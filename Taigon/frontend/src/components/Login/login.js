@@ -1,6 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getAccounts } from '../../actions/account';
 
 class Login extends Component {
+    constructor(props){
+        super(props);
+    }
+
+    componentDidMount() {
+        this.props.getAccounts();
+    };
     render() {
         return (
             <>
@@ -10,4 +19,8 @@ class Login extends Component {
     }
 }
 
-export { Login }
+const mapStateToProps = state => (
+    { accounts: state.accounts.accounts }
+) 
+
+export default connect(mapStateToProps, {getAccounts})(Login);
