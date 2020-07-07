@@ -1,0 +1,184 @@
+@mixin flex_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin content_vertical_space {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+@mixin button_reset($font_color, $bg_color, $bg_hover) {
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+    color: $font_color;
+    font-size: 1rem;
+    padding: 1rem;
+    background: $bg_color;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+        background: $bg_hover;
+    }
+}
+
+.SignIn {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: relative;
+    .top_bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 1.5rem;
+        .Logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            img {
+                width: 3rem;
+            }
+            h1 {
+                color: #545454;
+                font-size: 1.5rem;
+                padding-left: 0.5rem;
+                font-weight: bolder;
+            }
+        }
+    }
+}
+
+.sigin_content,
+.registe_content {
+    flex: 0 0 66%;
+    @include flex_center();
+    .main_content {
+        h2 {
+            font-size: 3rem;
+            font-weight: bolder;
+            @include content_vertical_space();
+        }
+        p {
+            font-size: 1.25rem;
+            @include content_vertical_space();
+        }
+        .social_networks {
+            display: flex;
+            justify-content: space-around;
+            .social_login_btn {
+                min-width: 6rem;
+                padding: 1rem 1.5rem;
+                border-radius: 5%;
+                @include content_vertical_space();
+                &.fb {
+                    background: #8bb0fd;
+                }
+                &.google {
+                    background: #ffacbb;
+                }
+            }
+        }
+        .spread_line {
+            display: flex;
+            justify-content: space-between;
+            .line {
+                flex: 0 0 45%;
+            }
+            .text {
+                color: grey;
+                flex: 0 0 2rem;
+            }
+        }
+        .signin_form,
+        .registe_form {
+            .form_group {
+                @include content_vertical_space();
+            }
+            input {
+                font-size: 1.25rem;
+                padding: 0.6rem 2rem;
+                box-sizing: border-box;
+                border-radius: 0.25rem;
+                width: 100%;
+                background: #def8e7;
+            }
+            .submitBtn {
+                width: 40%;
+                margin: 0 auto;
+                @include button_reset(white, rgb(92, 191, 126), rgb(77, 172, 110));
+            }
+        }
+        .registe_form{
+            input{
+                background: #dadada;
+            }
+            .registeBtn {
+                width: 40%;
+                margin: 0 auto;
+                @include button_reset(black, rgb(252, 204, 45), rgb(232, 184, 35));
+            }
+        }
+    }
+}
+
+.To_registe,
+.To_signin{
+    flex: 0 0 34%;
+    background-image: $sign_bg;
+    @include flex_center();
+    h2 {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: bolder;
+        @include content_vertical_space();
+    }
+    p {
+        font-size: 1.25rem;
+        line-height: 2.5rem;
+        word-spacing: 0.5rem;
+        @include content_vertical_space();
+    }
+    .goRegiste {
+        width: 100%;
+        @include button_reset(black, rgb(252, 204, 45), rgb(232, 184, 35));
+    }
+}
+
+.To_signin {
+    background-image: $registe_bg;
+    p {
+        color: white;
+    }
+    .goSignin {
+        width: 100%;
+        @include button_reset(white, rgb(92, 191, 126), rgb(77, 172, 110));
+    }
+}
+
+// ========= RWD =========== 
+@media (max-width: 800px) {
+    .SignIn {
+        flex-direction: column;
+    }
+
+    .sigin_content,
+    .registe_content {
+        margin-top: 6rem;
+        .main_content {
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    }
+
+    .To_registe,
+    .To_signin {
+        padding: 2.8rem 0;
+    }
+}

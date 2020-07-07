@@ -2,18 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './statics/styles/all.scss';
 // Components
-import Login from './components/Login/login';
-import { Content } from './components/Login/content';
+import SignIn from './components/Signin/';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
+// Router 
+import { BrowserRouter as Router } from "react-router-dom";
 
 class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <Login />
-                <Content />
+                <Router>
+                    <SignIn />
+                </Router>
             </Provider>
         )
     }

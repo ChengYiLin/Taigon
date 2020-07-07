@@ -1,7 +1,8 @@
-import { GET_ALLACCOUNT } from '../actions/account';
+import { GET_ALLACCOUNT, GET_ALLACCOUNT_ERROR } from '../actions/account';
 
 const initialState = {
-    accounts: []
+    accounts: [],
+    ajax_error: {}
 }
 
 function accounts(state = initialState, action) {
@@ -10,6 +11,14 @@ function accounts(state = initialState, action) {
             return {
                 ...state,
                 accounts: action.payload
+            }
+        case GET_ALLACCOUNT_ERROR:
+            return {
+                ...state,
+                ajax_error:{
+                    status: action.payload.status,
+                    msg: action.payload.msg
+                }
             }
         default:
             return state;
