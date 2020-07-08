@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 // Router
 import { Link } from "react-router-dom";
 
-export default class To_registe extends Component {
+class To_registe extends Component {
     render() {
         return (
             <div className="To_registe">
@@ -17,3 +17,5 @@ export default class To_registe extends Component {
         )
     }
 }
+
+export default To_registe;
