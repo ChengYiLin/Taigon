@@ -24,19 +24,14 @@ function auth(state = initialState, action) {
             })
 
         case LOGIN_SUCCESS:
-            localStorage.setItem('token', action.payload.token);
-            return ({
-                ...state,
-                isAuthenticated: true,
-                isLoading: false,
-            })
-
         case REGISTE_SUCCESS:
             localStorage.setItem('token', action.payload.token);
             return ({
                 ...state,
+                token: action.payload.token,
                 isAuthenticated: true,
                 isLoading: false,
+                user: action.payload.user
             })
 
 
@@ -47,7 +42,7 @@ function auth(state = initialState, action) {
             return ({
                 ...state,
                 token: null,
-                isAuthenticated: null,
+                isAuthenticated: false,
                 isLoading: false,
                 user: null
             })

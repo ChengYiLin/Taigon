@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
+// Router 
+import { Redirect } from "react-router-dom";
 
 class Signin_content extends Component {
     constructor(props) {
@@ -11,7 +13,11 @@ class Signin_content extends Component {
         }
     }
     render() {
-        console.log(this.props.isAuthenticated);
+        if(this.props.isAuthenticated){
+            return (
+                <Redirect push to="/" />
+            )
+        }
         return (
             <div className="sigin_content">
                 <div className="main_content">

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { registe } from '../../actions/auth';
+// Router 
+import { Redirect } from "react-router-dom";
 
 class Registe_content extends Component {
     constructor(props) {
@@ -11,10 +13,12 @@ class Registe_content extends Component {
             password: ""
         }
     }
-    componentDidMount(){
-        console.log(this.props);
-    }
     render() {
+        if(this.props.isAuthenticated){
+            return (
+                <Redirect push to="/" />
+            )
+        }
         return (
             <div className="registe_content">
                 <div className="main_content">
@@ -62,8 +66,10 @@ class Registe_content extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
-})
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.isAuthenticated
+    }
+}
 
 export default connect(mapStateToProps, { registe })(Registe_content);
