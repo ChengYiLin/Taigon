@@ -7,7 +7,7 @@ import Chatroom from './Chatroom';
 import { Provider } from 'react-redux';
 import store from '../store';
 // Router 
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // actions
 import { loadUserData } from '../actions/auth';
 
