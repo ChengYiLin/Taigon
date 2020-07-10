@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // Components
 import Topbar from './topbar';
 // Router 
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class ChatRoom extends Component {
     render() {

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'knox',
     'frontend',
-    'accounts'
+    'accounts',
+    'chat'
 ]
 
 REST_FRAMEWORK = {
@@ -76,7 +78,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Taigon.wsgi.application'
-
+ASGI_APPLICATION = 'Taigon.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
