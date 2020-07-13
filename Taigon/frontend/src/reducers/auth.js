@@ -1,4 +1,14 @@
-import { USER_LOADING, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_ERROR, REGISTE_SUCCESS, REGISTE_ERROR } from '../actions/auth';
+import {
+    USER_LOADING,
+    USER_LOADED,
+    AUTH_ERROR,
+    LOGIN_SUCCESS,
+    LOGIN_ERROR,
+    REGISTE_SUCCESS,
+    REGISTE_ERROR,
+    LOGOUT_SUCCESS,
+    LOGOUT_ERROR
+} from '../actions/auth';
 
 const initialState = {
     token: localStorage.getItem('token'),
@@ -34,10 +44,16 @@ function auth(state = initialState, action) {
                 user: action.payload.user
             })
 
+        case LOGOUT_ERROR:
+            console.log(`Log out Error : ${action.payload}`)
+            return ({
+                ...state,
+            })
 
         case LOGIN_ERROR:
         case AUTH_ERROR:
         case REGISTE_ERROR:
+        case LOGOUT_SUCCESS:
             localStorage.removeItem('token');
             return ({
                 ...state,
@@ -46,6 +62,7 @@ function auth(state = initialState, action) {
                 isLoading: false,
                 user: null
             })
+
 
         default:
             return state

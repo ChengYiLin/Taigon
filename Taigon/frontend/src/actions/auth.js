@@ -5,6 +5,8 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const REGISTE_SUCCESS = "REGISTE_SUCCESS";
 export const REGISTE_ERROR = "REGISTE_ERROR";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_ERROR = "LOGOUT_ERROR";
 
 
 //      GET USER DATA
@@ -113,6 +115,50 @@ export const registe = (username, email, password) => (dispatch) => {
         .catch(err => {
             dispatch({
                 type: REGISTE_ERROR,
+                payload: err.status
+            });
+        })
+}
+
+//        User Logout
+// --------------------------
+export const logout = () => (dispatch, getState) => {
+    // Get Token from state
+    const token = getState().auth.token;
+
+    // Define Ajax config for UserAPI
+    const config = {
+        method: "POST",
+        headers: {
+            'content-type': 'application/json',
+        },
+    }
+    // --- if there is a token, ser it in headers
+    if (token) {
+        config.headers['Authorization'] = `Token ${token}`;
+    }
+
+    // FETCH API
+    fetch('http://localhost:8000/api/auth/logout', config)
+        .then(res => {
+            if (res.ok) { 
+                return res
+            }
+            else {
+                throw ({ status: res.status, msg: res.statusText });
+            }
+        })
+        .then(res => {
+            console.log('OUT Success')
+            dispatch({
+                type: LOGOUT_SUCCESS,
+                payload: res
+            })
+        })
+        .catch(err => {
+            console.log(`Noooooo  ${err}`)
+            dispatch({
+                type: LOGOUT_ERROR,
                 payload: err.status
             });
         })

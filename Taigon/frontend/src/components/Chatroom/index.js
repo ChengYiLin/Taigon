@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // Components
 import Topbar from './topbar';
+import Main from './main';
 // Router 
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class ChatRoom extends Component {
     render() {
@@ -12,9 +13,7 @@ class ChatRoom extends Component {
         return (
             <div className='Chatroom_wrapper'>
                 <Topbar />
-                <div className="main">
-                    Coming Soon ....
-                </div>
+                <Main />
             </div>
         )
     }
