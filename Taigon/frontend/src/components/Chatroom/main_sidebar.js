@@ -9,16 +9,16 @@ class Sidebar extends Component {
         return (
             <div className='sidebar'>
                 <div className='side_head'>
-                    <h2 className='workspace'>Appworks School FrontEnd</h2>
+                    <h2 className='workspace'>AppWorks School Front-End</h2>
                     <p className='username'>{username}</p>
                 </div>
                 <ul className='side_content'>
                     <li>
                         <i className="fas fa-users"></i>People
-                        </li>
+                    </li>
                     <li>
                         <i className="fas fa-comments"></i>Channels
-                        </li>
+                    </li>
                 </ul>
             </div>
         )
