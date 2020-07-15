@@ -6,7 +6,16 @@ User = get_user_model()
 # Create your models here.
 # --- Record Room Name and owner
 class ChatRooom(models.Model):
+    CATEGORY = [
+        ('INTEREST','interest'),
+        ('FOOD', 'food'),
+        ('TECH', 'tech'),
+        ('TRAVEL','travel'),
+    ]
+
     roomname = models.CharField(max_length=100)
+    bgimage = models.URLField()
+    category = models.CharField(max_length=20, choices=CATEGORY, default='INTEREST')
     owner = models.ForeignKey(User, related_name='roomOwner',on_delete=models.CASCADE)
 
     def __str__(self):

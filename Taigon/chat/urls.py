@@ -1,6 +1,8 @@
-from django.urls import path, include
-from .views import index
+from django.urls import path
+from .api import ChatroomAPI, MessageAPI, RoomMemberAPI
 
 urlpatterns = [
-    path('', index),
+    path('api/chatroom', ChatroomAPI.as_view()),
+    path('api/message', MessageAPI.as_view()),
+    path('api/roommember', RoomMemberAPI.as_view()),
 ]
