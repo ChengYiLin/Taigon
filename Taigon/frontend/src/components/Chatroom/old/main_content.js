@@ -36,6 +36,9 @@ class Content extends Component {
             </div>
         )
     }
+    handleChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    }
 }
 
 const mapStateToProps = state => {

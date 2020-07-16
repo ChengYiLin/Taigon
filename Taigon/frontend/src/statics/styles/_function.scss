@@ -1,0 +1,38 @@
+$chat_text_color: white;
+$chat_main_color: rgb(25, 85, 60);
+$chat_main_hover_color: rgb(17, 65, 45);
+$chat_divideline: 1px solid rgb(36, 109, 78);
+
+@mixin flex_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex_align_center {
+    display: flex;
+    align-items: center;
+}
+
+@mixin content_vertical_space {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+@mixin button_reset($font_color, $bg_color, $bg_hover) {
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+    color: $font_color;
+    font-size: 1rem;
+    padding: 1rem;
+    background: $bg_color;
+    border: none;
+    outline: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+        background: $bg_hover;
+    }
+}

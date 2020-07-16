@@ -1,0 +1,186 @@
+.Lobby {
+    height: 100vh;
+    // topbar
+    >.topbar {
+        height: 5rem;
+        box-sizing: border-box;
+        padding: 1rem 0;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 #dadce0;
+        .container {
+            width: 90%;
+            // max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            .Logo {
+                @include flex_align_center();
+                img {
+                    width: 3rem;
+                    height: auto;
+                }
+                h1 {
+                    padding-left: 1rem;
+                    font-size: 1.5rem;
+                    font-weight: bolder;
+                }
+            }
+            .User {
+                .porfile_image {
+                    display: block;
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 50%;
+                    background: gray;
+                    background-position: center;
+                    background-size: cover;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    // main_section
+    .main_section {
+        height: calc(100vh - 5rem);
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            height: 100%;
+        }
+    }
+
+    // ** aside
+    aside {
+        flex: 0 0 300px;
+        padding: 3rem 0;
+        .createRoom {
+            display: flex;
+            align-items: center;
+            width: 10rem;
+            padding: 0.85rem 2rem;
+            border-radius: 3rem;
+            font-size: 1.25rem;
+            color: white;
+            background: rgb(46, 190, 126);
+            cursor: pointer;
+            &::before {
+                content: "\271B";
+                font-size: 2rem;
+                font-weight: bolder;
+                padding-right: 1rem;
+            }
+        }
+        .main_nav {
+            padding-top: 3rem;
+            li {
+                padding: .5rem 2rem;
+                width: 60%;
+                &:hover{
+                    background: rgb(240, 240, 240);
+                    border-radius: 0 5rem 5rem 0;
+                }
+                .navlink {
+                    font-size: 1.25rem;
+                    padding: 1rem 0;
+                    display: flex;
+                    cursor: pointer;
+                    .nav_icon {
+                        flex: 0 0 3rem;
+                    }
+                }
+            }
+        }
+    }
+
+    // ** main
+    main {
+        width: 100%;
+        padding: 3rem 0;
+        .title{
+            font-size: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgb(219, 218, 218);
+        }
+        .all_room{
+            padding: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .room{
+                flex: 0 0 300px;
+                height: 300px; 
+                margin: 1rem 0;
+                box-sizing: border-box;
+                border-radius: .5rem;
+                border: 1px solid rgb(156, 182, 156);
+                .room_background{
+                    height: 250px;
+                    background: rgb(202, 202, 202);
+                    background-size: cover;
+                    background-position: center center;
+                    border-radius: .5rem .5rem 0 0;
+                }
+                .name_box{
+                    height: 50px;
+                    margin: 0 1rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .room_category{
+                        font-size: 1rem;
+                        padding: .5rem 1rem;
+                        margin-right: 1rem;
+                        background: rgb(178, 238, 178);
+                        border-radius: 2rem;
+                    }
+                    .room_name{
+                        font-weight: bolder;
+                    }
+                }
+            }
+        }
+       
+    }
+
+    // create_room_form
+    .create_room{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(189, 189, 189, 0.4);
+        @include flex_center();
+        .form_box{
+            width: 40%;
+            border-radius: .5rem;
+            background: white;
+            position: relative;
+            .title{
+                flex: 1 1 auto;
+                font-size: 1.5rem;
+                padding: 1rem 0;
+                text-align: center;
+            }
+            .cross{
+                padding: 1rem;
+                position: absolute;
+                top: 0;
+                right: 0;
+                cursor: pointer;
+                @include flex_center();
+            }
+            // Form style
+            .create_form{
+                padding: 1rem 2rem;
+                .form_group{
+                    padding-bottom: 1rem;
+                    input{
+                        border-bottom: 1px solid black;
+                    }
+                }
+            }
+        }
+    }
+}

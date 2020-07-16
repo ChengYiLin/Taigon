@@ -14,7 +14,7 @@ class ChatRooom(models.Model):
     ]
 
     roomname = models.CharField(max_length=100)
-    bgimage = models.URLField()
+    bgimage = models.URLField(blank=True)
     category = models.CharField(max_length=20, choices=CATEGORY, default='INTEREST')
     owner = models.ForeignKey(User, related_name='roomOwner',on_delete=models.CASCADE)
 

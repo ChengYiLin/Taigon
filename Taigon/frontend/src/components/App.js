@@ -3,6 +3,7 @@ import '../statics/styles/all.scss';
 // Components
 import { Signin_Page, Registe_Page } from './Entrance';
 import Chatroom from './Chatroom';
+import Lobby from './Lobby';
 // Redux
 import { Provider } from 'react-redux';
 import store from '../store';
@@ -21,9 +22,11 @@ class App extends React.Component {
             <Provider store={store}>
                 <Router>
                     <Switch>
-                        <Route exact path="/" component={Chatroom} />
+                        {/* <Route exact path="/" component={Chatroom} /> */}
+                        <Route exact path="/chatroom/:roomname" component={Chatroom} />
                         <Route exact path="/signin" component={Signin_Page} />
                         <Route exact path="/registe" component={Registe_Page} />
+                        <Route path="/" component={Lobby} />
                     </Switch>
                 </Router>
             </Provider>

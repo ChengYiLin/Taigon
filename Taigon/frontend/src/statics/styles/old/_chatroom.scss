@@ -1,0 +1,236 @@
+.Chatroom_wrapper {
+    color: $chat_text_color;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 1);
+    display: grid;
+    grid-template-rows: 4rem auto;
+}
+
+// Top bar
+// .topbar {
+//     color: #333232;
+//     background-color: $chat_main_color;
+//     font-size: 1.5rem;
+//     padding: 0 6rem;
+//     justify-content: space-between;
+//     @include flex_align_center();
+//     .logo {
+//         @include flex_align_center();
+//         .logo_image {
+//             width: 2rem;
+//             padding-right: 1rem;
+//         }
+//         .logo_text {
+//             color: white;
+//             font-weight: bolder;
+//         }
+//     }
+//     .user {
+//         position: relative;
+//         @include flex_align_center();
+//         .profile_img {
+//             --profile_img: url("/static/frontend/img/guest.png");
+//             display: block;
+//             width: 2.5rem;
+//             height: 2.5rem;
+//             border-radius: 50%;
+//             background-image: var(--profile_img);
+//             background-size: cover;
+//             cursor: pointer;
+//         }
+//         .profile_inform {
+//             opacity: 0;
+//             transition: opacity 0.3s ease;
+//             position: absolute;
+//             right: 0;
+//             top: 4rem;
+//             width: 20rem;
+//             padding: 1rem 0 0;
+//             border-radius: 0.5rem;
+//             background: #fdfdfd;
+//             box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 #dadce0;
+//             &.active {
+//                 opacity: 1;
+//             }
+//             .inform {
+//                 padding: 1rem 0;
+//                 border-bottom: 1px solid #d0d0d0;
+//                 .profile_img {
+//                     width: 3.5rem;
+//                     height: 3.5rem;
+//                     margin: 0 auto;
+//                 }
+//                 p {
+//                     font-size: 1.25rem;
+//                     text-align: center;
+//                     line-height: 2rem;
+//                     &.email {
+//                         font-size: 1rem;
+//                         color: grey;
+//                     }
+//                 }
+//             }
+//             .sign_out {
+//                 font-size: 1rem;
+//                 color: rgb(102, 101, 101);
+//                 padding: 1rem;
+//                 display: flex;
+//                 justify-content: center;
+//                 .signout_Btn {
+//                     padding: 0.5rem 1rem;
+//                     border: 1px solid #d6d4d4;
+//                     border-radius: 0.5rem;
+//                     cursor: pointer;
+//                     &:hover {
+//                         background: #efefef;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// Main content
+.main {
+    display: flex;
+    --sidebar_wdith: 400px;
+    .sidebar {
+        width: var(--sidebar_wdith);
+        height: 100%;
+    }
+    .content {
+        width: calc(100vw - var(--sidebar_wdith));
+    }
+}
+
+.sidebar {
+    background-color: $chat_main_color;
+    box-sizing: border-box;
+    border-right: 1px solid #d6d4d4;
+    .side_head {
+        padding: 2rem 2rem 1rem;
+        border-top: $chat_divideline;
+        border-bottom: $chat_divideline;
+        .workspace {
+            font-size: 1.25rem;
+            font-weight: bolder;
+        }
+        .username {
+            padding: 1rem 0;
+            color: rgb(219, 219, 219);
+            &::before {
+                content: "Hi, ";
+            }
+        }
+    }
+    .side_content {
+        padding: 1.5rem 0;
+        border-bottom: $chat_divideline;
+        li {
+            font-size: 1.25rem;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            i {
+                padding-right: 1.5rem;
+            }
+            &:hover {
+                background: $chat_main_hover_color;
+            }
+        }
+    }
+}
+
+.content {
+    color: black;
+    display: flex;
+    flex-direction: column;
+    .header {
+        flex: 0 0 4rem;
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 -1px 0 0 #dadce0;
+        .room_name {
+            font-size: 1.4rem;
+            padding: 1rem 2rem;
+        }
+    }
+    .main {
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: column;
+        .chat_box{
+            display: flex;
+            padding: 1rem 2rem;
+            .user_image{
+                flex: 0 0 4rem;
+                height: 4rem;
+                img{
+                    width: 100%;
+                    height: auto;
+                }
+            }
+            .inform{
+                font-size: 1.25rem;
+                padding-left: 2rem;
+                display: flex;
+                flex-direction: column;
+                .user_name{
+                    font-size: 1.5rem;
+                    padding-bottom: .5rem;
+                }
+                .msg_text{
+                    line-height: 2rem;
+                }
+            }
+        }
+    }
+    .footer {
+        flex: 0 0 8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .message_input {
+            width: 80%;
+            position: relative;
+            input {
+                width: 100%;
+                box-sizing: border-box;
+                padding: .8rem 1rem;
+                font-size: 1.25rem;
+                border: 1px solid #d0d0d0;
+                border-radius: .6rem;
+            }
+            .submitBtn{
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                width: 3rem;
+                color: white;
+                border: none;
+                cursor: pointer;
+                background: $chat_main_color;
+            }
+        }
+    }
+}
+
+// ========= RWD ===========
+@media (max-width: 800px) {
+    .topbar {
+        padding: 0 1rem;
+    }
+
+    .main {
+        display: flex;
+        position: relative;
+        overflow-x: hidden;
+        .sidebar {
+            width: 80vw;
+            position: absolute;
+            left: -80vw;
+        }
+        .content {
+            width: 100%;
+        }
+    }
+}
