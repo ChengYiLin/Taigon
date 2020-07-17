@@ -10,7 +10,7 @@ class Topbar extends Component {
         }
     }
     render() {
-        const profile_img = 'https://yt3.ggpht.com/a/AATXAJwS-EfJzU6v3dqTzjkxpTZOnwUiPKtbB89Y8JpOQw=s100-c-k-c0xffffffff-no-rj-mo';
+        const profile_img = 'https://thispersondoesnotexist.com/image';
         return (
             <header className='topbar'>
                 <div className='container'>

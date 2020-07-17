@@ -2,9 +2,12 @@ from rest_framework import generics
 from rest_framework import mixins
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.serializers import ModelSerializer
 from .serializers import ChatRooomSerializer, MessageSerializer, RoomMemberSerializer
 from .models import ChatRooom, Message, RoomMember
 from django.contrib.auth import get_user_model
+# knox
+from knox.auth import TokenAuthentication
 
 User = get_user_model()
 
@@ -53,16 +56,38 @@ class MessageAPI(mixins.ListModelMixin,
     serializer_class = MessageSerializer
 
     def get(self, request):
-        return self.list(request)
+        roomId = request.query_params['room'] if request.query_params else False
+        messages = Message.objects.filter(
+            chatroom=roomId) if roomId else Message.objects.all()
 
-    def post(self, request):
-        # Save data in Message table
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        message = serializer.save()
+        data = [{'id': message.id,
+                 'author': message.author.username,
+                 'chatroom': message.chatroom.roomname,
+                 'time': message.timestamp.strftime('%Y-%m-%d-%H-%M-%S'),
+                 'text': message.textmessage}
+                for message in messages]
 
         return Response({
-            'data': MessageSerializer(message).data
+            'data': data
+        })
+
+    def post(self, request):
+        roomId = request.query_params['room']
+
+        message = self.get_serializer(data=request.data)
+        message.is_valid(raise_exception=True)
+        message.save()
+
+        messages = Message.objects.filter(chatroom=roomId)
+        data = [{'id': message.id,
+                 'author': message.author.username,
+                 'chatroom': message.chatroom.roomname,
+                 'time': message.timestamp.strftime('%Y-%m-%d-%H-%M-%S'),
+                 'text': message.textmessage}
+                for message in messages]
+
+        return Response({
+            'data': data
         })
 
     def delete(self, request, *args, **kwargs):

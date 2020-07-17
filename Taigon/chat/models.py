@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from datetime import datetime
 
 User = get_user_model()
 
@@ -13,7 +14,7 @@ class ChatRooom(models.Model):
         ('TRAVEL','travel'),
     ]
 
-    roomname = models.CharField(max_length=100)
+    roomname = models.CharField(max_length=30, unique=True)
     bgimage = models.URLField(blank=True)
     category = models.CharField(max_length=20, choices=CATEGORY, default='INTEREST')
     owner = models.ForeignKey(User, related_name='roomOwner',on_delete=models.CASCADE)

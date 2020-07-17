@@ -106,14 +106,16 @@
             padding: 2rem 0;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
             .room{
                 flex: 0 0 300px;
                 height: 300px; 
                 margin: 1rem 0;
+                margin-right: 3rem;
                 box-sizing: border-box;
                 border-radius: .5rem;
                 border: 1px solid rgb(156, 182, 156);
+                cursor: pointer;
                 .room_background{
                     height: 250px;
                     background: rgb(202, 202, 202);

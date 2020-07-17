@@ -1,7 +1,9 @@
 export const GET_CHATROOM = 'GET_CHATROOM';
 export const GET_CHATROOM_ERROR = 'GET_CHATROOM';
+export const GET_NOW_ROOM = 'GET_NOW_ROOM';
+export const LEAVE_ROOM = 'LEAVE_ROOM';
 
-
+// Get the chatroom
 export const getChatRoom = () => (dispatch) => {
     const config = {
         method: "GET",
@@ -17,7 +19,7 @@ export const getChatRoom = () => (dispatch) => {
                 throw ({ status: res.status, msg: res.statusText });
             }
         })
-        .then(res=>{
+        .then(res => {
             dispatch({
                 type: GET_CHATROOM,
                 payload: res
@@ -29,4 +31,20 @@ export const getChatRoom = () => (dispatch) => {
                 payload: err.status
             });
         })
+}
+
+// Get the Room Name Now
+export const getNowRoom = (roomName, id) => (dispatch) => {
+    dispatch({
+        type: GET_NOW_ROOM,
+        payload: [id, roomName]
+    })
+}
+
+// Go to Lobby
+export const leaveChatRoom = () => (dispatch) => {
+    dispatch({
+        type: LEAVE_ROOM,
+        payload: null
+    })
 }

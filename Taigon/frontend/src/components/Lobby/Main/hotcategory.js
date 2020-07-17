@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getChatRoom } from '../../../actions/lobby';
+import { getChatRoom, getNowRoom } from '../../../actions/lobby';
 // Router 
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
 
 
 class Hotcategory extends Component {
@@ -17,7 +17,7 @@ class Hotcategory extends Component {
             let room_BackgroundImage = element.bgimage;
 
             return (
-                <Link key={room_id} className='room' to={`/chatroom/${room_Name}`}>
+                <Link key={room_id} className='room' to={`/chatroom/${room_Name}`} onClick={()=>{this.props.getNowRoom(room_Name, room_id)}}>
                     <div className='room_background' style={{ backgroundImage: `url(${room_BackgroundImage})` }}></div>
                     <div className='name_box'>
                         <p className='room_category'>{room_Category}</p>
@@ -26,7 +26,6 @@ class Hotcategory extends Component {
                 </Link>
             )
         })
-
 
         return (
             <main>
@@ -42,7 +41,7 @@ class Hotcategory extends Component {
 }
 
 const mapStateToProps = state => ({
-    chatroomList: state.lobby.chatroomList
+    chatroomList: state.lobby.chatroomList,
 })
 
-export default connect(mapStateToProps, { getChatRoom })(Hotcategory);
+export default connect(mapStateToProps, { getChatRoom, getNowRoom })(Hotcategory);

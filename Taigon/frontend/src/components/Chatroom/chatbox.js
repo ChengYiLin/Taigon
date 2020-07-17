@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Chatbox extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.profile_img = this.props.profile_img;
         this.author_name = this.props.author_name;
@@ -9,8 +10,10 @@ class Chatbox extends Component {
         this.textcontent = this.props.textcontent;
     }
     render() {
+        // Check mine msgs or not
+        const MessageType = (this.props.user.username===this.author_name) ? 'chat_box mine_msg' :'chat_box'
         return (
-            <div className='chat_box'>
+            <div className={MessageType}>
                 <div className='author_img' style={{ backgroundImage: `url(${this.profile_img})` }}></div>
                 <div className='main_content'>
                     <p className='author_name'>{this.author_name}</p>
@@ -24,4 +27,10 @@ class Chatbox extends Component {
     }
 }
 
-export default Chatbox;
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user,
+    }
+}
+
+export default connect(mapStateToProps)(Chatbox);
