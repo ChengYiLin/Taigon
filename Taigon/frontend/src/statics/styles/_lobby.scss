@@ -25,6 +25,7 @@
                 }
             }
             .User {
+                position: relative;
                 .porfile_image {
                     display: block;
                     width: 3rem;
@@ -34,6 +35,15 @@
                     background-position: center;
                     background-size: cover;
                     cursor: pointer;
+                }
+                .profile_box{
+                    display: none;
+                    position: absolute;
+                    width: 15rem;
+                    height: 10rem;
+                    background: greenyellow;
+                    top: 3.8rem;
+                    right: 0;
                 }
             }
         }

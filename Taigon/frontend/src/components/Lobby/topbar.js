@@ -22,6 +22,9 @@ class Topbar extends Component {
                     {/* User */}
                     <div className='User'>
                         <a className='porfile_image' style={{ backgroundImage: `url(${profile_img})` }}></a>
+                        <div className='profile_box'>
+                            <a className='porfile_image' style={{ backgroundImage: `url(${profile_img})` }}></a>
+                        </div>
                     </div>
                 </div>
             </header>

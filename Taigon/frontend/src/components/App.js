@@ -22,7 +22,6 @@ class App extends React.Component {
             <Provider store={store}>
                 <Router>
                     <Switch>
-                        {/* <Route exact path="/" component={Chatroom} /> */}
                         <Route exact path="/chatroom/:roomname" component={Chatroom} />
                         <Route exact path="/signin" component={Signin_Page} />
                         <Route exact path="/registe" component={Registe_Page} />

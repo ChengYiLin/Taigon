@@ -31,25 +31,7 @@ export const sendNewMessage = (author, currentRoomId, textmessage) => (dispatch)
         body: JSON.stringify(data),
     }
 
-    fetch(`http://localhost:8000/api/message?room=${currentRoomId}`, config)
-        .then(res => {
-            if (res.ok) { return res.json() }
-            else {
-                throw ({ status: res.status, msg: res.statusText });
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: SEND_NEW_MSG,
-                payload: res
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: SEND_NEW_MSG_ERROR,
-                payload: err.status
-            });
-        })
+    Standard_Fetch(dispatch, `http://localhost:8000/api/message?room=${currentRoomId}`, config, SEND_NEW_MSG, SEND_NEW_MSG_ERROR);
 }
 
 
