@@ -6,6 +6,9 @@ class Profile extends Component {
             <main>
                 <div className='profile'>
                     <h2 className='title'>個人資訊</h2>
+                    <div className='inform'>
+                        Hello
+                    </div>
                 </div>
             </main>
         )

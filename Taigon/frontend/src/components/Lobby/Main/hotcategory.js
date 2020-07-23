@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getChatRoom, getNowRoom } from '../../../actions/lobby';
 // Router 
-import { Link,Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { element } from 'prop-types';
 
 
 class Hotcategory extends Component {
@@ -17,8 +18,10 @@ class Hotcategory extends Component {
             let room_BackgroundImage = element.bgimage;
 
             return (
-                <Link key={room_id} className='room' to={`/chatroom/${room_Name}`} onClick={()=>{this.props.getNowRoom(room_Name, room_id)}}>
-                    <div className='room_background' style={{ backgroundImage: `url(${room_BackgroundImage})` }}></div>
+                <Link key={room_id} className='room' to={`/chatroom/${room_Name}`} onClick={() => { this.props.getNowRoom(room_Name, room_id) }}>
+                    <div className='image_box' >
+                        <div className='room_background' style={{ backgroundImage: `url(${room_BackgroundImage})` }}></div>
+                    </div>
                     <div className='name_box'>
                         <p className='room_category'>{room_Category}</p>
                         <p className='room_name'>{room_Name}</p>

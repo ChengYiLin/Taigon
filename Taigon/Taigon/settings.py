@@ -103,6 +103,17 @@ DATABASES = {
     }
 }
 
+# ========== AWS ==========
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'taigon',
+#         'USER': 'postgres',
+#         'PASSWORD': DB_PWD(),
+#         'HOST':'database-1.cfzrcpvpy6ju.us-east-2.rds.amazonaws.com',
+#         'PORT':'5432'
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -141,3 +152,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]

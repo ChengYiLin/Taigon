@@ -24,7 +24,7 @@ class Aside extends Component {
                     </li>
                     <li>
                         <i className="nav_icon fas fa-users"></i>
-                        <p className='nav_text'>聊天室友</p>
+                        <p className='nav_text'>聊天成員</p>
                     </li>
                 </ul>
             </div>

@@ -20,22 +20,37 @@ class ChatroomAPI(mixins.ListModelMixin,
     serializer_class = ChatRooomSerializer
 
     def get(self, request):
-        return self.list(request)
+        rooms = ChatRooom.objects.all()
+
+        # Response
+        res_data = [{'id': room.id,
+                     'owner': room.owner.username,
+                     'roomname': room.roomname,
+                     'bgimage': room.bgimage,
+                     'category': room.category.category}
+                    for room in rooms]
+
+        return Response(res_data)
 
     def post(self, request):
+        pass
         # Save data in Chatroom table
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        roomname = serializer.save()
+        room = serializer.save()
         # Sava data in RoomMember
         user_set = User.objects.get(id=serializer.data['owner'])
         roomOwner = RoomMember(user=user_set)
         roomOwner.save()
-        roomOwner.roomname.add(roomname)
+        roomOwner.roomname.add(room)
+        # Response
+        res_data = {'id': room.id,
+                    'owner': room.owner.username,
+                    'roomname': room.roomname,
+                    'bgimage': room.bgimage,
+                    'category': room.category}
 
-        return Response({
-            'data': ChatRooomSerializer(roomname).data
-        })
+        return Response(res_data)
 
     def delete(self, request, *args, **kwargs):
         delete_id = int(dict(request.query_params)['id'][0])
@@ -60,15 +75,15 @@ class MessageAPI(mixins.ListModelMixin,
         messages = Message.objects.filter(
             chatroom=roomId) if roomId else Message.objects.all()
 
-        data = [{'id': message.id,
-                 'author': message.author.username,
-                 'chatroom': message.chatroom.roomname,
-                 'time': message.timestamp.strftime('%Y-%m-%d-%H-%M-%S'),
-                 'text': message.textmessage}
-                for message in messages]
+        res_data = [{'id': message.id,
+                     'author': message.author.username,
+                     'chatroom': message.chatroom.roomname,
+                     'time': message.timestamp.strftime('%Y-%m-%d-%H-%M-%S'),
+                     'text': message.textmessage}
+                    for message in messages]
 
         return Response({
-            'data': data
+            'data': res_data
         })
 
     def post(self, request):
@@ -79,15 +94,15 @@ class MessageAPI(mixins.ListModelMixin,
         message.save()
 
         messages = Message.objects.filter(chatroom=roomId)
-        data = [{'id': message.id,
-                 'author': message.author.username,
-                 'chatroom': message.chatroom.roomname,
-                 'time': message.timestamp.strftime('%Y-%m-%d-%H-%M-%S'),
-                 'text': message.textmessage}
-                for message in messages]
+        res_data = [{'id': message.id,
+                     'author': message.author.username,
+                     'chatroom': message.chatroom.roomname,
+                     'time': message.timestamp.strftime('%Y-%m-%d-%H-%M-%S'),
+                     'text': message.textmessage}
+                    for message in messages]
 
         return Response({
-            'data': data
+            'data': res_data
         })
 
     def delete(self, request, *args, **kwargs):

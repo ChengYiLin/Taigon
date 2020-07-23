@@ -8,13 +8,13 @@ import CreateRoom from './createRoom';
 import Aside from './Main/aside';
 import Hotcategory from './Main/hotcategory';
 import Profile from './Main/profile';
-import Allcategory from './Main/allcategory';
+import MineChat from './Main/minechat';
 
 class Lobby extends Component {
     constructor(props){
         super(props)
         this.state={
-            createRoomState:''
+            createRoomState:false
         }
     }
     render() {
@@ -31,7 +31,7 @@ class Lobby extends Component {
                         <Switch>
                             <Route exact path='/' component={Hotcategory}/>
                             <Route exact path='/profile' component={Profile}/>
-                            <Route exact path='/categories' component={Allcategory}/>
+                            <Route exact path='/minechat' component={MineChat}/>
                         </Switch>
                     </div>
                 </section>

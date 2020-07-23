@@ -1,7 +1,7 @@
 .Lobby {
     height: 100vh;
     // topbar
-    >.topbar {
+    > .topbar {
         height: 5rem;
         box-sizing: border-box;
         padding: 1rem 0;
@@ -36,7 +36,7 @@
                     background-size: cover;
                     cursor: pointer;
                 }
-                .profile_box{
+                .profile_box {
                     display: none;
                     position: absolute;
                     width: 15rem;
@@ -67,30 +67,45 @@
         .createRoom {
             display: flex;
             align-items: center;
-            width: 10rem;
+            width: 10.5rem;
             padding: 0.85rem 2rem;
             border-radius: 3rem;
             font-size: 1.25rem;
+            letter-spacing: 0.2rem;
             color: white;
             background: rgb(46, 190, 126);
             cursor: pointer;
-            &::before {
-                content: "\271B";
+            transition: 0.2s;
+            &:hover {
+                background: rgb(36, 151, 99);
+                .add_icon {
+                    transform: rotate(0.25turn);
+                }
+            }
+            .add_icon {
+                color: rgb(255, 234, 45);
                 font-size: 2rem;
-                font-weight: bolder;
-                padding-right: 1rem;
+                transform: rotate(0);
+                transition: 0.3s;
+            }
+            span {
+                margin-left: 1rem;
             }
         }
         .main_nav {
             padding-top: 3rem;
             li {
-                padding: .5rem 2rem;
+                padding: 0.5rem 2rem;
                 width: 60%;
-                &:hover{
+                &:hover {
                     background: rgb(240, 240, 240);
                     border-radius: 0 5rem 5rem 0;
+                    .navlink {
+                        color: black;
+                    }
                 }
                 .navlink {
+                    color: #525252;
                     font-size: 1.25rem;
                     padding: 1rem 0;
                     display: flex;
@@ -107,56 +122,70 @@
     main {
         width: 100%;
         padding: 3rem 0;
-        .title{
+        .title {
             font-size: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid rgb(219, 218, 218);
         }
-        .all_room{
+        .all_room {
             padding: 2rem 0;
             display: flex;
             flex-wrap: wrap;
-            justify-content: flex-start;
-            .room{
+            justify-content: space-between;
+            .room {
                 flex: 0 0 300px;
-                height: 300px; 
+                height: 300px;
                 margin: 1rem 0;
                 margin-right: 3rem;
                 box-sizing: border-box;
-                border-radius: .5rem;
+                border-radius: 0.5rem;
                 border: 1px solid rgb(156, 182, 156);
                 cursor: pointer;
-                .room_background{
+                .image_box {
                     height: 250px;
-                    background: rgb(202, 202, 202);
-                    background-size: cover;
-                    background-position: center center;
-                    border-radius: .5rem .5rem 0 0;
+                    overflow: hidden;
+                    .room_background {
+                        height: 100%;
+                        background: rgb(202, 202, 202);
+                        background-size: cover;
+                        background-position: center center;
+                        border-radius: 0.5rem 0.5rem 0 0;
+                        transform: scale(1);
+                        transition: 0.5s;
+                        &:hover {
+                            transform: scale(1.1);
+                            // image filter
+                            -webkit-filter: opacity(.8);
+                            -moz-filter: opacity(.8);
+                            -o-filter: opacity(.8);
+                            -ms-filter: opacity(.8);
+                            filter: opacity(.8);
+                        }
+                    }
                 }
-                .name_box{
+                .name_box {
                     height: 50px;
                     margin: 0 1rem;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    .room_category{
+                    .room_category {
                         font-size: 1rem;
-                        padding: .5rem 1rem;
+                        padding: 0.5rem 1rem;
                         margin-right: 1rem;
                         background: rgb(178, 238, 178);
                         border-radius: 2rem;
                     }
-                    .room_name{
+                    .room_name {
                         font-weight: bolder;
                     }
                 }
             }
         }
-       
     }
 
     // create_room_form
-    .create_room{
+    .create_room_box {
         position: fixed;
         top: 0;
         bottom: 0;
@@ -164,32 +193,144 @@
         right: 0;
         background: rgba(189, 189, 189, 0.4);
         @include flex_center();
-        .form_box{
+        .form_box {
             width: 40%;
-            border-radius: .5rem;
+            border-radius: 0.5rem;
             background: white;
             position: relative;
-            .title{
+            .title {
                 flex: 1 1 auto;
                 font-size: 1.5rem;
                 padding: 1rem 0;
                 text-align: center;
+                color: white;
+                border-radius: 0.5rem 0.5rem 0 0;
+                background: rgb(46, 190, 126);
             }
-            .cross{
-                padding: 1rem;
+            .cross {
+                padding: 1rem 2rem;
                 position: absolute;
                 top: 0;
                 right: 0;
+                font-size: 1.5rem;
+                color: rgb(230, 230, 230);
                 cursor: pointer;
                 @include flex_center();
+                &:hover {
+                    color: rgb(255, 255, 255);
+                }
             }
             // Form style
-            .create_form{
-                padding: 1rem 2rem;
-                .form_group{
-                    padding-bottom: 1rem;
-                    input{
-                        border-bottom: 1px solid black;
+            .create_form {
+                padding: 2rem 2rem 1rem 2rem;
+                .form_group {
+                    padding: 1.5rem;
+                    padding-top: 0;
+                    display: flex;
+                    align-items: baseline;
+                    label {
+                        flex: 0 0 7rem;
+                        color: #808080;
+                        font-size: 1.25rem;
+                    }
+                    input {
+                        flex: 0 0 60%;
+                        font-size: 1.5rem;
+                        padding: 0.5rem 1rem;
+                        border-radius: 0.5rem;
+                        border: 1px solid #ccc;
+                        &::placeholder {
+                            font-size: 1.25rem;
+                        }
+                    }
+                    .select {
+                        flex: 0 0 160px;
+                        font-size: 1.5rem;
+                        padding: 0.5rem 1rem;
+                        border: 1px solid #ccc;
+                        box-sizing: border-box;
+                        position: relative;
+                        overflow: hidden;
+                        cursor: pointer;
+                        .select_icon {
+                            position: absolute;
+                            top: 45%;
+                            bottom: 0;
+                            right: 0;
+                            transform: translateY(-50%);
+                            font-size: 1.25rem;
+                            padding: 0 1rem;
+                            color: rgb(117, 117, 117);
+                        }
+                        .placeholder {
+                            color: rgb(117, 117, 117);
+                            font-size: 1.25rem;
+                            line-height: 1.5rem;
+                        }
+                        .main_select {
+                            position: absolute;
+                            top: -20rem;
+                            left: -1px;
+                            width: calc(100% + 2px);
+                            .value {
+                                padding: 0.5rem 1rem;
+                                background: rgb(255, 255, 255);
+                                border-left: 1px solid #ccc;
+                                border-right: 1px solid #ccc;
+                                cursor: pointer;
+                                &:hover {
+                                    background: rgb(236, 236, 236);
+                                }
+                            }
+                        }
+                        &.show {
+                            overflow: visible;
+                            .main_select {
+                                top: 2.5rem;
+                            }
+                        }
+                    }
+                    input[type=file]{
+                        display: none;
+                    }
+                    .image_dropbox {
+                        margin-top: 1.5rem;
+                        width: 100%;
+                        height: 15rem;
+                        background: #efefef;
+                        @include flex_center();
+                        .upload_image{
+                            font-size: 5rem;
+                            text-align: center;
+                            cursor: pointer;
+                            p{
+                                font-size: 1.25rem;
+                                padding: 1rem 0;
+                            }
+                        }
+                    }
+                    .submitBTN{
+                        font-size: 1.25rem;
+                        padding: .25rem 1.25rem;
+                        outline: none;
+                        border: none;
+                        color: rgb(51, 51, 51);
+                        background: #fbd623;
+                        border-radius: .5rem;
+                        cursor: pointer;
+                        &:hover{
+                            background: #ecca1c;
+                        }
+                    }
+                    &.flex_column {
+                        align-items: flex-start;
+                        flex-direction: column;
+                        label {
+                            flex: 0 0 auto;
+                        }
+                    }
+                    &.submit{
+                        justify-content: flex-end;
                     }
                 }
             }

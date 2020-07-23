@@ -13,6 +13,7 @@ class Aside extends Component {
             <aside>
                 {/*--- Create Room BTN */}
                 <a className='createRoom' onClick={this.setTrueState}>
+                    <i className="add_icon fas fa-plus"></i>
                     <span>新增聊天室</span>
                 </a>
                 {/*--- Aside Navbar */}
@@ -24,15 +25,15 @@ class Aside extends Component {
                         </Link>
                     </li>
                     <li>
-                        <Link className='navlink' to='/profile'>
-                            <i className="nav_icon fas fa-user-alt"></i>
-                            <span>個人資訊</span>
+                        <Link className='navlink' to='/minechat'>
+                            <i class="nav_icon fab fa-facebook-messenger"></i>
+                            <span>我的聊天</span>
                         </Link>
                     </li>
                     <li>
-                        <Link className='navlink' to='/categories'>
-                            <i className="nav_icon fas fa-play"></i>
-                            <span>分類總攬</span>
+                        <Link className='navlink' to='/profile'>
+                            <i className="nav_icon fas fa-user-alt"></i>
+                            <span>個人資訊</span>
                         </Link>
                     </li>
                 </ul>

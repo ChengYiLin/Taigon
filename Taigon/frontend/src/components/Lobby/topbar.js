@@ -29,29 +29,6 @@ class Topbar extends Component {
                 </div>
             </header>
         )
-        // let username = (this.props.user) ? (this.props.user.username) : '';
-        // let email = (this.props.user) ? (this.props.user.email) : '';
-        // return (
-        //     <div className='topbar'>
-        //         <div className="logo">
-        //             <img className='logo_image' src='/static/frontend/img/Taigon_sm.png'></img>
-        //             <h1 className='logo_text'>Taigon</h1>
-        //         </div>
-        //         <div className="user">
-        //             <a className='profile_img' onClick={this.showInform.bind(this)}></a>
-        //             <div className={(this.state.showInform)?'profile_inform active':'profile_inform'}>
-        //                 <div className='inform'>
-        //                     <a className='profile_img'></a>
-        //                     <p className='username'>{username}</p>
-        //                     <p className='email'>{email}</p>
-        //                 </div>
-        //                 <div className='sign_out'>
-        //                     <a className='signout_Btn' onClick={this.props.logout.bind(this)}>Sign out</a>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // )
     }
     showInform() {
         this.setState(currentState => ({ showInform: !currentState.showInform }))
