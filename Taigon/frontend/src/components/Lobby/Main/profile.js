@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Profile extends Component {
     render() {
@@ -7,7 +8,7 @@ class Profile extends Component {
                 <div className='profile'>
                     <h2 className='title'>個人資訊</h2>
                     <div className='inform'>
-                        Hello
+                        
                     </div>
                 </div>
             </main>
@@ -15,4 +16,8 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+const mapStateToProps = state => ({
+    chatroomList: state.lobby.chatroomList,
+})
+
+export default connect(mapStateToProps)(Profile);

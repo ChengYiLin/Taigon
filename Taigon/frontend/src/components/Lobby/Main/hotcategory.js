@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getChatRoom, getNowRoom } from '../../../actions/lobby';
 // Router 
-import { Link, Redirect } from "react-router-dom";
-import { element } from 'prop-types';
+import { Link } from "react-router-dom";
 
 
 class Hotcategory extends Component {

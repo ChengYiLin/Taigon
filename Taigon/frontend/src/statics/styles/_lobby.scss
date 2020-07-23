@@ -26,7 +26,7 @@
             }
             .User {
                 position: relative;
-                .porfile_image {
+                .profile_image {
                     display: block;
                     width: 3rem;
                     height: 3rem;
@@ -37,13 +37,48 @@
                     cursor: pointer;
                 }
                 .profile_box {
-                    display: none;
-                    position: absolute;
+                    opacity: 0;
                     width: 15rem;
-                    height: 10rem;
-                    background: greenyellow;
+                    padding: 1rem 0;
+                    background: #fff;
+                    border: 1px solid #ccc;
+                    border-color: rgba(0, 0, 0, 0.2);
+                    border-radius: 0.5rem;
+                    position: absolute;
                     top: 3.8rem;
                     right: 0;
+                    transition: all 0.6s ease;
+                    z-index: 999;
+                    &.show {
+                        opacity: 1;
+                    }
+                    .profile_image {
+                        margin: .5rem auto;
+                    }
+                    .profile_name,
+                    .profile_email{
+                        text-align: center;
+                        padding: .5rem;
+                    }
+                    .signout_box{
+                        padding-top: 1rem;
+                        margin-top: 1rem;
+                        border-top: 1px solid #dadce0;
+                        @include flex-center();
+                        .logout{
+                            padding: .5rem 1rem;
+                            border-radius: .2rem;
+                            border: 1px solid #dadce0;
+                            cursor: pointer;
+                            user-select: none;
+                            &:hover{
+                                background: #e5e8ec;
+                            }
+                            &:active{
+                                background: #bec1c5;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -155,11 +190,11 @@
                         &:hover {
                             transform: scale(1.1);
                             // image filter
-                            -webkit-filter: opacity(.8);
-                            -moz-filter: opacity(.8);
-                            -o-filter: opacity(.8);
-                            -ms-filter: opacity(.8);
-                            filter: opacity(.8);
+                            -webkit-filter: opacity(0.8);
+                            -moz-filter: opacity(0.8);
+                            -o-filter: opacity(0.8);
+                            -ms-filter: opacity(0.8);
+                            filter: opacity(0.8);
                         }
                     }
                 }
@@ -290,7 +325,7 @@
                             }
                         }
                     }
-                    input[type=file]{
+                    input[type="file"] {
                         display: none;
                     }
                     .image_dropbox {
@@ -299,26 +334,26 @@
                         height: 15rem;
                         background: #efefef;
                         @include flex_center();
-                        .upload_image{
+                        .upload_image {
                             font-size: 5rem;
                             text-align: center;
                             cursor: pointer;
-                            p{
+                            p {
                                 font-size: 1.25rem;
                                 padding: 1rem 0;
                             }
                         }
                     }
-                    .submitBTN{
+                    .submitBTN {
                         font-size: 1.25rem;
-                        padding: .25rem 1.25rem;
+                        padding: 0.25rem 1.25rem;
                         outline: none;
                         border: none;
                         color: rgb(51, 51, 51);
                         background: #fbd623;
-                        border-radius: .5rem;
+                        border-radius: 0.5rem;
                         cursor: pointer;
-                        &:hover{
+                        &:hover {
                             background: #ecca1c;
                         }
                     }
@@ -329,7 +364,7 @@
                             flex: 0 0 auto;
                         }
                     }
-                    &.submit{
+                    &.submit {
                         justify-content: flex-end;
                     }
                 }

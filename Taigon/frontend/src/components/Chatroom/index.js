@@ -46,12 +46,11 @@ class ChatRoom extends Component {
     }
     render() {
         const currentRoom = (this.props.currentRoom) ? (this.props.currentRoom) : '';
-        const profile_img = 'https://thispersondoesnotexist.com/image';
 
         // Message
         let Messages = (!this.props.past_message) ? ([]) : (
             this.props.past_message.data.map(element => (
-                <Chatbox key={element.id} profile_img={profile_img} author_name={element.author} timestamp={element.time} textcontent={element.text} />
+                <Chatbox key={element.id} author_name={element.author} authorImage={element.author_Image} timestamp={element.time} textcontent={element.text} />
             ))
         )
 

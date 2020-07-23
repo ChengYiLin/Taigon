@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 from .serializers import ChatRooomSerializer, MessageSerializer, RoomMemberSerializer
 from .models import ChatRooom, Message, RoomMember
+from accounts.models import UserProfile
 from django.contrib.auth import get_user_model
 # knox
 from knox.auth import TokenAuthentication
@@ -77,6 +78,7 @@ class MessageAPI(mixins.ListModelMixin,
 
         res_data = [{'id': message.id,
                      'author': message.author.username,
+                     'author_Image': str(UserProfile.objects.get(user=message.author.id).profileimg),
                      'chatroom': message.chatroom.roomname,
                      'time': message.timestamp.strftime('%Y-%m-%d-%H-%M-%S'),
                      'text': message.textmessage}

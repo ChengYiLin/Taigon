@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class Aside extends Component {
     render() {
         const currentRoom = (this.props.currentRoom) ? (this.props.currentRoom) : '';
-        const profile_img = 'https://thispersondoesnotexist.com/image';
+        const profile_img = (this.props.user) ? `/media/${this.props.user.image}` : "url(/media/user.png)";;
 
         return (
             <div className='room_aside'>

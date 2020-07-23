@@ -26,7 +26,7 @@ class Aside extends Component {
                     </li>
                     <li>
                         <Link className='navlink' to='/minechat'>
-                            <i class="nav_icon fab fa-facebook-messenger"></i>
+                            <i className="nav_icon fab fa-facebook-messenger"></i>
                             <span>我的聊天</span>
                         </Link>
                     </li>
