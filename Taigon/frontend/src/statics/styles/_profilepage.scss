@@ -1,0 +1,24 @@
+.profile{
+    .inform{
+        padding: 3rem 0;
+        @include flex-center();
+        flex-direction: column;
+        .image{
+            width: 300px;
+            height: 300px;
+            box-sizing: border-box;
+            border: 1px solid #d4d4d4;
+            border-radius: 50%;
+            background-position: center center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+        .username,
+        .email{
+            font-size: 1.5rem;
+            padding: 1rem 0;
+        }
+    }
+}

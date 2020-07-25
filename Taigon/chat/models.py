@@ -18,7 +18,7 @@ class RooomCategory(models.Model):
 
 class ChatRooom(models.Model):
     roomname = models.CharField(max_length=30, unique=True)
-    bgimage = models.URLField(blank=True)
+    bgimage = models.ImageField(upload_to='room')
     category = models.ForeignKey(
         RooomCategory, related_name='roomCategory', on_delete=models.CASCADE)
     owner = models.ForeignKey(

@@ -14,7 +14,7 @@ class Hotcategory extends Component {
             let room_id = element.id
             let room_Name = element.roomname;
             let room_Category = element.category;
-            let room_BackgroundImage = element.bgimage;
+            let room_BackgroundImage = window.location.origin + '/media/' + element.bgimage;
 
             return (
                 <Link key={room_id} className='room' to={`/chatroom/${room_Name}`} onClick={() => { this.props.getNowRoom(room_Name, room_id) }}>

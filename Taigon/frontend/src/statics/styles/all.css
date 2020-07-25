@@ -1,0 +1,1298 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  font-family: Arial, "Microsoft JhengHei", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+.SignIn {
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.SignIn .top_bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+}
+
+.SignIn .top_bar .Logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.SignIn .top_bar .Logo img {
+  width: 3rem;
+}
+
+.SignIn .top_bar .Logo h1 {
+  color: #545454;
+  font-size: 1.5rem;
+  padding-left: 0.5rem;
+  font-weight: bolder;
+}
+
+.sigin_content,
+.registe_content {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 66%;
+          flex: 0 0 66%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.sigin_content .main_content h2,
+.registe_content .main_content h2 {
+  font-size: 3rem;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.sigin_content .main_content p,
+.registe_content .main_content p {
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.sigin_content .main_content .social_networks,
+.registe_content .main_content .social_networks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.sigin_content .main_content .social_networks .social_login_btn,
+.registe_content .main_content .social_networks .social_login_btn {
+  min-width: 6rem;
+  padding: 1rem 1.5rem;
+  border-radius: 5%;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.sigin_content .main_content .social_networks .social_login_btn.fb,
+.registe_content .main_content .social_networks .social_login_btn.fb {
+  background: #8bb0fd;
+}
+
+.sigin_content .main_content .social_networks .social_login_btn.google,
+.registe_content .main_content .social_networks .social_login_btn.google {
+  background: #ffacbb;
+}
+
+.sigin_content .main_content .spread_line,
+.registe_content .main_content .spread_line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.sigin_content .main_content .spread_line .line,
+.registe_content .main_content .spread_line .line {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 45%;
+          flex: 0 0 45%;
+}
+
+.sigin_content .main_content .spread_line .text,
+.registe_content .main_content .spread_line .text {
+  color: grey;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 2rem;
+          flex: 0 0 2rem;
+}
+
+.sigin_content .main_content .signin_form .form_group,
+.sigin_content .main_content .registe_form .form_group,
+.registe_content .main_content .signin_form .form_group,
+.registe_content .main_content .registe_form .form_group {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.sigin_content .main_content .signin_form input,
+.sigin_content .main_content .registe_form input,
+.registe_content .main_content .signin_form input,
+.registe_content .main_content .registe_form input {
+  font-size: 1.25rem;
+  padding: 0.6rem 2rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 0.25rem;
+  width: 100%;
+  background: #def8e7;
+}
+
+.sigin_content .main_content .signin_form .submitBtn,
+.sigin_content .main_content .registe_form .submitBtn,
+.registe_content .main_content .signin_form .submitBtn,
+.registe_content .main_content .registe_form .submitBtn {
+  width: 40%;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: white;
+  font-size: 1rem;
+  padding: 1rem;
+  background: #5cbf7e;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.sigin_content .main_content .signin_form .submitBtn:hover,
+.sigin_content .main_content .registe_form .submitBtn:hover,
+.registe_content .main_content .signin_form .submitBtn:hover,
+.registe_content .main_content .registe_form .submitBtn:hover {
+  background: #4dac6e;
+}
+
+.sigin_content .main_content .registe_form input,
+.registe_content .main_content .registe_form input {
+  background: #dadada;
+}
+
+.sigin_content .main_content .registe_form .registeBtn,
+.registe_content .main_content .registe_form .registeBtn {
+  width: 40%;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: black;
+  font-size: 1rem;
+  padding: 1rem;
+  background: #fccc2d;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.sigin_content .main_content .registe_form .registeBtn:hover,
+.registe_content .main_content .registe_form .registeBtn:hover {
+  background: #e8b823;
+}
+
+.To_registe,
+.To_signin {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 34%;
+          flex: 0 0 34%;
+  background-image: radial-gradient(circle at 62% 39%, rgba(30, 30, 30, 0.05) 0%, rgba(30, 30, 30, 0.05) 8%, transparent 8%, transparent 16%, transparent 16%, transparent 28%, transparent 28%, transparent 100%), radial-gradient(circle at 19% 61%, rgba(201, 201, 201, 0.01) 0%, rgba(201, 201, 201, 0.01) 59%, transparent 59%, transparent 60%, transparent 60%, transparent 99%, transparent 99%, transparent 100%), radial-gradient(circle at 15% 5%, rgba(186, 186, 186, 0.05) 0%, rgba(186, 186, 186, 0.05) 9%, transparent 9%, transparent 79%, transparent 79%, transparent 92%, transparent 92%, transparent 100%), radial-gradient(circle at 64% 49%, rgba(51, 51, 51, 0.08) 0%, rgba(51, 51, 51, 0.08) 22%, transparent 22%, transparent 50%, transparent 50%, transparent 96%, transparent 96%, transparent 100%), radial-gradient(circle at 53% 21%, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 21%, transparent 21%, transparent 80%, transparent 80%, transparent 89%, transparent 89%, transparent 100%), radial-gradient(circle at 14% 91%, rgba(49, 49, 49, 0.04) 0%, rgba(49, 49, 49, 0.04) 35%, transparent 35%, transparent 63%, transparent 63%, transparent 71%, transparent 71%, transparent 100%), radial-gradient(circle at 42% 78%, rgba(121, 64, 64, 0.02) 0%, rgba(121, 64, 64, 0.02) 56%, transparent 56%, transparent 75%, transparent 75%, transparent 80%, transparent 80%, transparent 100%), radial-gradient(circle at 76% 85%, rgba(69, 69, 69, 0.06) 0%, rgba(69, 69, 69, 0.06) 53%, transparent 53%, transparent 68%, transparent 68%, transparent 97%, transparent 97%, transparent 100%), -webkit-gradient(linear, left top, right top, from(#8ff9b1), to(#3e9250));
+  background-image: radial-gradient(circle at 62% 39%, rgba(30, 30, 30, 0.05) 0%, rgba(30, 30, 30, 0.05) 8%, transparent 8%, transparent 16%, transparent 16%, transparent 28%, transparent 28%, transparent 100%), radial-gradient(circle at 19% 61%, rgba(201, 201, 201, 0.01) 0%, rgba(201, 201, 201, 0.01) 59%, transparent 59%, transparent 60%, transparent 60%, transparent 99%, transparent 99%, transparent 100%), radial-gradient(circle at 15% 5%, rgba(186, 186, 186, 0.05) 0%, rgba(186, 186, 186, 0.05) 9%, transparent 9%, transparent 79%, transparent 79%, transparent 92%, transparent 92%, transparent 100%), radial-gradient(circle at 64% 49%, rgba(51, 51, 51, 0.08) 0%, rgba(51, 51, 51, 0.08) 22%, transparent 22%, transparent 50%, transparent 50%, transparent 96%, transparent 96%, transparent 100%), radial-gradient(circle at 53% 21%, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 21%, transparent 21%, transparent 80%, transparent 80%, transparent 89%, transparent 89%, transparent 100%), radial-gradient(circle at 14% 91%, rgba(49, 49, 49, 0.04) 0%, rgba(49, 49, 49, 0.04) 35%, transparent 35%, transparent 63%, transparent 63%, transparent 71%, transparent 71%, transparent 100%), radial-gradient(circle at 42% 78%, rgba(121, 64, 64, 0.02) 0%, rgba(121, 64, 64, 0.02) 56%, transparent 56%, transparent 75%, transparent 75%, transparent 80%, transparent 80%, transparent 100%), radial-gradient(circle at 76% 85%, rgba(69, 69, 69, 0.06) 0%, rgba(69, 69, 69, 0.06) 53%, transparent 53%, transparent 68%, transparent 68%, transparent 97%, transparent 97%, transparent 100%), linear-gradient(450deg, #8ff9b1, #3e9250);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.To_registe h2,
+.To_signin h2 {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.To_registe p,
+.To_signin p {
+  font-size: 1.25rem;
+  line-height: 2.5rem;
+  word-spacing: 0.5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.To_registe .goRegiste,
+.To_signin .goRegiste {
+  width: 100%;
+  display: block;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: black;
+  font-size: 1rem;
+  padding: 1rem;
+  background: #fccc2d;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.To_registe .goRegiste:hover,
+.To_signin .goRegiste:hover {
+  background: #e8b823;
+}
+
+.To_signin {
+  background-image: radial-gradient(circle at 19% 90%, rgba(190, 190, 190, 0.04) 0%, rgba(190, 190, 190, 0.04) 17%, transparent 17%, transparent 100%), radial-gradient(circle at 73% 2%, rgba(78, 78, 78, 0.04) 0%, rgba(78, 78, 78, 0.04) 94%, transparent 94%, transparent 100%), radial-gradient(circle at 45% 2%, rgba(18, 18, 18, 0.04) 0%, rgba(18, 18, 18, 0.04) 55%, transparent 55%, transparent 100%), radial-gradient(circle at 76% 60%, rgba(110, 110, 110, 0.04) 0%, rgba(110, 110, 110, 0.04) 34%, transparent 34%, transparent 100%), radial-gradient(circle at 68% 56%, rgba(246, 246, 246, 0.04) 0%, rgba(246, 246, 246, 0.04) 16%, transparent 16%, transparent 100%), radial-gradient(circle at 71% 42%, rgba(156, 156, 156, 0.04) 0%, rgba(156, 156, 156, 0.04) 47%, transparent 47%, transparent 100%), radial-gradient(circle at 46% 82%, rgba(247, 247, 247, 0.04) 0%, rgba(247, 247, 247, 0.04) 39%, transparent 39%, transparent 100%), radial-gradient(circle at 50% 47%, rgba(209, 209, 209, 0.04) 0%, rgba(209, 209, 209, 0.04) 45%, transparent 45%, transparent 100%), -webkit-gradient(linear, left top, right top, from(#555558), to(#29282b));
+  background-image: radial-gradient(circle at 19% 90%, rgba(190, 190, 190, 0.04) 0%, rgba(190, 190, 190, 0.04) 17%, transparent 17%, transparent 100%), radial-gradient(circle at 73% 2%, rgba(78, 78, 78, 0.04) 0%, rgba(78, 78, 78, 0.04) 94%, transparent 94%, transparent 100%), radial-gradient(circle at 45% 2%, rgba(18, 18, 18, 0.04) 0%, rgba(18, 18, 18, 0.04) 55%, transparent 55%, transparent 100%), radial-gradient(circle at 76% 60%, rgba(110, 110, 110, 0.04) 0%, rgba(110, 110, 110, 0.04) 34%, transparent 34%, transparent 100%), radial-gradient(circle at 68% 56%, rgba(246, 246, 246, 0.04) 0%, rgba(246, 246, 246, 0.04) 16%, transparent 16%, transparent 100%), radial-gradient(circle at 71% 42%, rgba(156, 156, 156, 0.04) 0%, rgba(156, 156, 156, 0.04) 47%, transparent 47%, transparent 100%), radial-gradient(circle at 46% 82%, rgba(247, 247, 247, 0.04) 0%, rgba(247, 247, 247, 0.04) 39%, transparent 39%, transparent 100%), radial-gradient(circle at 50% 47%, rgba(209, 209, 209, 0.04) 0%, rgba(209, 209, 209, 0.04) 45%, transparent 45%, transparent 100%), linear-gradient(90deg, #555558, #29282b);
+}
+
+.To_signin p {
+  color: white;
+}
+
+.To_signin .goSignin {
+  width: 100%;
+  display: block;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: white;
+  font-size: 1rem;
+  padding: 1rem;
+  background: #5cbf7e;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.To_signin .goSignin:hover {
+  background: #4dac6e;
+}
+
+@media (max-width: 800px) {
+  .SignIn {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .sigin_content,
+  .registe_content {
+    margin-top: 6rem;
+  }
+  .sigin_content .main_content h2,
+  .registe_content .main_content h2 {
+    font-size: 2rem;
+  }
+  .To_registe,
+  .To_signin {
+    padding: 2.8rem 0;
+  }
+}
+
+.Lobby {
+  height: 100vh;
+}
+
+.Lobby > .topbar {
+  height: 5rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 1rem 0;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 #dadce0;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 #dadce0;
+}
+
+.Lobby > .topbar .container {
+  width: 90%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.Lobby > .topbar .container .Logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Lobby > .topbar .container .Logo img {
+  width: 3rem;
+  height: auto;
+}
+
+.Lobby > .topbar .container .Logo h1 {
+  padding-left: 1rem;
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+.Lobby > .topbar .container .User {
+  position: relative;
+}
+
+.Lobby > .topbar .container .User .profile_image {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: white;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.Lobby > .topbar .container .User .profile_box {
+  opacity: 0;
+  width: 15rem;
+  padding: 1rem 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  position: absolute;
+  top: 3.8rem;
+  right: 0;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+  z-index: 999;
+}
+
+.Lobby > .topbar .container .User .profile_box.show {
+  opacity: 1;
+}
+
+.Lobby > .topbar .container .User .profile_box .profile_image {
+  margin: .5rem auto;
+}
+
+.Lobby > .topbar .container .User .profile_box .profile_name,
+.Lobby > .topbar .container .User .profile_box .profile_email {
+  text-align: center;
+  padding: .5rem;
+}
+
+.Lobby > .topbar .container .User .profile_box .signout_box {
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid #dadce0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Lobby > .topbar .container .User .profile_box .signout_box .logout {
+  padding: .5rem 1rem;
+  border-radius: .2rem;
+  border: 1px solid #dadce0;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.Lobby > .topbar .container .User .profile_box .signout_box .logout:hover {
+  background: #e5e8ec;
+}
+
+.Lobby > .topbar .container .User .profile_box .signout_box .logout:active {
+  background: #bec1c5;
+}
+
+.Lobby .main_section {
+  height: calc(100vh - 5rem);
+}
+
+.Lobby .main_section .container {
+  width: 90%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+.Lobby aside {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 300px;
+          flex: 0 0 300px;
+  padding: 3rem 0;
+}
+
+.Lobby aside .createRoom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 10.5rem;
+  padding: 0.85rem 2rem;
+  border-radius: 3rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.2rem;
+  color: white;
+  background: #2ebe7e;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.Lobby aside .createRoom:hover {
+  background: #249763;
+}
+
+.Lobby aside .createRoom:hover .add_icon {
+  -webkit-transform: rotate(0.25turn);
+          transform: rotate(0.25turn);
+}
+
+.Lobby aside .createRoom .add_icon {
+  color: #ffea2d;
+  font-size: 2rem;
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.Lobby aside .createRoom span {
+  margin-left: 1rem;
+}
+
+.Lobby aside .main_nav {
+  padding-top: 3rem;
+}
+
+.Lobby aside .main_nav li {
+  padding: 0.5rem 2rem;
+  width: 60%;
+}
+
+.Lobby aside .main_nav li:hover {
+  background: #f0f0f0;
+  border-radius: 0 5rem 5rem 0;
+}
+
+.Lobby aside .main_nav li:hover .navlink {
+  color: black;
+}
+
+.Lobby aside .main_nav li .navlink {
+  color: #525252;
+  font-size: 1.25rem;
+  padding: 1rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+}
+
+.Lobby aside .main_nav li .navlink .nav_icon {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 3rem;
+          flex: 0 0 3rem;
+}
+
+.Lobby main {
+  width: 100%;
+  padding: 3rem 0;
+}
+
+.Lobby main .title {
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #dbdada;
+}
+
+.Lobby main .all_room {
+  padding: 2rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.Lobby main .all_room .room {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 300px;
+          flex: 0 0 300px;
+  height: 300px;
+  margin: 1rem 0;
+  margin-right: 3rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 0.5rem;
+  border: 1px solid #9cb69c;
+  cursor: pointer;
+}
+
+.Lobby main .all_room .room .image_box {
+  height: 250px;
+  overflow: hidden;
+}
+
+.Lobby main .all_room .room .image_box .room_background {
+  height: 100%;
+  background: #cacaca;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 0.5rem 0.5rem 0 0;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.Lobby main .all_room .room .image_box .room_background:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-filter: opacity(0.8);
+  -moz-filter: opacity(0.8);
+  -o-filter: opacity(0.8);
+  -ms-filter: opacity(0.8);
+  filter: opacity(0.8);
+}
+
+.Lobby main .all_room .room .name_box {
+  height: 50px;
+  margin: 0 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Lobby main .all_room .room .name_box .room_category {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  background: #b2eeb2;
+  border-radius: 2rem;
+}
+
+.Lobby main .all_room .room .name_box .room_name {
+  font-weight: bolder;
+}
+
+.Lobby .create_room_box {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(189, 189, 189, 0.4);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Lobby .create_room_box .form_box {
+  width: 40%;
+  border-radius: 0.5rem;
+  background: white;
+  position: relative;
+}
+
+.Lobby .create_room_box .form_box .title {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  font-size: 1.5rem;
+  padding: 1rem 0;
+  text-align: center;
+  color: white;
+  border-radius: 0.5rem 0.5rem 0 0;
+  background: #2ebe7e;
+}
+
+.Lobby .create_room_box .form_box .cross {
+  padding: 1rem 2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.5rem;
+  color: #e6e6e6;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Lobby .create_room_box .form_box .cross:hover {
+  color: white;
+}
+
+.Lobby .create_room_box .form_box .create_form {
+  padding: 2rem 2rem 1rem 2rem;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group {
+  padding: 1.5rem;
+  padding-top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group label {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 7rem;
+          flex: 0 0 7rem;
+  color: #808080;
+  font-size: 1.25rem;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group input {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 60%;
+          flex: 0 0 60%;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group input::-webkit-input-placeholder {
+  font-size: 1.25rem;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group input:-ms-input-placeholder {
+  font-size: 1.25rem;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group input::-ms-input-placeholder {
+  font-size: 1.25rem;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group input::placeholder {
+  font-size: 1.25rem;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .select {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 160px;
+          flex: 0 0 160px;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .select .select_icon {
+  position: absolute;
+  top: 45%;
+  bottom: 0;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 1.25rem;
+  padding: 0 1rem;
+  color: #757575;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .select .placeholder {
+  color: #757575;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .select .main_select {
+  position: absolute;
+  top: -20rem;
+  left: -1px;
+  width: calc(100% + 2px);
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .select .main_select .value {
+  padding: 0.5rem 1rem;
+  background: white;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .select .main_select .value:hover {
+  background: #ececec;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .select.show {
+  overflow: visible;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .select.show .main_select {
+  top: 2.5rem;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group input[type="file"] {
+  display: none;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .image_dropbox {
+  margin-top: 1.5rem;
+  width: 100%;
+  height: 15rem;
+  background: #efefef;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .image_dropbox .upload_image {
+  font-size: 5rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .image_dropbox .upload_image p {
+  font-size: 1.25rem;
+  padding: 1rem 0;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .submitBTN {
+  font-size: 1.25rem;
+  padding: 0.25rem 1.25rem;
+  outline: none;
+  border: none;
+  color: #333333;
+  background: #fbd623;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group .submitBTN:hover {
+  background: #ecca1c;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group.flex_column {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group.flex_column label {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+
+.Lobby .create_room_box .form_box .create_form .form_group.submit {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.profile .inform {
+  padding: 3rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.profile .inform .image {
+  width: 300px;
+  height: 300px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #d4d4d4;
+  border-radius: 50%;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.profile .inform .username,
+.profile .inform .email {
+  font-size: 1.5rem;
+  padding: 1rem 0;
+}
+
+.Chatroom_wrapper {
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Chatroom_wrapper .room_aside {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 400px;
+          flex: 0 0 400px;
+  background: #19553c;
+}
+
+.Chatroom_wrapper .room_aside .topbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 2rem;
+  border-bottom: 1px solid #216b4c;
+}
+
+.Chatroom_wrapper .room_aside .topbar .logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Chatroom_wrapper .room_aside .topbar .logo img {
+  width: 3rem;
+  height: auto;
+}
+
+.Chatroom_wrapper .room_aside .topbar .logo h1 {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bolder;
+  padding-left: 1rem;
+}
+
+.Chatroom_wrapper .room_aside .topbar .profile .porfile_image {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  background: gray;
+  border-radius: 50%;
+  background-position: center center;
+  background-size: cover;
+}
+
+.Chatroom_wrapper .room_aside .chat_nav {
+  padding: 2rem 0;
+  border-bottom: 1px solid #216b4c;
+}
+
+.Chatroom_wrapper .room_aside .chat_nav li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: white;
+  font-size: 1.5rem;
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+}
+
+.Chatroom_wrapper .room_aside .chat_nav li:hover {
+  background: #11412d;
+}
+
+.Chatroom_wrapper .room_aside .chat_nav li .nav_icon {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 4.5rem;
+          flex: 0 0 4.5rem;
+}
+
+.Chatroom_wrapper .room_aside .chat_nav li .nav_text {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.Chatroom_wrapper .chat_content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.Chatroom_wrapper .chat_content .header {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 6rem;
+          flex: 0 0 6rem;
+  font-size: 2rem;
+  padding: 2rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 #dadce0;
+          box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 #dadce0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.Chatroom_wrapper .chat_content .header .leave_room {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  background-image: url("/static/frontend/img/leave.svg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.Chatroom_wrapper .chat_content .main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 1.25rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.Chatroom_wrapper .chat_content .main .overflow_container {
+  height: calc(100vh - 11rem - 6rem);
+  overflow: auto;
+}
+
+.Chatroom_wrapper .chat_content .main .overflow_container .chat_box {
+  padding: 1.8rem 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Chatroom_wrapper .chat_content .main .overflow_container .chat_box .author_img {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 5rem;
+          flex: 0 0 5rem;
+  height: 5rem;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 50%;
+}
+
+.Chatroom_wrapper .chat_content .main .overflow_container .chat_box .main_content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  padding-left: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.Chatroom_wrapper .chat_content .main .overflow_container .chat_box .main_content .author_name {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 2rem;
+          flex: 0 0 2rem;
+  font-size: 1.5rem;
+}
+
+.Chatroom_wrapper .chat_content .main .overflow_container .chat_box .main_content .timestamp {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 1.75rem;
+          flex: 0 0 1.75rem;
+  font-size: 1rem;
+  color: gray;
+}
+
+.Chatroom_wrapper .chat_content .main .overflow_container .mine_msg .main_content {
+  -webkit-box-ordinal-group: 0;
+      -ms-flex-order: -1;
+          order: -1;
+  text-align: right;
+  padding-left: 0rem;
+  padding-right: 2rem;
+}
+
+.Chatroom_wrapper .chat_content .footer {
+  border-top: 1px solid grey;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 11rem;
+          flex: 0 0 11rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Chatroom_wrapper .chat_content .footer .message_form {
+  width: 80%;
+  position: relative;
+}
+
+.Chatroom_wrapper .chat_content .footer .message_form input {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 1.5rem;
+  padding: 1rem 0.8rem;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  background: #f1f1f1;
+}
+
+.Chatroom_wrapper .chat_content .footer .message_form .submitBtn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding: 0 1rem;
+  font-size: 1.25rem;
+  color: white;
+  border: none;
+  outline: none;
+  background: #19553c;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+/*# sourceMappingURL=all.css.map */

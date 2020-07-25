@@ -30,26 +30,7 @@ export const loadUserData = () => (dispatch, getState) => {
         config.headers['Authorization'] = `Token ${token}`;
     }
 
-    fetch('http://localhost:8000/api/auth/user', config)
-        .then(res => {
-            if (res.ok) { return res.json() }
-            else {
-                throw ({ status: res.status, msg: res.statusText });
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: USER_LOADED,
-                payload: res
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: AUTH_ERROR,
-                payload: err.status
-            });
-        })
-
+    Standard_Fetch(dispatch, 'http://localhost:8000/api/auth/user', config, USER_LOADED, AUTH_ERROR);
 };
 
 //        User Login
@@ -65,25 +46,7 @@ export const login = (username, password) => (dispatch) => {
     }
 
     // FETCH API
-    fetch('http://localhost:8000/api/auth/login', config)
-        .then(res => {
-            if (res.ok) { return res.json() }
-            else {
-                throw ({ status: res.status, msg: res.statusText });
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: LOGIN_SUCCESS,
-                payload: res
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: LOGIN_ERROR,
-                payload: err.status
-            });
-        })
+    Standard_Fetch(dispatch, 'http://localhost:8000/api/auth/login', config, LOGIN_SUCCESS, LOGIN_ERROR);
 }
 
 //        User Registe
@@ -99,25 +62,7 @@ export const registe = (username, email, password) => (dispatch) => {
     }
 
     // FETCH API
-    fetch('http://localhost:8000/api/auth/registe', config)
-        .then(res => {
-            if (res.ok) { return res.json() }
-            else {
-                throw ({ status: res.status, msg: res.statusText });
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: REGISTE_SUCCESS,
-                payload: res
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: REGISTE_ERROR,
-                payload: err.status
-            });
-        })
+    Standard_Fetch(dispatch, 'http://localhost:8000/api/auth/registe', config, REGISTE_SUCCESS, REGISTE_ERROR);
 }
 
 //        User Logout
@@ -149,16 +94,37 @@ export const logout = () => (dispatch, getState) => {
             }
         })
         .then(res => {
-            console.log('OUT Success')
             dispatch({
                 type: LOGOUT_SUCCESS,
                 payload: res
             })
         })
         .catch(err => {
-            console.log(`Noooooo  ${err}`)
             dispatch({
                 type: LOGOUT_ERROR,
+                payload: err.status
+            });
+        })
+}
+
+// Fetch API
+function Standard_Fetch(dispatch, URL, config, Success_type, Error_type) {
+    fetch(URL, config)
+        .then(res => {
+            if (res.ok) { return res.json() }
+            else {
+                throw ({ status: res.status, msg: res.statusText });
+            }
+        })
+        .then(res => {
+            dispatch({
+                type: Success_type,
+                payload: res
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: Error_type,
                 payload: err.status
             });
         })

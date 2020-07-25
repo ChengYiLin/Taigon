@@ -2,13 +2,10 @@ from rest_framework import generics
 from rest_framework import mixins
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework.serializers import ModelSerializer
-from .serializers import ChatRooomSerializer, MessageSerializer, RoomMemberSerializer
-from .models import ChatRooom, Message, RoomMember
+from .serializers import ChatRooomSerializer, MessageSerializer, RoomMemberSerializer, RooomCategorySerializer
+from .models import ChatRooom, Message, RoomMember, RooomCategory
 from accounts.models import UserProfile
 from django.contrib.auth import get_user_model
-# knox
-from knox.auth import TokenAuthentication
 
 User = get_user_model()
 
@@ -27,7 +24,7 @@ class ChatroomAPI(mixins.ListModelMixin,
         res_data = [{'id': room.id,
                      'owner': room.owner.username,
                      'roomname': room.roomname,
-                     'bgimage': room.bgimage,
+                     'bgimage': str(room.bgimage),
                      'category': room.category.category}
                     for room in rooms]
 
@@ -45,11 +42,14 @@ class ChatroomAPI(mixins.ListModelMixin,
         roomOwner.save()
         roomOwner.roomname.add(room)
         # Response
-        res_data = {'id': room.id,
-                    'owner': room.owner.username,
-                    'roomname': room.roomname,
-                    'bgimage': room.bgimage,
-                    'category': room.category}
+        rooms = ChatRooom.objects.all()
+
+        res_data = [{'id': room.id,
+                     'owner': room.owner.username,
+                     'roomname': room.roomname,
+                     'bgimage': str(room.bgimage),
+                     'category': room.category.category}
+                    for room in rooms]
 
         return Response(res_data)
 
@@ -119,6 +119,8 @@ class MessageAPI(mixins.ListModelMixin,
 
 
 # RoomMember API
+
+
 class RoomMemberAPI(mixins.ListModelMixin,
                     generics.GenericAPIView):
     queryset = RoomMember.objects.all()
@@ -161,3 +163,20 @@ class RoomMemberAPI(mixins.ListModelMixin,
         return Response({
             'data': 'success'
         })
+
+
+# RoomCategory API
+
+
+class RoomCategoryAPI(mixins.ListModelMixin,
+                      generics.GenericAPIView):
+    queryset = RooomCategory.objects.all()
+    serializer_class = RooomCategorySerializer
+
+    def get(self, request):
+        categories = RooomCategory.objects.all()
+        res_data = [{'id': category.id,
+                     'value': category.category}
+                    for category in categories]
+
+        return Response(res_data)

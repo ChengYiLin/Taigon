@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createChatRoom, getChatroomCategories } from '../../actions/lobby';
+import { element } from 'prop-types';
 
 class CreateRoom extends Component {
     constructor(props) {
@@ -9,15 +12,24 @@ class CreateRoom extends Component {
         this.state = {
             roomname: "",
             category: "",
-            bgimage: "",
             showCategory: false,
-            showCategoryText: "請選擇類別"
+            showCategoryText: "請選擇類別",
+            previewImg: ''
         }
+        this.fileInput = React.createRef();
+    }
+    componentDidMount(){
+        this.props.getChatroomCategories();
     }
     render() {
         if (this.props.openState) {
-            let showCategory = (this.state.showCategory) ? 'select show' : 'select'
-
+            let showCategory = (this.state.showCategory) ? 'select show' : 'select';
+            let categories = (!this.props.categories) ? [] : this.props.categories.map(element =>{
+                return(
+                    <div key={element.id} className='value' id={element.id}>{element.value}</div>
+                )
+            })
+            
             return (
                 <div className='create_room_box'>
                     <div className='form_box'>
@@ -28,20 +40,13 @@ class CreateRoom extends Component {
                             <i className="cross fas fa-times" onClick={this.setFalseState}></i>
                         </div>
                         {/* Form */}
-                        <form className='create_form'>
+                        <form className='create_form' onSubmit={this.handleSubmit.bind(this)}>
                             <div className="form_group">
                                 <label htmlFor='category'>主題類別 : </label>
                                 <div className={showCategory} onClick={this.createRoomCategory.bind(this)}>
                                     <div className='placeholder'>{this.state.showCategoryText}</div>
                                     <div className='main_select'>
-                                        <div className='value' id='1'>娛樂</div>
-                                        <div className='value' id='2'>美食</div>
-                                        <div className='value' id='3'>學習</div>
-                                        <div className='value' id='4'>旅遊</div>
-                                        <div className='value' id='5'>運動</div>
-                                        <div className='value' id='6'>寵物</div>
-                                        <div className='value' id='7'>科技</div>
-                                        <div className='value' id='8'>興趣</div>
+                                        {categories}
                                     </div>
                                     <i className="select_icon fas fa-sort-down"></i>
                                 </div>
@@ -59,11 +64,12 @@ class CreateRoom extends Component {
                                         <i className="fas fa-upload"></i>
                                         <p>上傳聊天室背景圖片(.jpg / .png)</p>
                                     </label>
-                                    <input type="file" id="room_bgimage" name="room_bgimage" accept="image/png, image/jpeg"></input>
+                                    <div className='previewImg' style={{backgroundImage:`url(${this.state.previewImg})`}}></div>
+                                    <input type="file" id="room_bgimage" ref={this.fileInput} onChange={this.handleImgChange.bind(this)} name="room_bgimage" accept=".png, .jpg, .jpeg"></input>
                                 </div>
                             </div>
                             <div className="form_group submit">
-                                <button type="submit" className="submitBTN">開始聊天</button>
+                                <button type="submit" className="submitBTN">建立聊天室</button>
                             </div>
                         </form>
                     </div>
@@ -78,9 +84,23 @@ class CreateRoom extends Component {
         e.preventDefault();
         this.setState({ [e.target.name]: e.target.value });
     }
-    createRoomCategory(e) {
+    handleImgChange(e) {
         e.preventDefault();
-        console.log(e.target.id)
+        let reader = new FileReader();
+        reader.readAsDataURL(this.fileInput.current.files[0])
+
+        reader.onloadend = (e) =>{
+            this.setState({previewImg: reader.result})
+        }
+    }
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.createChatRoom(this.state.roomname, this.fileInput.current.files[0], this.state.category, this.props.user.id);
+        this.props.setFalseState();
+        this.setState({roomname: "",category: "",})
+    }
+    createRoomCategory(e) {
+        e.preventDefault();s
 
         if (e.target.className === 'value') {
             const categoryId = e.target.id;
@@ -98,4 +118,10 @@ class CreateRoom extends Component {
     }
 }
 
-export default CreateRoom;
+const mapStateToProps = state => ({
+    user: state.auth.user,
+    chatroomList: state.lobby.chatroomList,
+    categories: state.lobby.categories
+})
+
+export default connect(mapStateToProps, { createChatRoom, getChatroomCategories })(CreateRoom);

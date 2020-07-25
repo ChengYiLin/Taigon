@@ -20,7 +20,7 @@ class Aside extends Component {
                 <ul className='chat_nav'>
                     <li>
                         <i className="nav_icon fas fa-comments"></i>
-                        <p className='nav_text'>{currentRoom}</p>
+                        <p className='nav_text'>聊天室</p>
                     </li>
                     <li>
                         <i className="nav_icon fas fa-users"></i>

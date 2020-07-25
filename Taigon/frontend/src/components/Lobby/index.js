@@ -20,8 +20,6 @@ class Lobby extends Component {
     render() {
         if (this.props.isAuthenticated === false) { return <Redirect push to="/signin" /> }
 
-        // if(this.props.roomnow){ return <Redirect push to={`/chatroom/${this.props.roomnow}`}/>}
-
         return (
             <div className='Lobby'>
                 <Topbar />
