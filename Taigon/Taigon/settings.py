@@ -109,7 +109,7 @@ DATABASES = {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'taigon',
 #         'USER': 'postgres',
-#         'PASSWORD': DB_PWD(),
+#         'PASSWORD': 'postgres',
 #         'HOST':'database-1.cfzrcpvpy6ju.us-east-2.rds.amazonaws.com',
 #         'PORT':'5432'
 #     }
@@ -151,12 +151,22 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
-
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+#  S3 Buckets Config
+# AWS_ACCESS_KEY_ID = 'AKIA432U6UR4FHXZRGV7'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'taigon-bucket'
+  
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_ACL = None
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
