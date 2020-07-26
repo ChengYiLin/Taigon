@@ -7,6 +7,7 @@ export const CREATE_CHATROOM_ERROR = 'CREATE_CHATROOM_ERROR';
 export const GET_ROOM_CATEGORIES = 'GET_ROOM_CATEGORIES';
 export const GET_ROOM_CATEGORIES_ERROR = 'GET_ROOM_CATEGORIES_ERROR';
 
+const HOST = window.location.origin;
 
 // Get the chatroom
 export const getChatRoom = () => (dispatch) => {
@@ -17,7 +18,7 @@ export const getChatRoom = () => (dispatch) => {
         },
     }
 
-    fetch('http://localhost:8000/api/chatroom', config)
+    fetch(HOST + '/api/chatroom', config)
         .then(res => {
             if (res.ok) { return res.json() }
             else {
@@ -69,25 +70,25 @@ export const createChatRoom = (roomName, roomBgImg, category, owner) => (dispatc
 
     console.log(formData);
 
-    fetch('http://localhost:8000/api/chatroom', config)
-    .then(res => {
-        if (res.ok) { return res.json() }
-        else {
-            throw ({ status: res.status, msg: res.statusText });
-        }
-    })
-    .then(res => {
-        dispatch({
-            type: CREATE_CHATROOM,
-            payload: res
+    fetch(HOST + '/api/chatroom', config)
+        .then(res => {
+            if (res.ok) { return res.json() }
+            else {
+                throw ({ status: res.status, msg: res.statusText });
+            }
         })
-    })
-    .catch(err => {
-        dispatch({
-            type: CREATE_CHATROOM_ERROR,
-            payload: err.status
-        });
-    })
+        .then(res => {
+            dispatch({
+                type: CREATE_CHATROOM,
+                payload: res
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: CREATE_CHATROOM_ERROR,
+                payload: err.status
+            });
+        })
 }
 
 // Get the chatroom categories
@@ -99,7 +100,7 @@ export const getChatroomCategories = () => (dispatch) => {
         },
     }
 
-    fetch('http://localhost:8000/api/roomcategory', config)
+    fetch(HOST + '/api/roomcategory', config)
         .then(res => {
             if (res.ok) { return res.json() }
             else {

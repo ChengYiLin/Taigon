@@ -8,6 +8,7 @@ export const REGISTE_ERROR = "REGISTE_ERROR";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_ERROR = "LOGOUT_ERROR";
 
+const HOST = window.location.origin;
 
 //      GET USER DATA
 // --------------------------
@@ -30,7 +31,7 @@ export const loadUserData = () => (dispatch, getState) => {
         config.headers['Authorization'] = `Token ${token}`;
     }
 
-    Standard_Fetch(dispatch, 'http://localhost:8000/api/auth/user', config, USER_LOADED, AUTH_ERROR);
+    Standard_Fetch(dispatch, HOST + '/api/auth/user', config, USER_LOADED, AUTH_ERROR);
 };
 
 //        User Login
@@ -46,7 +47,7 @@ export const login = (username, password) => (dispatch) => {
     }
 
     // FETCH API
-    Standard_Fetch(dispatch, 'http://localhost:8000/api/auth/login', config, LOGIN_SUCCESS, LOGIN_ERROR);
+    Standard_Fetch(dispatch, HOST + '/api/auth/login', config, LOGIN_SUCCESS, LOGIN_ERROR);
 }
 
 //        User Registe
@@ -62,7 +63,7 @@ export const registe = (username, email, password) => (dispatch) => {
     }
 
     // FETCH API
-    Standard_Fetch(dispatch, 'http://localhost:8000/api/auth/registe', config, REGISTE_SUCCESS, REGISTE_ERROR);
+    Standard_Fetch(dispatch, HOST + '/api/auth/registe', config, REGISTE_SUCCESS, REGISTE_ERROR);
 }
 
 //        User Logout
@@ -84,9 +85,9 @@ export const logout = () => (dispatch, getState) => {
     }
 
     // FETCH API
-    fetch('http://localhost:8000/api/auth/logout', config)
+    fetch(HOST + '/api/auth/logout', config)
         .then(res => {
-            if (res.ok) { 
+            if (res.ok) {
                 return res
             }
             else {

@@ -100,7 +100,7 @@ class CreateRoom extends Component {
         this.setState({roomname: "",category: "",})
     }
     createRoomCategory(e) {
-        e.preventDefault();s
+        e.preventDefault();
 
         if (e.target.className === 'value') {
             const categoryId = e.target.id;

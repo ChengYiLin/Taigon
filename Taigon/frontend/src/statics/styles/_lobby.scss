@@ -184,6 +184,7 @@
                         background: rgb(202, 202, 202);
                         background-size: cover;
                         background-repeat: no-repeat;
+                        background-position: center center;
                         border-radius: 0.5rem 0.5rem 0 0;
                         transform: scale(1);
                         transition: 0.5s;
@@ -337,11 +338,11 @@
                         @include flex_center();
                         justify-content: start;
                         .upload_image {
-                            font-size: 5rem;
+                            font-size: 3rem;
                             text-align: center;
                             cursor: pointer;
                             p {
-                                font-size: 1.25rem;
+                                font-size: 1rem;
                                 padding: 1rem 0;
                             }
                         }
@@ -350,7 +351,7 @@
                             top: 0;
                             bottom: 0;
                             right: 0;
-                            width: 300px;
+                            width: 240px;
                             box-sizing: border-box;
                             border: 3px dashed gray;
                             background: rgb(228, 228, 228);
@@ -358,7 +359,7 @@
                             background-size: cover;
                             display: flex;
                             justify-content: center;
-                            align-items: flex-end;
+                            align-items: center;
                             &::after{
                                 content: "預覽圖";
                                 padding-left: 1.25rem;

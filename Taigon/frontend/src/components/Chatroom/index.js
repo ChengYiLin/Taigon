@@ -10,12 +10,16 @@ import { getRoomMessages, sendNewMessage } from '../../actions/chatroom';
 import { Link } from "react-router-dom";
 // Wensocket 
 import ReconnectingWebSocket from 'reconnecting-websocket';
+// Emogi
+import 'emoji-mart/css/emoji-mart.css';
+import { Picker } from 'emoji-mart';
 
 class ChatRoom extends Component {
     constructor(props) {
         super(props);
         this.state = {
             message: "",
+            showEmoji: false
         }
     }
     componentDidMount() {
@@ -38,7 +42,7 @@ class ChatRoom extends Component {
             console.error('Chat socket closed unexpectedly');
         };
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         // When leave the chatroom
         this.chatSocket.onclose = function (e) {
             console.log('Chat socket closed unexpectedly');
@@ -46,6 +50,7 @@ class ChatRoom extends Component {
     }
     render() {
         const currentRoom = (this.props.currentRoom) ? (this.props.currentRoom) : '';
+        const showEmoji = (this.state.showEmoji) ? 'emogi show' : 'emogi';
 
         // Message
         let Messages = (!this.props.past_message) ? ([]) : (
@@ -72,11 +77,21 @@ class ChatRoom extends Component {
                     </div>
                     {/* Chat Footer */}
                     <div className='footer'>
-                        <form className='message_form'>
-                            <input type="text" id="message" name="message" placeholder={`Messagge to ${currentRoom}`} required
-                                value={this.state.message} onChange={this.handleChange.bind(this)}
-                            ></input>
-                            <button type="submit" className="submitBtn" onClick={this.websocketSubmitMessage.bind(this)}>
+                        <form className='message_form' onSubmit={this.websocketSubmitMessage.bind(this)}>
+                            <textarea id="message" name="message" placeholder={`Messagge to ${currentRoom}`} rows='2'
+                                value={this.state.message} onChange={this.handleTextChange.bind(this)} onKeyPress={this.handleUserKeyPress.bind(this)}
+                            ></textarea>
+                            <div className="emojiBtn" onClick={this.toggleEmogiTable.bind(this)}>
+                                <i className="far fa-smile"></i>
+                                <div className={showEmoji}>
+                                    <Picker onSelect={this.addEmoji.bind(this)} />
+                                </div>
+                            </div>
+                            <div className="imageBtn">
+
+                                <i className="far fa-images"></i>
+                            </div>
+                            <button type="submit" className="submitBtn">
                                 <i className="fas fa-paper-plane"></i>
                             </button>
                         </form>
@@ -85,15 +100,30 @@ class ChatRoom extends Component {
             </div>
         )
     }
-    handleChange(e) {
+    addEmoji(e) {
+        this.setState((currentState) => ({ message: currentState.message + e.native }));
+    }
+    toggleEmogiTable(e) {
+        e.preventDefault();
+        if (e.target.tagName !== 'I') { return }
+        this.setState((currentState) => ({ showEmoji: !currentState.showEmoji }));
+    }
+    handleTextChange(e) {
         this.setState({ [e.target.name]: e.target.value });
+    }
+    handleUserKeyPress(e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+            this.websocketSubmitMessage(e);
+        }
     }
     websocketSubmitMessage(e) {
         e.preventDefault();
 
+        if (this.state.message === '') { return }
+
         this.chatSocket.send(JSON.stringify({
             'type': 'text',
-            'author':this.props.user.id,
+            'author': this.props.user.id,
             'chatroom': this.props.currentRoomId,
             'textmessage': this.state.message
         }));

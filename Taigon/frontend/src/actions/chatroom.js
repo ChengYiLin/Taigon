@@ -3,6 +3,8 @@ export const GET_ROOM_MSG_ERROR = 'GET_ROOM_MSG_ERROR';
 export const SEND_NEW_MSG = 'SEND_NEW_MSG';
 export const SEND_NEW_MSG_ERROR = 'SEND_NEW_MSG_ERROR';
 
+const HOST = window.location.origin;
+
 // Get Old Messages
 export const getRoomMessages = (currentRoomId) => (dispatch) => {
     const config = {
@@ -12,7 +14,7 @@ export const getRoomMessages = (currentRoomId) => (dispatch) => {
         },
     }
 
-    Standard_Fetch(dispatch, `http://localhost:8000/api/message?room=${currentRoomId}`, config, GET_ROOM_MSG, GET_ROOM_MSG_ERROR);
+    Standard_Fetch(dispatch, HOST + `/api/message?room=${currentRoomId}`, config, GET_ROOM_MSG, GET_ROOM_MSG_ERROR);
 }
 
 // Send New Message
@@ -31,7 +33,7 @@ export const sendNewMessage = (author, currentRoomId, textmessage) => (dispatch)
         body: JSON.stringify(data),
     }
 
-    Standard_Fetch(dispatch, `http://localhost:8000/api/message?room=${currentRoomId}`, config, SEND_NEW_MSG, SEND_NEW_MSG_ERROR);
+    Standard_Fetch(dispatch, HOST + `/api/message?room=${currentRoomId}`, config, SEND_NEW_MSG, SEND_NEW_MSG_ERROR);
 }
 
 
