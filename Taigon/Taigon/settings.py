@@ -92,28 +92,28 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Taigon',
-        'USER': 'postgres',
-        'PASSWORD': DB_PWD(),
-        'HOST':'localhost',
-        'PORT':'5432'
-    }
-}
-
-# ========== AWS ==========
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'taigon',
+#         'NAME': 'Taigon',
 #         'USER': 'postgres',
 #         'PASSWORD': DB_PWD(),
-#         'HOST':'database-1.cfzrcpvpy6ju.us-east-2.rds.amazonaws.com',
+#         'HOST':'localhost',
 #         'PORT':'5432'
 #     }
 # }
+
+# ========== AWS ==========
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'taigon',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST':'database-1.cfzrcpvpy6ju.us-east-2.rds.amazonaws.com',
+        'PORT':'5432'
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
