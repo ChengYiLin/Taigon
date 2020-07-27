@@ -7,11 +7,12 @@ export const REGISTE_SUCCESS = "REGISTE_SUCCESS";
 export const REGISTE_ERROR = "REGISTE_ERROR";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_ERROR = "LOGOUT_ERROR";
+export const UPDATE_PROFILE_IMAGE = 'UPDATE_PROFILE_IMAGE';
+export const UPDATE_PROFILE_IMAGE_ERROR = 'UPDATE_PROFILE_IMAGE_ERROR';
 
 const HOST = window.location.origin;
 
-//      GET USER DATA
-// --------------------------
+// Get User data
 export const loadUserData = () => (dispatch, getState) => {
     // Start to Loading
     dispatch({ type: USER_LOADING });
@@ -34,10 +35,8 @@ export const loadUserData = () => (dispatch, getState) => {
     Standard_Fetch(dispatch, HOST + '/api/auth/user', config, USER_LOADED, AUTH_ERROR);
 };
 
-//        User Login
-// --------------------------
+// User Login
 export const login = (username, password) => (dispatch) => {
-    // Define Ajax config for LoginAPI
     let config = {
         method: "POST",
         headers: {
@@ -50,10 +49,8 @@ export const login = (username, password) => (dispatch) => {
     Standard_Fetch(dispatch, HOST + '/api/auth/login', config, LOGIN_SUCCESS, LOGIN_ERROR);
 }
 
-//        User Registe
-// --------------------------
+// User Registe
 export const registe = (username, email, password) => (dispatch) => {
-    // Define Ajax config for RegisteAPI
     let config = {
         method: "POST",
         headers: {
@@ -66,8 +63,7 @@ export const registe = (username, email, password) => (dispatch) => {
     Standard_Fetch(dispatch, HOST + '/api/auth/registe', config, REGISTE_SUCCESS, REGISTE_ERROR);
 }
 
-//        User Logout
-// --------------------------
+// User Logout
 export const logout = () => (dispatch, getState) => {
     // Get Token from state
     const token = getState().auth.token;
@@ -106,6 +102,22 @@ export const logout = () => (dispatch, getState) => {
                 payload: err.status
             });
         })
+}
+
+
+// Update user Profile
+export const updateProfileImage = (user, profileImg) => (dispatch) =>{
+    let formData = new FormData();
+    formData.append('user', user);
+    formData.append('profileimg', profileImg);
+
+    const config = {
+        method: "POST",
+        body: formData,
+    }
+
+    // FETCH API
+    Standard_Fetch(dispatch, HOST + '/api/auth/profile', config, UPDATE_PROFILE_IMAGE, UPDATE_PROFILE_IMAGE_ERROR);
 }
 
 // Fetch API

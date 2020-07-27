@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createChatRoom, getChatroomCategories } from '../../actions/lobby';
-import { element } from 'prop-types';
 
 class CreateRoom extends Component {
     constructor(props) {

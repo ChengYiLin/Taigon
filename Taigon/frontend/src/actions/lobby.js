@@ -68,8 +68,6 @@ export const createChatRoom = (roomName, roomBgImg, category, owner) => (dispatc
         body: formData,
     }
 
-    console.log(formData);
-
     fetch(HOST + '/api/chatroom', config)
         .then(res => {
             if (res.ok) { return res.json() }

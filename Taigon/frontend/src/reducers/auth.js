@@ -7,7 +7,9 @@ import {
     REGISTE_SUCCESS,
     REGISTE_ERROR,
     LOGOUT_SUCCESS,
-    LOGOUT_ERROR
+    LOGOUT_ERROR,
+    UPDATE_PROFILE_IMAGE,
+    UPDATE_PROFILE_IMAGE_ERROR
 } from '../actions/auth';
 
 const initialState = {
@@ -26,6 +28,7 @@ function auth(state = initialState, action) {
             })
 
         case USER_LOADED:
+        case UPDATE_PROFILE_IMAGE:
             return ({
                 ...state,
                 isAuthenticated: true,
@@ -45,7 +48,7 @@ function auth(state = initialState, action) {
             })
 
         case LOGOUT_ERROR:
-            console.log(`Log out Error : ${action.payload}`)
+        case UPDATE_PROFILE_IMAGE_ERROR:
             return ({
                 ...state,
             })
