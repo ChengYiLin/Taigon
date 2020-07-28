@@ -149,7 +149,7 @@ class RoomMemberAPI(mixins.ListModelMixin,
                         for room in list(userRoomData.roomname.all())]
             return Response(res_data)
 
-        # Get Room Members 
+        # Get Room Members
         elif('room' in dict(request.query_params)):
             roomId = int(dict(request.query_params)['room'][0])
             roomMemberData = RoomMember.objects.filter(roomname__id=roomId)
@@ -159,37 +159,53 @@ class RoomMemberAPI(mixins.ListModelMixin,
                          'email': user.user.email,
                          'image': str(UserProfile.objects.get(user=user.user.id).profileimg)}
                         for user in list(roomMemberData.all())]
-
-
             return Response(res_data)
 
-
     def post(self, request):
-        user = int(dict(self.request.data)['user'][0])
+        user = dict(self.request.data)['user']
         roomname = dict(self.request.data)['roomname']
 
-        # Check User in Room Member or not
+        # Check User in RoomMember Table or not
         # True : update
         if(RoomMember.objects.filter(user=user)):
-            print('yes')
-            # get_user_data = RoomMember.objects.get(user=user)
-            # get_user_data.roomname.set(roomname)
+            get_user_data = RoomMember.objects.get(user=user)
+            if(roomname in [user_room.id for user_room in list(get_user_data.roomname.all())]):
+                res_data = [{'id': room.id,
+                            'owner': room.owner.username,
+                            'roomname': room.roomname,
+                            'bgimage': str(room.bgimage),
+                            'category': room.category.category}
+                            for room in list(get_user_data.roomname.all())]
 
-            # return Response({
-            #     'user': User.objects.get(id=user).username,
-            #     'roomname': roomname
-            # })
+                return Response(res_data)
+            else:
+                get_user_data.roomname.add(roomname)
+                get_user_data.save()
+
+                res_data = [{'id': room.id,
+                            'owner': room.owner.username,
+                            'roomname': room.roomname,
+                            'bgimage': str(room.bgimage),
+                            'category': room.category.category}
+                            for room in list(get_user_data.roomname.all())]
+
+                return Response(res_data)
 
         # False: create
         else:
-            print('no')
-            # serializer = self.get_serializer(data=request.data)
-            # serializer.is_valid(raise_exception=True)
-            # roommember = serializer.save()
+            user_set = User.objects.get(id=user)
+            roomOwner = RoomMember(user=user_set)
+            roomOwner.save()
+            roomOwner.roomname.add(roomname)
 
-            # return Response({
-            #     'data': RoomMemberSerializer(roommember).data
-            # })
+            res_data = [{'id': room.id,
+                         'owner': room.owner.username,
+                         'roomname': room.roomname,
+                         'bgimage': str(room.bgimage),
+                         'category': room.category.category}
+                        for room in list(roomOwner.roomname.all())]
+
+            return Response(res_data)
 
     def delete(self, request, *args, **kwargs):
         delete_id = int(dict(request.query_params)['id'][0])

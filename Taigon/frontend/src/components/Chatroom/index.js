@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 // Components
 import Aside from './aside';
 import Chatbox from './chatbox';
+import Member from './member';
 // action
-import { leaveChatRoom } from '../../actions/lobby'
-import { getRoomMessages, sendNewMessage } from '../../actions/chatroom';
+import { leaveChatRoom } from '../../actions/lobby';
+import { getRoomMessages, sendNewMessage, getRoomMember } from '../../actions/chatroom';
 // Router 
 import { Link, Route } from "react-router-dom";
 // Wensocket 
@@ -23,10 +24,11 @@ class ChatRoom extends Component {
         }
     }
     componentDidMount() {
-        this.props.getRoomMessages(this.props.currentRoomId);
-        
+        const roomID = this.props.currentRoomId
+        this.props.getRoomMessages(roomID);
+        this.scrollToBottom();
         // WebSocket
-        const path = `ws://${window.location.host}/ws/chat/${this.props.currentRoomId}/`;
+        const path = `ws://${window.location.host}/ws/chat/${roomID}/`;
         this.chatSocket = new ReconnectingWebSocket(path);
         // When open the chatroom
         this.chatSocket.onopen = (e) => {
@@ -35,8 +37,7 @@ class ChatRoom extends Component {
         // When receive the msgs from backend
         this.chatSocket.onmessage = (e) => {
             const data = JSON.parse(e.data);
-            this.props.getRoomMessages(this.props.currentRoomId);
-            console.log(data);
+            this.props.getRoomMessages(roomID);
         };
         // When get the Unexpected Error
         this.chatSocket.onclose = function (e) {
@@ -45,15 +46,10 @@ class ChatRoom extends Component {
     }
     componentWillUnmount() {
         // When leave the chatroom
-        this.chatSocket.close = function (e) {
-            console.log('Chat socket closed unexpectedly');
-        };
+        this.chatSocket.close();
     }
     componentDidUpdate() {
-        let auto_button = document.querySelector('.overflow_container');
-        if(auto_button){
-            auto_button.scrollTop = auto_button.scrollHeight;
-        }
+        this.scrollToBottom();
     }
     render() {
         const currentRoom = (this.props.currentRoom) ? (this.props.currentRoom) : '';
@@ -80,6 +76,7 @@ class ChatRoom extends Component {
                         <div className='main'>
                             <div className='overflow_container'>
                                 {Messages}
+                                <div className='overflow_anchor' ref={(el) => { this.messagesEnd = el; }}></div>
                             </div>
                         </div>
                         <div className='footer'>
@@ -106,10 +103,7 @@ class ChatRoom extends Component {
                 )} />
 
                 {/* RoomMember */}
-                <Route exact path="/chatroom/:roomname/member" render={() => (
-                    <div className='room_member'>
-                    </div>
-                )} />
+                <Route exact path="/chatroom/:roomname/member" component={Member} />
 
             </div>
         )
@@ -144,6 +138,11 @@ class ChatRoom extends Component {
 
         this.setState({ message: '' })
     }
+    scrollToBottom() {
+        if (this.messagesEnd) {
+            this.messagesEnd.scrollIntoView();
+        }
+    }
 }
 
 const mapStateToProps = state => {
@@ -155,4 +154,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { getRoomMessages, sendNewMessage, leaveChatRoom })(ChatRoom);
+export default connect(mapStateToProps, { getRoomMessages, sendNewMessage, leaveChatRoom, getRoomMember })(ChatRoom);

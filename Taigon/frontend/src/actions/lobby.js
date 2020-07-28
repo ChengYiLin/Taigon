@@ -8,6 +8,8 @@ export const GET_ROOM_CATEGORIES = 'GET_ROOM_CATEGORIES';
 export const GET_ROOM_CATEGORIES_ERROR = 'GET_ROOM_CATEGORIES_ERROR';
 export const GET_USER_CHATROOM = 'GET_USER_CHATROOM';
 export const GET_USER_CHATROOM_ERROR = 'GET_USER_CHATROOM_ERROR';
+export const CHECK_ROOM_MEMBER = 'CHECK_ROOM_MEMBER';
+export const CHECK_ROOM_MEMBER_ERROR = 'CHECK_ROOM_MEMBER_ERROR';
 
 const HOST = window.location.origin;
 
@@ -146,6 +148,47 @@ export const getUserOwnChatroom = (user) => (dispatch) => {
         .catch(err => {
             dispatch({
                 type: GET_USER_CHATROOM_ERROR,
+                payload: err.status
+            });
+        })
+}
+
+// Check Room Member or not
+export const checkRoomMember = (user, roomID) => (dispatch) => {
+    const data = {
+        "user": user,
+        "roomname": roomID
+    }
+
+    const config = {
+        method: "POST",
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }
+
+    Standard_Fetch(dispatch, HOST + `/api/roommember`, config, CHECK_ROOM_MEMBER, CHECK_ROOM_MEMBER_ERROR);
+}
+
+// Fetch API
+function Standard_Fetch(dispatch, URL, config, Success_type, Error_type) {
+    fetch(URL, config)
+        .then(res => {
+            if (res.ok) { return res.json() }
+            else {
+                throw ({ status: res.status, msg: res.statusText });
+            }
+        })
+        .then(res => {
+            dispatch({
+                type: Success_type,
+                payload: res
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: Error_type,
                 payload: err.status
             });
         })

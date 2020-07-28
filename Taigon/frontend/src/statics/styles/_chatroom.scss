@@ -75,8 +75,9 @@
         }
     }
 
-    // chat content 
-    .chat_content {
+    // chat conte.nt
+    .chat_content,
+    .room_member {
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
@@ -98,7 +99,7 @@
                 background-position: center center;
             }
         }
-        // main
+        // chatroom - main
         .main {
             flex: 1 1 auto;
             box-sizing: border-box;
@@ -112,6 +113,7 @@
                 .chat_box {
                     padding: 1.8rem 5rem;
                     display: flex;
+                    overflow-anchor: none;
                     .author_img {
                         flex: 0 0 5rem;
                         height: 5rem;
@@ -144,9 +146,12 @@
                         padding-right: 2rem;
                     }
                 }
+                .overflow_anchor{
+                    overflow-anchor: auto;
+                }
             }
         }
-        // footer
+        // chatroom - footer
         .footer {
             border-top: 1px solid grey;
             flex: 0 0 11rem;
@@ -191,6 +196,41 @@
                     padding: 0.75rem;
                     border-radius: 50%;
                     cursor: pointer;
+                }
+            }
+        }
+        // chatroom - member
+        .member {
+            flex: 1 1 auto;
+            .member_overflow_container {
+                padding: 2rem;
+                height: calc(100vh - 6rem);
+                box-sizing: border-box;
+                overflow: auto;
+                display: flex;
+                .member_card{
+                    width: 15rem;
+                    height: 18rem;
+                    margin-right: 2rem;
+                    border-radius: .5rem;
+                    border: 1px solid #ffffff;
+                    background: #dedede;
+                    display: flex;
+                    flex-direction: column;
+                    .profileImg{
+                        flex: 0 0 15rem;
+                        width: 100%;
+                        border-radius: .5rem .5rem 0 0;
+                        background-position: center center;
+                        background-size: cover;
+                        background-image: url('https://freefrontend.com/assets/img/css-business-cards/Geometric-business-card-with-CSS-Grid.png');
+                    }
+                    .name{
+                        flex: 1 1 auto;
+                        font-size: 1.25rem;
+                        text-align: center;
+                        @include flex-center();
+                    }
                 }
             }
         }

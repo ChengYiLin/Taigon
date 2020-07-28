@@ -2,6 +2,9 @@ export const GET_ROOM_MSG = 'GET_ROOM_MSG';
 export const GET_ROOM_MSG_ERROR = 'GET_ROOM_MSG_ERROR';
 export const SEND_NEW_MSG = 'SEND_NEW_MSG';
 export const SEND_NEW_MSG_ERROR = 'SEND_NEW_MSG_ERROR';
+export const GET_ROOM_MEMBER = 'GET_ROOM_MEMBER';
+export const GET_ROOM_MEMBER_ERROR = 'GET_ROOM_MEMBER_ERROR';
+
 
 const HOST = window.location.origin;
 
@@ -36,6 +39,17 @@ export const sendNewMessage = (author, currentRoomId, textmessage) => (dispatch)
     Standard_Fetch(dispatch, HOST + `/api/message?room=${currentRoomId}`, config, SEND_NEW_MSG, SEND_NEW_MSG_ERROR);
 }
 
+// Get Room Member
+export const getRoomMember = (currentRoomId) => (dispatch) =>{
+    const config = {
+        method: "GET",
+        headers: {
+            'content-type': 'application/json',
+        },
+    }
+
+    Standard_Fetch(dispatch, HOST + `/api/roommember?room=${currentRoomId}`, config, GET_ROOM_MEMBER, GET_ROOM_MEMBER_ERROR);
+}
 
 // Fetch API
 function Standard_Fetch(dispatch, URL, config, Success_type, Error_type) {

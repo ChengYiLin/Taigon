@@ -13,22 +13,25 @@ class CreateRoom extends Component {
             category: "",
             showCategory: false,
             showCategoryText: "請選擇類別",
-            previewImg: ''
+            previewImg: "",
         }
         this.fileInput = React.createRef();
     }
-    componentDidMount(){
+    componentDidMount() {
         this.props.getChatroomCategories();
+        this.setState({disableBtn: true})
     }
     render() {
         if (this.props.openState) {
             let showCategory = (this.state.showCategory) ? 'select show' : 'select';
-            let categories = (!this.props.categories) ? [] : this.props.categories.map(element =>{
-                return(
+            let categories = (!this.props.categories) ? [] : this.props.categories.map(element => {
+                return (
                     <div key={element.id} className='value' id={element.id}>{element.value}</div>
                 )
             })
-            
+
+            const enableBtn = (this.state.roomname.trim()!=="" && this.state.category!=="" && this.state.previewImg!=="") ? false : true
+
             return (
                 <div className='create_room_box'>
                     <div className='form_box'>
@@ -63,12 +66,12 @@ class CreateRoom extends Component {
                                         <i className="fas fa-upload"></i>
                                         <p>上傳背景圖片(.jpg / .png)</p>
                                     </label>
-                                    <div className='previewImg' style={{backgroundImage:`url(${this.state.previewImg})`}}></div>
+                                    <div className='previewImg' style={{ backgroundImage: `url(${this.state.previewImg})` }}></div>
                                     <input type="file" id="room_bgimage" ref={this.fileInput} onChange={this.handleImgChange.bind(this)} name="room_bgimage" accept=".png, .jpg, .jpeg"></input>
                                 </div>
                             </div>
                             <div className="form_group submit">
-                                <button type="submit" className="submitBTN">建立聊天室</button>
+                                <button type="submit" className="submitBTN" disabled={enableBtn}>建立聊天室</button>
                             </div>
                         </form>
                     </div>
@@ -81,6 +84,7 @@ class CreateRoom extends Component {
     }
     handleChange(e) {
         e.preventDefault();
+        console.log(e.target.value)
         this.setState({ [e.target.name]: e.target.value });
     }
     handleImgChange(e) {
@@ -88,15 +92,10 @@ class CreateRoom extends Component {
         let reader = new FileReader();
         reader.readAsDataURL(this.fileInput.current.files[0])
 
-        reader.onloadend = (e) =>{
-            this.setState({previewImg: reader.result})
+        reader.onloadend = (e) => {
+            this.setState({ previewImg: reader.result, disableBtn: false })
+
         }
-    }
-    handleSubmit(e) {
-        e.preventDefault();
-        this.props.createChatRoom(this.state.roomname, this.fileInput.current.files[0], this.state.category, this.props.user.id);
-        this.props.setFalseState();
-        this.setState({roomname: "",category: "",})
     }
     createRoomCategory(e) {
         e.preventDefault();
@@ -114,6 +113,12 @@ class CreateRoom extends Component {
         else {
             this.setState(currentState => ({ showCategory: !currentState.showCategory }));
         }
+    }
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.createChatRoom(this.state.roomname.trim(), this.fileInput.current.files[0], this.state.category, this.props.user.id);
+        this.props.setFalseState();
+        this.setState({ roomname: "", category: "",previewImg: "" })
     }
 }
 
