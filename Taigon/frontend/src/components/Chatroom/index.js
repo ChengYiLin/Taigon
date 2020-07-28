@@ -7,7 +7,7 @@ import Chatbox from './chatbox';
 import { leaveChatRoom } from '../../actions/lobby'
 import { getRoomMessages, sendNewMessage } from '../../actions/chatroom';
 // Router 
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 // Wensocket 
 import ReconnectingWebSocket from 'reconnecting-websocket';
 // Emogi
@@ -44,7 +44,7 @@ class ChatRoom extends Component {
     }
     componentWillUnmount() {
         // When leave the chatroom
-        this.chatSocket.onclose = function (e) {
+        this.chatSocket.close = function (e) {
             console.log('Chat socket closed unexpectedly');
         };
     }
@@ -63,40 +63,47 @@ class ChatRoom extends Component {
             <div className='Chatroom_wrapper'>
                 <Aside />
 
-                <div className='chat_content'>
-                    {/* Chat Header */}
-                    <div className='header'>
-                        <p className='room_name'>{currentRoom}</p>
-                        <Link className='leave_room' to='/' onClick={this.props.leaveChatRoom}></Link>
-                    </div>
-                    {/* Chat Main */}
-                    <div className='main'>
-                        <div className='overflow_container'>
-                            {Messages}
+                {/* ChatRoom */}
+                <Route exact path="/chatroom/:roomname" render={() => (
+                    <div className='chat_content'>
+                        <div className='header'>
+                            <p className='room_name'>{currentRoom}</p>
+                            <Link className='leave_room' to='/' onClick={this.props.leaveChatRoom}></Link>
+                        </div>
+                        <div className='main'>
+                            <div className='overflow_container'>
+                                {Messages}
+                            </div>
+                        </div>
+                        <div className='footer'>
+                            <form className='message_form' onSubmit={this.websocketSubmitMessage.bind(this)}>
+                                <textarea id="message" name="message" placeholder={`Messagge to ${currentRoom}`} rows='2'
+                                    value={this.state.message} onChange={this.handleTextChange.bind(this)} onKeyPress={this.handleUserKeyPress.bind(this)}
+                                ></textarea>
+                                <div className="emojiBtn" onClick={this.toggleEmogiTable.bind(this)}>
+                                    <i className="far fa-smile"></i>
+                                    <div className={showEmoji}>
+                                        <Picker onSelect={this.addEmoji.bind(this)} />
+                                    </div>
+                                </div>
+                                <div className="imageBtn">
+
+                                    <i className="far fa-images"></i>
+                                </div>
+                                <button type="submit" className="submitBtn">
+                                    <i className="fas fa-paper-plane"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
-                    {/* Chat Footer */}
-                    <div className='footer'>
-                        <form className='message_form' onSubmit={this.websocketSubmitMessage.bind(this)}>
-                            <textarea id="message" name="message" placeholder={`Messagge to ${currentRoom}`} rows='2'
-                                value={this.state.message} onChange={this.handleTextChange.bind(this)} onKeyPress={this.handleUserKeyPress.bind(this)}
-                            ></textarea>
-                            <div className="emojiBtn" onClick={this.toggleEmogiTable.bind(this)}>
-                                <i className="far fa-smile"></i>
-                                <div className={showEmoji}>
-                                    <Picker onSelect={this.addEmoji.bind(this)} />
-                                </div>
-                            </div>
-                            <div className="imageBtn">
+                )} />
 
-                                <i className="far fa-images"></i>
-                            </div>
-                            <button type="submit" className="submitBtn">
-                                <i className="fas fa-paper-plane"></i>
-                            </button>
-                        </form>
+                {/* RoomMember */}
+                <Route exact path="/chatroom/:roomname/member" render={() => (
+                    <div className='room_member'>
                     </div>
-                </div>
+                )} />
+
             </div>
         )
     }

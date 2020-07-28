@@ -5,7 +5,7 @@ from rest_framework import generics, permissions
 from rest_framework import serializers
 from rest_framework.response import Response
 from knox.models import AuthToken
-from .serializers import UserSerialzer, RegisterSerializer, LoginSerializer
+from .serializers import UserSerialzer, RegisterSerializer, LoginSerializer, UserProfileSerializer
 from .models import UserProfile
 from django.contrib.auth import get_user_model
 
@@ -79,4 +79,23 @@ class UserAPI(generics.GenericAPIView):
             "username": userName,
             "email": userEmail,
             "image": userImage
+        })
+
+
+class UserprofileAPI(generics.GenericAPIView):
+    serializer_class = UserProfileSerializer
+
+    def post(self, request, *args, **kwargs):
+        userID = dict(request.data)['user'][0]
+        newProfileImg = dict(request.data)['profileimg'][0]
+        # Update data
+        userData = UserProfile.objects.get(user=userID)
+        userData.profileimg = newProfileImg
+        userData.save()
+
+        return Response({
+            "id": userID,
+            "username": User.objects.get(id=userID).username,
+            "email": User.objects.get(id=userID).email,
+            "image": str(userData.profileimg)
         })

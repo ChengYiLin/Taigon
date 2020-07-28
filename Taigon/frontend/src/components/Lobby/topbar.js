@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
+// Router 
+import { Link } from "react-router-dom";
 
 class Topbar extends Component {
     constructor(props) {
@@ -19,15 +21,15 @@ class Topbar extends Component {
             <header className='topbar'>
                 <div className='container'>
                     {/* Logo */}
-                    <div className="Logo">
+                    <Link className="Logo" to='/'>
                         <img src='/static/frontend/img/Taigon.png'></img>
                         <h1>Taigon</h1>
-                    </div>
+                    </Link>
                     {/* User */}
                     <div className='User'>
                         <a className='profile_image' onClick={this.showInform.bind(this)} style={{ backgroundImage: `url(${profile_img})` }}></a>
                         <div className={`${showInform_class}`}>
-                            <a className='profile_image' style={{ backgroundImage: `url(${profile_img})` }}></a>
+                            <Link to='/profile' className='profile_image' style={{ backgroundImage: `url(${profile_img})` }}></Link>
                             <p className='profile_name'>{userName}</p>
                             <p className='profile_email'>{userEmail}</p>
                             <div className='signout_box'>

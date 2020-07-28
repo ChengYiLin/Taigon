@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from rest_framework import fields
+from .models import UserProfile
+
 
 # User Serializers
 
@@ -30,6 +31,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 # Login Serializers
+
+
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
@@ -40,3 +43,11 @@ class LoginSerializer(serializers.Serializer):
             return user
         else:
             raise serializers.ValidationError("Incorrect Credentials")
+
+# UserProfile Image
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = '__all__'

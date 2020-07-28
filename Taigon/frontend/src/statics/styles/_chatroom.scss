@@ -15,6 +15,7 @@
     width: 100%;
     height: 100vh;
     display: flex;
+    // room aside
     .room_aside {
         flex: 0 0 400px;
         background: rgb(25, 85, 60);
@@ -55,23 +56,26 @@
             padding: 2rem 0;
             border-bottom: 1px solid #216b4c;
             li {
-                display: flex;
-                color: white;
-                font-size: 1.5rem;
-                padding: 1.5rem 2rem;
-                cursor: pointer;
                 &:hover {
                     background: rgb(17, 65, 45);
                 }
-                .nav_icon {
-                    flex: 0 0 4.5rem;
-                }
-                .nav_text {
-                    flex: 1 1 auto;
+                a {
+                    padding: 1.5rem 2rem;
+                    display: flex;
+                    color: white;
+                    font-size: 1.5rem;
+                    .nav_icon {
+                        flex: 0 0 4.5rem;
+                    }
+                    .nav_text {
+                        flex: 1 1 auto;
+                    }
                 }
             }
         }
     }
+
+    // chat content 
     .chat_content {
         flex: 1 1 auto;
         display: flex;
@@ -175,7 +179,7 @@
                         }
                     }
                 }
-                .imageBtn{
+                .imageBtn {
                     @include msg_button_reset();
                 }
                 .submitBtn {
@@ -187,6 +191,182 @@
                     padding: 0.75rem;
                     border-radius: 50%;
                     cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+    .Chatroom_wrapper {
+        flex-direction: column;
+        .room_aside {
+            flex: 0 0 80px;
+            background: rgb(25, 85, 60);
+            // room_aside : topbar
+            .topbar {
+                padding: 1rem;
+                .logo {
+                    img {
+                        width: 2rem;
+                    }
+                    h1 {
+                        font-size: 1.15rem;
+                        padding-left: 0.6rem;
+                    }
+                }
+                .profile {
+                    .porfile_image {
+                        display: block;
+                        width: 3rem;
+                        height: 3rem;
+                        background: gray;
+                        border-radius: 50%;
+                        background-position: center center;
+                        background-size: cover;
+                    }
+                }
+            }
+            // room_aside : navbar
+            .chat_nav {
+                display: none;
+                // ---------
+                padding: 2rem 0;
+                border-bottom: 1px solid #216b4c;
+                li {
+                    display: flex;
+                    color: white;
+                    font-size: 1.5rem;
+                    padding: 1.5rem 2rem;
+                    cursor: pointer;
+                    &:hover {
+                        background: rgb(17, 65, 45);
+                    }
+                    .nav_icon {
+                        flex: 0 0 4.5rem;
+                    }
+                    .nav_text {
+                        flex: 1 1 auto;
+                    }
+                }
+            }
+        }
+        .chat_content {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            // header
+            .header {
+                flex: 0 0 6rem;
+                font-size: 2rem;
+                padding: 2rem;
+                box-sizing: border-box;
+                box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 #dadce0;
+                display: flex;
+                justify-content: space-between;
+                .leave_room {
+                    display: block;
+                    width: 2rem;
+                    height: 2rem;
+                    background-image: url("/static/frontend/img/leave.svg");
+                    background-size: cover;
+                    background-position: center center;
+                }
+            }
+            // main
+            .main {
+                flex: 1 1 auto;
+                box-sizing: border-box;
+                font-size: 1.25rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                .overflow_container {
+                    height: calc(100vh - 11rem - 6rem);
+                    overflow: auto;
+                    .chat_box {
+                        padding: 1.8rem 5rem;
+                        display: flex;
+                        .author_img {
+                            flex: 0 0 5rem;
+                            height: 5rem;
+                            background-size: cover;
+                            background-position: center center;
+                            border-radius: 50%;
+                        }
+                        .main_content {
+                            flex: 1 1 auto;
+                            padding-left: 2rem;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            .author_name {
+                                flex: 0 0 2rem;
+                                font-size: 1.5rem;
+                            }
+                            .timestamp {
+                                flex: 0 0 1.75rem;
+                                font-size: 1rem;
+                                color: gray;
+                            }
+                        }
+                    }
+                    .mine_msg {
+                        .main_content {
+                            order: -1;
+                            text-align: right;
+                            padding-left: 0rem;
+                            padding-right: 2rem;
+                        }
+                    }
+                }
+            }
+            // footer
+            .footer {
+                border-top: 1px solid grey;
+                flex: 0 0 11rem;
+                box-sizing: border-box;
+                @include flex-center();
+                .message_form {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-end;
+                    width: 80%;
+                    textarea {
+                        width: 80%;
+                        font-size: 1.5rem;
+                        padding: 0.5rem 1rem;
+                        border: 1px solid rgb(192, 192, 192);
+                        border-radius: 0.5rem;
+                        outline: none;
+                        resize: none;
+                    }
+                    .emojiBtn {
+                        position: relative;
+                        @include msg_button_reset();
+                        .emogi {
+                            position: absolute;
+                            bottom: 3rem;
+                            right: 0;
+                            display: none;
+                            &.show {
+                                display: block;
+                            }
+                        }
+                    }
+                    .imageBtn {
+                        @include msg_button_reset();
+                    }
+                    .submitBtn {
+                        border: none;
+                        outline: none;
+                        color: white;
+                        background: rgb(25, 85, 60);
+                        font-size: 1.5rem;
+                        padding: 0.75rem;
+                        border-radius: 50%;
+                        cursor: pointer;
+                    }
                 }
             }
         }

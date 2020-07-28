@@ -10,7 +10,7 @@ class To_registe extends Component {
                     <h2>New Here ?</h2>
                     <p>Be a Taigoner<br></br>Sign up and Join Us</p>
                     <Link to="/registe" className="goRegiste">
-                        Registe Now
+                        Register Now
                     </Link>
                 </div>
             </div>
