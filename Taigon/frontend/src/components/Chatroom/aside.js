@@ -32,6 +32,12 @@ class Aside extends Component {
                             <p className='nav_text'>聊天成員</p>
                         </Link>
                     </li>
+                    <li>
+                        <Link to={`/`}>
+                            <i className="nav_icon fas fa-door-open"></i>
+                            <p className='nav_text'>返回大廳</p>
+                        </Link>
+                    </li>
                 </ul>
             </div>
         )
@@ -40,7 +46,7 @@ class Aside extends Component {
 
 const mapStateToProps = state => {
     return {
-                    user: state.auth.user,
+        user: state.auth.user,
         currentRoom: state.lobby.currentRoom,
         currentRoomId: state.lobby.currentRoomId
     }

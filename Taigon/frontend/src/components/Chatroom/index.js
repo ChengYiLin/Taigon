@@ -24,6 +24,7 @@ class ChatRoom extends Component {
     }
     componentDidMount() {
         this.props.getRoomMessages(this.props.currentRoomId);
+        
         // WebSocket
         const path = `ws://${window.location.host}/ws/chat/${this.props.currentRoomId}/`;
         this.chatSocket = new ReconnectingWebSocket(path);
@@ -47,6 +48,12 @@ class ChatRoom extends Component {
         this.chatSocket.close = function (e) {
             console.log('Chat socket closed unexpectedly');
         };
+    }
+    componentDidUpdate() {
+        let auto_button = document.querySelector('.overflow_container');
+        if(auto_button){
+            auto_button.scrollTop = auto_button.scrollHeight;
+        }
     }
     render() {
         const currentRoom = (this.props.currentRoom) ? (this.props.currentRoom) : '';
