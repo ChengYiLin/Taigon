@@ -18,19 +18,29 @@ class ChatroomAPI(mixins.ListModelMixin,
     serializer_class = ChatRooomSerializer
 
     def get(self, request):
-        rooms = ChatRooom.objects.all()
+        search_id = int(dict(request.query_params)['room'][0]) if ('room' in dict(request.query_params)) else False
+
+        rooms = ChatRooom.objects.get(
+            id=search_id) if search_id else ChatRooom.objects.all()
         # Response
-        res_data = [{'id': room.id,
-                     'owner': room.owner.username,
-                     'roomname': room.roomname,
-                     'bgimage': str(room.bgimage),
-                     'category': room.category.category}
-                    for room in rooms]
+        print(rooms)
+        if(search_id):
+            res_data = {'id': rooms.id,
+                        'owner': rooms.owner.username,
+                        'roomname': rooms.roomname,
+                        'bgimage': str(rooms.bgimage),
+                        'category': rooms.category.category}
+        else:
+            res_data = [{'id': room.id,
+                        'owner': room.owner.username,
+                        'roomname': room.roomname,
+                        'bgimage': str(room.bgimage),
+                        'category': room.category.category}
+                        for room in rooms]
 
         return Response(res_data)
 
     def post(self, request):
-        pass
         # Save data in Chatroom table
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)

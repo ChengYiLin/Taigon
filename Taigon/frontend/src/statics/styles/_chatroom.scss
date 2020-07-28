@@ -70,6 +70,23 @@
                     .nav_text {
                         flex: 1 1 auto;
                     }
+                    &.roomLink {
+                        flex-direction: column;
+                        // ----Temp Image
+                        .roomName{
+                            text-align: center;
+                            padding: 1rem 0;
+                        }
+                        .roomImage {
+                            margin: 0 auto;
+                            width: 100%;
+                            height: 300px;
+                            background: transparent;
+                            background-size: cover;
+                            background-position: center center;
+                            border-radius: 0.5rem;
+                        }
+                    }
                 }
             }
         }
@@ -134,23 +151,23 @@
                         }
                         .message_box {
                             display: flex;
-                            margin-top: .5rem; 
-                            .messageTxt{
+                            margin-top: 0.5rem;
+                            .messageTxt {
                                 flex: 0 1 auto;
                                 background: #d8d8d8;
-                                border-radius: .5rem;
-                                padding: .5rem 1rem;
+                                border-radius: 0.5rem;
+                                padding: 0.5rem 1rem;
                                 max-width: 80%;
-                                p{
+                                p {
                                     word-break: break-all;
                                     text-align: left;
                                 }
                             }
                             .timestamp {
                                 flex: 0 0 3rem;
-                                font-size: .8rem;
+                                font-size: 0.8rem;
                                 color: gray;
-                                padding-left: .5rem;
+                                padding-left: 0.5rem;
                                 display: flex;
                                 align-items: flex-end;
                             }
@@ -165,7 +182,7 @@
                         padding-right: 2rem;
                         .message_box {
                             justify-content: flex-end;
-                            .messageTxt{
+                            .messageTxt {
                                 background: rgb(194, 243, 179);
                             }
                             .timestamp {
@@ -214,6 +231,7 @@
                 }
                 .imageBtn {
                     @include msg_button_reset();
+                    display: none;
                 }
                 .submitBtn {
                     border: none;

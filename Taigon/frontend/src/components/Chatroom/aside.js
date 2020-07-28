@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// action
+import { getRoomImage } from '../../actions/chatroom';
 // Router 
 import { Link } from "react-router-dom";
 
+const HOST = window.location.origin
+
 class Aside extends Component {
+    componentWillMount() {
+        this.props.getRoomImage(this.props.currentRoomId)
+    }
     render() {
         const currentRoom = (this.props.currentRoom) ? (this.props.currentRoom) : '';
         const profile_img = (this.props.user) ? `/media/${this.props.user.image}` : "url(/media/user.png)";;
+        const room_img = (this.props.roomInform) ? HOST + '/media/' + (this.props.roomInform.bgimage) : '';
 
         return (
             <div className='room_aside'>
@@ -21,9 +29,9 @@ class Aside extends Component {
                 </div>
                 <ul className='chat_nav'>
                     <li>
-                        <Link to={`/chatroom/${currentRoom}`}>
-                            <i className="nav_icon fas fa-comments"></i>
-                            <p className='nav_text'>聊天室</p>
+                        <Link to={`/chatroom/${currentRoom}`} className='roomLink'>
+                            <p className='roomName'>{currentRoom}</p>
+                            <div className='roomImage' style={{ backgroundImage: `url(${room_img})` }}></div>
                         </Link>
                     </li>
                     <li>
@@ -39,6 +47,7 @@ class Aside extends Component {
                         </Link>
                     </li>
                 </ul>
+
             </div>
         )
     }
@@ -48,8 +57,9 @@ const mapStateToProps = state => {
     return {
         user: state.auth.user,
         currentRoom: state.lobby.currentRoom,
-        currentRoomId: state.lobby.currentRoomId
+        currentRoomId: state.lobby.currentRoomId,
+        roomInform: state.chatroom.roomInform
     }
 }
 
-export default connect(mapStateToProps)(Aside);
+export default connect(mapStateToProps, { getRoomImage })(Aside);

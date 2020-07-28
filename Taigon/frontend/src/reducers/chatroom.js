@@ -4,12 +4,15 @@ import {
     SEND_NEW_MSG,
     SEND_NEW_MSG_ERROR,
     GET_ROOM_MEMBER,
-    GET_ROOM_MEMBER_ERROR
+    GET_ROOM_MEMBER_ERROR,
+    GET_ROOM_IMAGE,
+    GET_ROOM_IMAGE_ERROR
 } from '../actions/chatroom';
 
 const initialState = {
     message: null,
-    member: null
+    member: null,
+    roomInform: null
 }
 
 function chatroom(state = initialState, action) {
@@ -22,14 +25,21 @@ function chatroom(state = initialState, action) {
             })
 
         case GET_ROOM_MEMBER:
-            return({
+            return ({
                 ...state,
                 member: action.payload
+            })
+
+        case GET_ROOM_IMAGE:
+            return ({
+                ...state,
+                roomInform: action.payload
             })
 
         case GET_ROOM_MSG_ERROR:
         case SEND_NEW_MSG_ERROR:
         case GET_ROOM_MEMBER_ERROR:
+        case GET_ROOM_IMAGE_ERROR:
             console.log(`GET_ERROR : ${action.payload}`)
             return ({
                 ...state,
