@@ -11,15 +11,20 @@ class Chatbox extends Component {
     }
     render() {
         // Check mine msgs or not
-        const MessageType = (this.props.user.username===this.author_name) ? 'chat_box mine_msg' :'chat_box'
+        const MessageType = (this.props.user.username === this.author_name) ? 'chat_box mine_msg' : 'chat_box'
+        
+        // Edit timestamp
+        let timestamp = this.timestamp.time.slice(0,5)
         return (
             <div className={MessageType}>
-                <div className='author_img' style={{ backgroundImage: `url('${window.location.origin+'/media/'+this.authorImage}')` }}></div>
+                <div className='author_img' style={{ backgroundImage: `url('${window.location.origin + '/media/' + this.authorImage}')` }}></div>
                 <div className='main_content'>
                     <p className='author_name'>{this.author_name}</p>
-                    <small className='timestamp'>{this.timestamp}</small>
-                    <div className='messageTxt'>
-                        {this.textcontent}
+                    <div className='message_box'>
+                        <div className='messageTxt'>
+                            <p>{this.textcontent}</p>
+                        </div>
+                        <small className='timestamp'>{timestamp}</small>
                     </div>
                 </div>
             </div>

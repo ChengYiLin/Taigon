@@ -25,7 +25,7 @@ class Hotcategory extends Component {
                         <div className='room_background' style={{ backgroundImage: `url(${room_BackgroundImage})` }}></div>
                     </div>
                     <div className='name_box'>
-                        <p className='room_category'>{room_Category}</p>
+                        <p className='room_category' style={{ background: `${this.setCategoryColor(room_Category)}` }}>{room_Category}</p>
                         <p className='room_name'>{room_Name}</p>
                     </div>
                 </Link>
@@ -42,6 +42,28 @@ class Hotcategory extends Component {
                 </div>
             </main>
         )
+    }
+    setCategoryColor(room_Category) {
+        switch (room_Category) {
+            case '興趣':
+                return 'rgb(255 184 93)';
+            case '科技':
+                return 'rgb(167 217 243)';
+            case '寵物':
+                return 'rgb(253 235 181)';
+            case '運動':
+                return 'rgb(90 255 242)';
+            case '旅遊':
+                return 'rgb(178, 238, 178)';
+            case '學習':
+                return 'rgb(216 172 155)';
+            case '娛樂':
+                return 'rgb(255 161 255)';
+            case '美食':
+                return 'rgb(255 168 191)';
+            default:
+                return '#b2eeb2';
+        }
     }
 }
 

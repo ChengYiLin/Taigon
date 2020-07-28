@@ -87,7 +87,10 @@ class MessageAPI(mixins.ListModelMixin,
                      'author': message.author.username,
                      'author_Image': str(UserProfile.objects.get(user=message.author.id).profileimg),
                      'chatroom': message.chatroom.roomname,
-                     'time': message.timestamp.strftime('%Y-%m-%d-%H-%M-%S'),
+                     'time': {
+                        'day': message.timestamp.strftime('%Y:%m:%d'),
+                        'time': message.timestamp.strftime('%H:%M:%S')
+                     },
                      'text': message.textmessage}
                     for message in messages]
 
@@ -171,10 +174,10 @@ class RoomMemberAPI(mixins.ListModelMixin,
             get_user_data = RoomMember.objects.get(user=user)
             if(roomname in [user_room.id for user_room in list(get_user_data.roomname.all())]):
                 res_data = [{'id': room.id,
-                            'owner': room.owner.username,
-                            'roomname': room.roomname,
-                            'bgimage': str(room.bgimage),
-                            'category': room.category.category}
+                             'owner': room.owner.username,
+                             'roomname': room.roomname,
+                             'bgimage': str(room.bgimage),
+                             'category': room.category.category}
                             for room in list(get_user_data.roomname.all())]
 
                 return Response(res_data)
@@ -183,10 +186,10 @@ class RoomMemberAPI(mixins.ListModelMixin,
                 get_user_data.save()
 
                 res_data = [{'id': room.id,
-                            'owner': room.owner.username,
-                            'roomname': room.roomname,
-                            'bgimage': str(room.bgimage),
-                            'category': room.category.category}
+                             'owner': room.owner.username,
+                             'roomname': room.roomname,
+                             'bgimage': str(room.bgimage),
+                             'category': room.category.category}
                             for room in list(get_user_data.roomname.all())]
 
                 return Response(res_data)

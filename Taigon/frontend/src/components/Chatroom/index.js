@@ -63,7 +63,7 @@ class ChatRoom extends Component {
         )
 
         return (
-            <div className='Chatroom_wrapper'>
+            <div className='Chatroom_wrapper' onClick={this.resetShow.bind(this)}>
                 <Aside />
 
                 {/* ChatRoom */}
@@ -81,7 +81,7 @@ class ChatRoom extends Component {
                         </div>
                         <div className='footer'>
                             <form className='message_form' onSubmit={this.websocketSubmitMessage.bind(this)}>
-                                <textarea id="message" name="message" placeholder={`Messagge to ${currentRoom}`} rows='2'
+                                <textarea id="message" name="message" className='textarea' placeholder={`Messagge to ${currentRoom}`} rows='2'
                                     value={this.state.message} onChange={this.handleTextChange.bind(this)} onKeyPress={this.handleUserKeyPress.bind(this)}
                                 ></textarea>
                                 <div className="emojiBtn" onClick={this.toggleEmogiTable.bind(this)}>
@@ -138,9 +138,16 @@ class ChatRoom extends Component {
 
         this.setState({ message: '' })
     }
-    scrollToBottom() {
+    scrollToBottom(e) {
         if (this.messagesEnd) {
             this.messagesEnd.scrollIntoView();
+        }
+    }
+    resetShow(e){
+        e.preventDefault();
+        let clickToHide = ['footer', 'chat_box', 'timestamp', 'author_name', 'textarea', 'room_aside']
+        if(clickToHide.includes(e.target.className)){
+            this.setState({showEmoji: false})
         }
     }
 }

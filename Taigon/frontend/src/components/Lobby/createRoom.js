@@ -19,7 +19,6 @@ class CreateRoom extends Component {
     }
     componentDidMount() {
         this.props.getChatroomCategories();
-        this.setState({disableBtn: true})
     }
     render() {
         if (this.props.openState) {
@@ -30,7 +29,7 @@ class CreateRoom extends Component {
                 )
             })
 
-            const enableBtn = (this.state.roomname.trim()!=="" && this.state.category!=="" && this.state.previewImg!=="") ? false : true
+            const enableBtn = (this.state.roomname.trim() !== "" && this.state.category !== "" && this.state.previewImg !== "") ? false : true
 
             return (
                 <div className='create_room_box'>

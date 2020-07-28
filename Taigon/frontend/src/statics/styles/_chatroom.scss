@@ -120,21 +120,40 @@
                         background-size: cover;
                         background-position: center center;
                         border-radius: 50%;
+                        border: 1px solid #d4d4d4;
                     }
                     .main_content {
                         flex: 1 1 auto;
                         padding-left: 2rem;
                         display: flex;
                         flex-direction: column;
-                        justify-content: space-between;
+                        justify-content: flex-end;
                         .author_name {
                             flex: 0 0 2rem;
                             font-size: 1.5rem;
                         }
-                        .timestamp {
-                            flex: 0 0 1.75rem;
-                            font-size: 1rem;
-                            color: gray;
+                        .message_box {
+                            display: flex;
+                            margin-top: .5rem; 
+                            .messageTxt{
+                                flex: 0 1 auto;
+                                background: #d8d8d8;
+                                border-radius: .5rem;
+                                padding: .5rem 1rem;
+                                max-width: 80%;
+                                p{
+                                    word-break: break-all;
+                                    text-align: left;
+                                }
+                            }
+                            .timestamp {
+                                flex: 0 0 3rem;
+                                font-size: .8rem;
+                                color: gray;
+                                padding-left: .5rem;
+                                display: flex;
+                                align-items: flex-end;
+                            }
                         }
                     }
                 }
@@ -144,9 +163,18 @@
                         text-align: right;
                         padding-left: 0rem;
                         padding-right: 2rem;
+                        .message_box {
+                            justify-content: flex-end;
+                            .messageTxt{
+                                background: rgb(194, 243, 179);
+                            }
+                            .timestamp {
+                                order: -1;
+                            }
+                        }
                     }
                 }
-                .overflow_anchor{
+                .overflow_anchor {
                     overflow-anchor: auto;
                 }
             }
@@ -208,24 +236,24 @@
                 box-sizing: border-box;
                 overflow: auto;
                 display: flex;
-                .member_card{
+                .member_card {
                     width: 15rem;
                     height: 18rem;
                     margin-right: 2rem;
-                    border-radius: .5rem;
+                    border-radius: 0.5rem;
                     border: 1px solid #ffffff;
                     background: #dedede;
                     display: flex;
                     flex-direction: column;
-                    .profileImg{
+                    .profileImg {
                         flex: 0 0 15rem;
                         width: 100%;
-                        border-radius: .5rem .5rem 0 0;
+                        border-radius: 0.5rem 0.5rem 0 0;
                         background-position: center center;
                         background-size: cover;
-                        background-image: url('https://freefrontend.com/assets/img/css-business-cards/Geometric-business-card-with-CSS-Grid.png');
+                        background-image: url("https://freefrontend.com/assets/img/css-business-cards/Geometric-business-card-with-CSS-Grid.png");
                     }
-                    .name{
+                    .name {
                         flex: 1 1 auto;
                         font-size: 1.25rem;
                         text-align: center;
