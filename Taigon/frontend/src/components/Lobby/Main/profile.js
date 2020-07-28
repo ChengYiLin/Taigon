@@ -14,11 +14,10 @@ class Profile extends Component {
         let profile_img = (this.props.user) ? `/media/${this.props.user.image}` : "url(/media/user.png)";
         const username = (this.props.user) ? this.props.user.username : '';
         const email = (this.props.user) ? this.props.user.email : '';
-        const showCheckBtn = (this.state.previewImg) ? 'checkBTN show' : 'checkBTN'
+        const showCheckBtn = (this.state.previewImg) ? 'checkBTN show' : 'checkBTN';
 
         if (this.state.previewImg) {
             profile_img = this.state.previewImg;
-
         }
 
         return (
@@ -51,7 +50,7 @@ class Profile extends Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        if(!this.state.previewImg){ return }
+        if (!this.state.previewImg) { return }
         this.props.updateProfileImage(this.props.user.id, this.fileInput.current.files[0]);
     }
 }

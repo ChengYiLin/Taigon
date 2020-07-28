@@ -6,6 +6,8 @@ export const CREATE_CHATROOM = 'CREATE_CHATROOM';
 export const CREATE_CHATROOM_ERROR = 'CREATE_CHATROOM_ERROR';
 export const GET_ROOM_CATEGORIES = 'GET_ROOM_CATEGORIES';
 export const GET_ROOM_CATEGORIES_ERROR = 'GET_ROOM_CATEGORIES_ERROR';
+export const GET_USER_CHATROOM = 'GET_USER_CHATROOM';
+export const GET_USER_CHATROOM_ERROR = 'GET_USER_CHATROOM_ERROR';
 
 const HOST = window.location.origin;
 
@@ -114,6 +116,36 @@ export const getChatroomCategories = () => (dispatch) => {
         .catch(err => {
             dispatch({
                 type: GET_ROOM_CATEGORIES_ERROR,
+                payload: err.status
+            });
+        })
+}
+
+// Get the User own chatroom
+export const getUserOwnChatroom = (user) => (dispatch) => {
+    const config = {
+        method: "GET",
+        headers: {
+            'content-type': 'application/json',
+        }
+    }
+
+    fetch(HOST + `/api/roommember?user=${user}`, config)
+        .then(res => {
+            if (res.ok) { return res.json() }
+            else {
+                throw ({ status: res.status, msg: res.statusText });
+            }
+        })
+        .then(res => {
+            dispatch({
+                type: GET_USER_CHATROOM,
+                payload: res
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: GET_USER_CHATROOM_ERROR,
                 payload: err.status
             });
         })

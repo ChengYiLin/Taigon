@@ -23,7 +23,7 @@ class App extends React.Component {
                 <Router>
                     <Switch>
                         {/* <Route exact path="/" component={Chatroom} /> */}
-                        <Route exact path="/chatroom/:roomname" component={Chatroom} />
+                        <Route path="/chatroom/:roomname" component={Chatroom} />
                         <Route exact path="/signin" component={Signin_Page} />
                         <Route exact path="/registe" component={Registe_Page} />
                         <Route path="/" component={Lobby} />

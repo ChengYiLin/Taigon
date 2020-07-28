@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// Router 
+import { Link } from "react-router-dom";
 
 class Aside extends Component {
     render() {
@@ -9,22 +11,26 @@ class Aside extends Component {
         return (
             <div className='room_aside'>
                 <div className='topbar'>
-                    <div className="logo">
+                    <Link to='/' className="logo">
                         <img src='/static/frontend/img/Taigon.png'></img>
                         <h1>Taigon</h1>
-                    </div>
+                    </Link>
                     <div className='profile'>
-                        <a className='porfile_image' style={{ backgroundImage: `url(${profile_img})` }}></a>
+                        <Link to='/profile' className='porfile_image' style={{ backgroundImage: `url(${profile_img})` }}></Link>
                     </div>
                 </div>
                 <ul className='chat_nav'>
                     <li>
-                        <i className="nav_icon fas fa-comments"></i>
-                        <p className='nav_text'>聊天室</p>
+                        <Link to={`/chatroom/${currentRoom}`}>
+                            <i className="nav_icon fas fa-comments"></i>
+                            <p className='nav_text'>聊天室</p>
+                        </Link>
                     </li>
                     <li>
-                        <i className="nav_icon fas fa-users"></i>
-                        <p className='nav_text'>聊天成員</p>
+                        <Link to={`/chatroom/${currentRoom}/member`}>
+                            <i className="nav_icon fas fa-users"></i>
+                            <p className='nav_text'>聊天成員</p>
+                        </Link>
                     </li>
                 </ul>
             </div>
@@ -34,7 +40,7 @@ class Aside extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.auth.user,
+                    user: state.auth.user,
         currentRoom: state.lobby.currentRoom,
         currentRoomId: state.lobby.currentRoomId
     }
