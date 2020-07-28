@@ -6,14 +6,17 @@ import {
     CREATE_CHATROOM,
     CREATE_CHATROOM_ERROR,
     GET_ROOM_CATEGORIES,
-    GET_ROOM_CATEGORIES_ERROR
+    GET_ROOM_CATEGORIES_ERROR,
+    GET_USER_CHATROOM,
+    GET_USER_CHATROOM_ERROR
 } from '../actions/lobby';
 
 const initialState = {
     chatroomList: '',
     currentRoom: null,
     currentRoomId: null,
-    categories: null
+    categories: null,
+    mineChatrooms:''
 }
 
 function lobby(state = initialState, action) {
@@ -28,6 +31,7 @@ function lobby(state = initialState, action) {
         case GET_CHATROOM_ERROR:
         case CREATE_CHATROOM_ERROR:
         case GET_ROOM_CATEGORIES_ERROR:
+        case GET_USER_CHATROOM_ERROR:
             return ({
                 ...state,
             })
@@ -43,6 +47,12 @@ function lobby(state = initialState, action) {
             return ({
                 ...state,
                 categories: action.payload,
+            })
+
+        case GET_USER_CHATROOM:
+            return ({
+                ...state,
+                mineChatrooms: action.payload
             })
 
         case LEAVE_ROOM:

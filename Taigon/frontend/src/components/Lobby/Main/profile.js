@@ -18,7 +18,6 @@ class Profile extends Component {
 
         if (this.state.previewImg) {
             profile_img = this.state.previewImg;
-
         }
 
         return (
@@ -51,7 +50,7 @@ class Profile extends Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        if(!this.state.previewImg){ return }
+        if (!this.state.previewImg) { return }
         this.props.updateProfileImage(this.props.user.id, this.fileInput.current.files[0]);
     }
 }

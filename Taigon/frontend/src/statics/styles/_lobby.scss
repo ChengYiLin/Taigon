@@ -34,6 +34,7 @@
                     background: rgb(255, 255, 255);
                     background-position: center;
                     background-size: cover;
+                    border: 1px solid #cac9c9;
                     cursor: pointer;
                 }
                 .profile_box {
@@ -166,7 +167,7 @@
             padding: 2rem 0;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
             .room {
                 flex: 0 0 300px;
                 height: 300px;
@@ -390,6 +391,62 @@
                     }
                     &.submit {
                         justify-content: flex-end;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1100px){
+        // main_section
+        .main_section {
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        // ** aside
+        aside{
+            display: none;
+        }
+
+        // ** main
+        main {
+            width: 100%;
+            padding: 3rem 0;
+            .title {
+                font-size: 1.5rem;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid rgb(219, 218, 218);
+            }
+            .all_room {
+                .room {
+                    flex: 0 0 250px;
+                    height: 250px;
+                    margin-right: 2rem;
+                    .image_box {
+                        height: 200px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 500px){
+        // ** main
+        main {
+            width: 100%;
+            padding: 2.5rem 0;
+            .all_room {
+                flex-direction: column;
+                .room {
+                    flex: 0 0 280px;
+                    width: 280px;
+                    height: 280px;
+                    margin-right: 0rem;
+                    margin: 1rem auto;
+                    .image_box {
+                        height: 230px;
                     }
                 }
             }

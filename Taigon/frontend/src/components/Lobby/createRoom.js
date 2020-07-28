@@ -61,7 +61,7 @@ class CreateRoom extends Component {
                                 <div className='image_dropbox'>
                                     <label htmlFor='room_bgimage' className='upload_image'>
                                         <i className="fas fa-upload"></i>
-                                        <p>上傳聊天室背景圖片(.jpg / .png)</p>
+                                        <p>上傳背景圖片(.jpg / .png)</p>
                                     </label>
                                     <div className='previewImg' style={{backgroundImage:`url(${this.state.previewImg})`}}></div>
                                     <input type="file" id="room_bgimage" ref={this.fileInput} onChange={this.handleImgChange.bind(this)} name="room_bgimage" accept=".png, .jpg, .jpeg"></input>
