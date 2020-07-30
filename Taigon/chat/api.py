@@ -22,8 +22,18 @@ class ChatroomAPI(mixins.ListModelMixin,
         search_id = int(dict(request.query_params)['room'][0]) if (
             'room' in dict(request.query_params)) else False
 
-        rooms = ChatRooom.objects.get(
-            id=search_id) if search_id else ChatRooom.objects.all()
+        search_category = int(dict(request.query_params)['category'][0]) if (
+            'category' in dict(request.query_params)) else False
+
+        rooms = ""
+
+        if(search_id):
+            rooms = ChatRooom.objects.get(id=search_id)
+        elif(search_category):
+            rooms = ChatRooom.objects.filter(category=search_category)
+        else:
+            rooms = ChatRooom.objects.all()
+
         # Response
         if(search_id):
             res_data = {'id': rooms.id,
@@ -31,6 +41,13 @@ class ChatroomAPI(mixins.ListModelMixin,
                         'roomname': rooms.roomname,
                         'bgimage': str(rooms.bgimage),
                         'category': rooms.category.category}
+        elif(search_category):
+            res_data = [{'id': room.id,
+                         'owner': room.owner.username,
+                         'roomname': room.roomname,
+                         'bgimage': str(room.bgimage),
+                         'category': room.category.category}
+                        for room in rooms]
         else:
             res_data = [{'id': room.id,
                          'owner': room.owner.username,
@@ -116,7 +133,8 @@ class MessageAPI(mixins.ListModelMixin,
         message.is_valid(raise_exception=True)
         message.save()
 
-        messages = Message.objects.filter(chatroom=dict(request.data)['chatroom'][0])
+        messages = Message.objects.filter(
+            chatroom=dict(request.data)['chatroom'][0])
         res_data = [{'id': message.id,
                      'author': message.author.username,
                      'author_Image': str(UserProfile.objects.get(user=message.author.id).profileimg),
@@ -233,14 +251,23 @@ class RoomMemberAPI(mixins.ListModelMixin,
             return Response(res_data)
 
     def delete(self, request, *args, **kwargs):
-        delete_id = int(dict(request.query_params)['id'][0])
+        if('room' in dict(request.query_params) and 'user' in dict(request.query_params)):
+            delete_user_id = int(dict(request.query_params)['user'][0])
+            delete_room_id = int(dict(request.query_params)['room'][0])
 
-        roomMember = RoomMember.objects.filter(id=delete_id)
-        roomMember.delete()
+            get_user_data = RoomMember.objects.get(user=delete_user_id)
+            get_user_data.roomname.remove(delete_room_id)
 
-        return Response({
-            'data': 'success'
-        })
+            userRoomData = RoomMember.objects.get(user=delete_user_id)
+            res_data = [{'id': room.id,
+                         'owner': room.owner.username,
+                         'roomname': room.roomname,
+                         'bgimage': str(room.bgimage),
+                         'category': room.category.category}
+                        for room in list(userRoomData.roomname.all())]
+            return Response(res_data)
+        else:
+            return Response("No room")
 
 
 # RoomCategory API

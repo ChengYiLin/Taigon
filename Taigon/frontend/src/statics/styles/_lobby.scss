@@ -49,9 +49,10 @@
                     top: 3.8rem;
                     right: 0;
                     transition: all 0.6s ease;
-                    z-index: 999;
+                    z-index: -1;
                     &.show {
                         opacity: 1;
+                        z-index: 999;
                     }
                     .profile_image {
                         margin: .5rem auto;
@@ -163,11 +164,33 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid rgb(219, 218, 218);
         }
+        // categories
+        .categories{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .category{
+                font-size: 1.25rem;
+                padding: .8rem 2rem;
+                margin: 1rem 0;
+                border-radius: .5rem;
+                opacity: .7;
+                cursor: pointer;
+                z-index: 99;
+                &:hover{
+                    opacity: 1;
+                }
+                i{
+                    padding-right: 1rem;
+                }
+            }
+        }
         .all_room {
-            padding: 2rem 0;
+            padding: 1rem 0;
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
+            // room
             .room {
                 flex: 0 0 300px;
                 height: 300px;
@@ -176,6 +199,7 @@
                 box-sizing: border-box;
                 border-radius: 0.5rem;
                 border: 1px solid rgb(156, 182, 156);
+                position: relative;
                 cursor: pointer;
                 .image_box {
                     height: 250px;
@@ -217,6 +241,26 @@
                         font-weight: bolder;
                     }
                 }
+                .deleteBtn{
+                    position: absolute;
+                    top: 0;
+                    right: -12%;
+                    transform: translate(-50%, -50%);
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    box-sizing: border-box;
+                    border-radius: 50%;
+                    background: #e2e2e2;
+                    display: none;
+                    &:hover{
+                        background: #bbbaba;
+                    }
+                }
+                &:hover{
+                    .deleteBtn{
+                        @include flex-center();
+                    }
+                }
             }
         }
     }
@@ -229,6 +273,7 @@
         left: 0;
         right: 0;
         background: rgba(189, 189, 189, 0.4);
+        z-index: 998;
         @include flex_center();
         .form_box {
             width: 40%;

@@ -10,6 +10,10 @@ export const GET_USER_CHATROOM = 'GET_USER_CHATROOM';
 export const GET_USER_CHATROOM_ERROR = 'GET_USER_CHATROOM_ERROR';
 export const CHECK_ROOM_MEMBER = 'CHECK_ROOM_MEMBER';
 export const CHECK_ROOM_MEMBER_ERROR = 'CHECK_ROOM_MEMBER_ERROR';
+export const GET_CHATROOM_BY_CATEGORY = 'GET_CHATROOM_BY_CATEGORY';
+export const GET_CHATROOM_BY_CATEGORY_ERROR = 'GET_CHATROOM_BY_CATEGORY_ERROR';
+export const DELETE_CHATROOM = 'DELETE_CHATROOM';
+export const DELETE_CHATROOM_ERROR = 'DELETE_CHATROOM_ERROR';
 
 const HOST = window.location.origin;
 
@@ -169,6 +173,30 @@ export const checkRoomMember = (user, roomID) => (dispatch) => {
     }
 
     Standard_Fetch(dispatch, HOST + `/api/roommember`, config, CHECK_ROOM_MEMBER, CHECK_ROOM_MEMBER_ERROR);
+}
+
+// Get the chatroom by category
+export const getChatRoomByCategory = (category_ID) => (dispatch) => {
+    const config = {
+        method: "GET",
+        headers: {
+            'content-type': 'application/json',
+        },
+    }
+
+    Standard_Fetch(dispatch, HOST + `/api/chatroom?category=${category_ID}`, config, GET_CHATROOM_BY_CATEGORY, GET_CHATROOM_BY_CATEGORY_ERROR);
+}
+
+// Delete the chatroom from mine room
+export const deleteChatRoom = (user, roomID) => (dispatch) => {
+    const config = {
+        method: "DELETE",
+        headers: {
+            'content-type': 'application/json',
+        }
+    }
+
+    Standard_Fetch(dispatch, HOST + `/api/roommember?user=${user}&room=${roomID}`, config, DELETE_CHATROOM, DELETE_CHATROOM_ERROR);
 }
 
 // Fetch API

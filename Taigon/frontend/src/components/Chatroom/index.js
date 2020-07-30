@@ -44,9 +44,9 @@ class ChatRoom extends Component {
             this.props.getRoomMessages(roomID);
         };
         // When get the Unexpected Error
-        this.chatSocket.onclose = function (e) {
+        this.chatSocket.onclose = (e) => {
             this.chatSocket.close();
-            console.error('Chat socket closed unexpectedly');
+            console.log('Websocket Close')
         };
     }
     componentWillUnmount() {
@@ -149,19 +149,9 @@ class ChatRoom extends Component {
                     'chatroom': this.props.currentRoomId
                 }));
             })
-
-        // let reader = new FileReader();
-        // reader.readAsDataURL(this.fileInput.current.files[0])
-        // reader.onloadend = (e) => {
-        //     this.setState({ previewImg: reader.result });
-        //     console.log(this.fileInput.current.files[0]);
-        //     this.chatSocket.send(JSON.stringify({
-        //         'msgtype': 'IMG',
-        //         'author': this.props.user.id,
-        //         'chatroom': this.props.currentRoomId,
-        //         'textmessage': 'sssss'
-        //     }));
-        // }
+            .catch(err => {
+                console.log(`Somthig Wrong : ${err}`)
+            })
     }
     handleUserKeyPress(e) {
         if (e.key === "Enter" && !e.shiftKey) {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUserOwnChatroom, getNowRoom } from '../../../actions/lobby';
+import { getUserOwnChatroom, getNowRoom, deleteChatRoom } from '../../../actions/lobby';
 // Router 
 import { Link } from "react-router-dom";
 
@@ -16,14 +16,18 @@ class MineChat extends Component {
             let room_Category = element.category;
             let room_BackgroundImage = 'media/' + element.bgimage;
 
+            // onClick={() => { this.props.getNowRoom(room_Name, room_id) }}
             return (
-                <Link key={room_id} className='room' to={`/chatroom/${room_Name}`} onClick={() => { this.props.getNowRoom(room_Name, room_id) }}>
+                <Link key={room_id} className='room' to={`/chatroom/${room_Name}`} onClick={this.handleRoomClick.bind(this)} data-roomid={room_id} data-roomname={room_Category} >
                     <div className='image_box' >
                         <div className='room_background' style={{ backgroundImage: `url(${room_BackgroundImage})` }}></div>
                     </div>
                     <div className='name_box'>
                         <p className='room_category' style={{ background: `${this.setCategoryColor(room_Category)}` }}>{room_Category}</p>
                         <p className='room_name'>{room_Name}</p>
+                    </div>
+                    <div className='deleteBtn' onClick={() => { this.props.deleteChatRoom(this.props.user.id, room_id) }}>
+                        <span>&#10008;</span>
                     </div>
                 </Link>
             )
@@ -62,6 +66,22 @@ class MineChat extends Component {
                 return '#b2eeb2';
         }
     }
+    handleRoomClick(e){
+        const child_className = ['image_box', 'name_box']
+        const child_child_className = ['room_background', 'room_category', 'room_name']
+
+        if(child_className.includes(e.target.className)){
+            const dom_source = e.target.parentNode;
+            this.props.getNowRoom(dom_source.dataset.roomname, dom_source.dataset.roomid)
+        }
+        else if(child_child_className.includes(e.target.className)){
+            const dom_source = e.target.parentNode.parentNode;
+            this.props.getNowRoom(dom_source.dataset.roomname, dom_source.dataset.roomid)
+        }
+        else{
+            e.preventDefault();
+        }
+    }
 }
 
 
@@ -70,4 +90,4 @@ const mapStateToProps = state => ({
     mineChatrooms: state.lobby.mineChatrooms,
 })
 
-export default connect(mapStateToProps, { getUserOwnChatroom, getNowRoom })(MineChat);
+export default connect(mapStateToProps, { getUserOwnChatroom, getNowRoom, deleteChatRoom })(MineChat);

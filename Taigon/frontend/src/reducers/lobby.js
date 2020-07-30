@@ -10,7 +10,11 @@ import {
     GET_USER_CHATROOM,
     GET_USER_CHATROOM_ERROR,
     CHECK_ROOM_MEMBER,
-    CHECK_ROOM_MEMBER_ERROR
+    CHECK_ROOM_MEMBER_ERROR,
+    GET_CHATROOM_BY_CATEGORY,
+    GET_CHATROOM_BY_CATEGORY_ERROR,
+    DELETE_CHATROOM,
+    DELETE_CHATROOM_ERROR
 } from '../actions/lobby';
 
 const initialState = {
@@ -25,6 +29,7 @@ function lobby(state = initialState, action) {
     switch (action.type) {
         case GET_CHATROOM:
         case CREATE_CHATROOM:
+        case GET_CHATROOM_BY_CATEGORY:
             return ({
                 ...state,
                 chatroomList: action.payload
@@ -35,6 +40,8 @@ function lobby(state = initialState, action) {
         case GET_ROOM_CATEGORIES_ERROR:
         case GET_USER_CHATROOM_ERROR:
         case CHECK_ROOM_MEMBER_ERROR:
+        case GET_CHATROOM_BY_CATEGORY_ERROR:
+        case DELETE_CHATROOM_ERROR:
             return ({
                 ...state,
             })
@@ -54,6 +61,7 @@ function lobby(state = initialState, action) {
 
         case GET_USER_CHATROOM:
         case CHECK_ROOM_MEMBER:
+        case DELETE_CHATROOM:
             return ({
                 ...state,
                 mineChatrooms: action.payload

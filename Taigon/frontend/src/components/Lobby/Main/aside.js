@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 // Router 
 import { Link } from "react-router-dom";
+// action
+import { getChatRoom } from '../../../actions/lobby';
 
 class Aside extends Component {
     constructor(props) {
@@ -19,7 +22,7 @@ class Aside extends Component {
                 {/*--- Aside Navbar */}
                 <ul className='main_nav'>
                     <li>
-                        <Link className='navlink' to='/'>
+                        <Link className='navlink' to='/' onClick={()=>{this.props.getChatRoom()}}>
                             <i className="nav_icon fas fa-fire"></i>
                             <span>熱門話題</span>
                         </Link>
@@ -42,4 +45,8 @@ class Aside extends Component {
     }
 }
 
-export default Aside;
+const mapStateToProps = state => ({
+    chatroomList: state.lobby.chatroomList,
+})
+
+export default connect(mapStateToProps, { getChatRoom})(Aside);
