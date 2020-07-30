@@ -1,7 +1,7 @@
 export const GET_ROOM_MSG = 'GET_ROOM_MSG';
 export const GET_ROOM_MSG_ERROR = 'GET_ROOM_MSG_ERROR';
-export const SEND_NEW_MSG = 'SEND_NEW_MSG';
-export const SEND_NEW_MSG_ERROR = 'SEND_NEW_MSG_ERROR';
+export const SEND_IMG_MSG = 'SEND_IMG_MSG';
+export const SEND_IMG_MSG_ERROR = 'SEND_IMG_MSG_ERROR';
 export const GET_ROOM_MEMBER = 'GET_ROOM_MEMBER';
 export const GET_ROOM_MEMBER_ERROR = 'GET_ROOM_MEMBER_ERROR';
 export const GET_ROOM_IMAGE = 'GET_ROOM_IMAGE';
@@ -23,11 +23,12 @@ export const getRoomMessages = (currentRoomId) => (dispatch) => {
 }
 
 // Send New Message
-export const sendNewMessage = (author, currentRoomId, textmessage) => (dispatch) => {
+export const sendImgMessage = (author, currentRoomId, imgmessage) => (dispatch) => {
     const data = {
+        "msgtype":"IMG",
         "author": author,
         "chatroom": currentRoomId,
-        "textmessage": textmessage
+        "imgmessage": imgmessage
     }
 
     const config = {
@@ -38,7 +39,7 @@ export const sendNewMessage = (author, currentRoomId, textmessage) => (dispatch)
         body: JSON.stringify(data),
     }
 
-    Standard_Fetch(dispatch, HOST + `/api/message?room=${currentRoomId}`, config, SEND_NEW_MSG, SEND_NEW_MSG_ERROR);
+    Standard_Fetch(dispatch, HOST + `/api/message`, config, SEND_IMG_MSG, SEND_IMG_MSG_ERROR);
 }
 
 // Get Room Member

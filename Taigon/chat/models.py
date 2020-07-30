@@ -42,11 +42,18 @@ class RoomMember(models.Model):
 
 
 class Message(models.Model):
+    MSG_TYPE = [
+        ('TXT', 'TXT'),
+        ('IMG', 'IMG')
+    ]
+
     author = models.ForeignKey(
         User, related_name='messageAuthor', on_delete=models.CASCADE)
     chatroom = models.ForeignKey(
         ChatRooom, related_name='messageRoom', on_delete=models.CASCADE)
-    textmessage = models.TextField()
+    msgtype = models.CharField(max_length=3, choices=MSG_TYPE, default='TXT')
+    textmessage = models.TextField(blank=True)
+    imgmessage = models.ImageField(upload_to='msg', blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

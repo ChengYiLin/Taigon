@@ -54,6 +54,7 @@
         // room_aside : navbar
         .chat_nav {
             padding: 2rem 0;
+            padding-top: 0;
             border-bottom: 1px solid #216b4c;
             li {
                 &:hover {
@@ -73,7 +74,7 @@
                     &.roomLink {
                         flex-direction: column;
                         // ----Temp Image
-                        .roomName{
+                        .roomName {
                             text-align: center;
                             padding: 1rem 0;
                         }
@@ -158,9 +159,16 @@
                                 border-radius: 0.5rem;
                                 padding: 0.5rem 1rem;
                                 max-width: 80%;
-                                p {
+                                .txt {
                                     word-break: break-all;
                                     text-align: left;
+                                }
+                                .img {
+                                    width: 250px;
+                                    img {
+                                        width: 100%;
+                                        height: auto;
+                                    }
                                 }
                             }
                             .timestamp {
@@ -207,7 +215,7 @@
                 justify-content: space-between;
                 align-items: flex-end;
                 width: 80%;
-                textarea {
+                .message {
                     width: 80%;
                     font-size: 1.5rem;
                     padding: 0.5rem 1rem;
@@ -231,7 +239,13 @@
                 }
                 .imageBtn {
                     @include msg_button_reset();
-                    display: none;
+                    i{
+                        cursor: pointer;
+                    }
+                    input[type="file"] {
+                        display: block;
+                        display: none;
+                    }
                 }
                 .submitBtn {
                     border: none;

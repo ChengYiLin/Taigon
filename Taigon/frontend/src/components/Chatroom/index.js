@@ -6,7 +6,7 @@ import Chatbox from './chatbox';
 import Member from './member';
 // action
 import { leaveChatRoom } from '../../actions/lobby';
-import { getRoomMessages, sendNewMessage, getRoomMember } from '../../actions/chatroom';
+import { getRoomMessages, sendImgMessage, getRoomMember } from '../../actions/chatroom';
 // Router 
 import { Link, Route } from "react-router-dom";
 // Wensocket 
@@ -15,13 +15,17 @@ import ReconnectingWebSocket from 'reconnecting-websocket';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 
+const HOST = window.location.origin;
+
 class ChatRoom extends Component {
     constructor(props) {
         super(props);
         this.state = {
             message: "",
-            showEmoji: false
+            showEmoji: false,
+            previewImg: ""
         }
+        this.fileInput = React.createRef();
     }
     componentDidMount() {
         const roomID = this.props.currentRoomId
@@ -41,6 +45,7 @@ class ChatRoom extends Component {
         };
         // When get the Unexpected Error
         this.chatSocket.onclose = function (e) {
+            this.chatSocket.close();
             console.error('Chat socket closed unexpectedly');
         };
     }
@@ -58,12 +63,13 @@ class ChatRoom extends Component {
         // Message
         let Messages = (!this.props.past_message) ? ([]) : (
             this.props.past_message.data.map(element => (
-                <Chatbox key={element.id} author_name={element.author} authorImage={element.author_Image} timestamp={element.time} textcontent={element.text} />
+                <Chatbox key={element.id} author_name={element.author} authorImage={element.author_Image}
+                    msgtype={element.type} timestamp={element.time} textcontent={element.text} />
             ))
         )
 
         return (
-            <div className='Chatroom_wrapper' onClick={this.resetShow.bind(this)}>
+            <div className='Chatroom_wrapper'>
                 <Aside />
 
                 {/* ChatRoom */}
@@ -81,7 +87,7 @@ class ChatRoom extends Component {
                         </div>
                         <div className='footer'>
                             <form className='message_form' onSubmit={this.websocketSubmitMessage.bind(this)}>
-                                <textarea id="message" name="message" className='textarea' placeholder={`Messagge to ${currentRoom}`} rows='2'
+                                <textarea id="message" name="message" className='message' placeholder={`Messagge to ${currentRoom}`} rows='2'
                                     value={this.state.message} onChange={this.handleTextChange.bind(this)} onKeyPress={this.handleUserKeyPress.bind(this)}
                                 ></textarea>
                                 <div className="emojiBtn" onClick={this.toggleEmogiTable.bind(this)}>
@@ -91,10 +97,12 @@ class ChatRoom extends Component {
                                     </div>
                                 </div>
                                 <div className="imageBtn">
-
-                                    <i className="far fa-images"></i>
+                                    <label htmlFor='msg_img' className='upload_image'>
+                                        <i className="far fa-images"></i>
+                                    </label>
+                                    <input type="file" id="msg_img" ref={this.fileInput} onChange={this.handleImgChange.bind(this)} accept=".png, .jpg, .jpeg"></input>
                                 </div>
-                                <button type="submit" className="submitBtn">
+                                <button type="submit" className="submitBtn" onClick={this.websocketSubmitMessage.bind(this)}>
                                     <i className="fas fa-paper-plane"></i>
                                 </button>
                             </form>
@@ -111,13 +119,49 @@ class ChatRoom extends Component {
     addEmoji(e) {
         this.setState((currentState) => ({ message: currentState.message + e.native }));
     }
-    toggleEmogiTable(e) {
-        e.preventDefault();
-        if (e.target.tagName !== 'I') { return }
-        this.setState((currentState) => ({ showEmoji: !currentState.showEmoji }));
-    }
     handleTextChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState({ [e.target.className]: e.target.value });
+    }
+    handleImgChange(e) {
+        let formData = new FormData();
+        formData.append('msgtype', 'IMG');
+        formData.append('author', this.props.user.id);
+        formData.append('chatroom', this.props.currentRoomId);
+        formData.append('imgmessage', this.fileInput.current.files[0]);
+
+        const config = {
+            method: "POST",
+            body: formData,
+        }
+
+        fetch(HOST + '/api/message', config)
+            .then(res => {
+                if (res.ok) { return res.json() }
+                else {
+                    throw ({ status: res.status, msg: res.statusText });
+                }
+            })
+            .then(res => {
+                console.log(res)
+                this.chatSocket.send(JSON.stringify({
+                    'msgtype': 'IMG',
+                    'author': this.props.user.id,
+                    'chatroom': this.props.currentRoomId
+                }));
+            })
+
+        // let reader = new FileReader();
+        // reader.readAsDataURL(this.fileInput.current.files[0])
+        // reader.onloadend = (e) => {
+        //     this.setState({ previewImg: reader.result });
+        //     console.log(this.fileInput.current.files[0]);
+        //     this.chatSocket.send(JSON.stringify({
+        //         'msgtype': 'IMG',
+        //         'author': this.props.user.id,
+        //         'chatroom': this.props.currentRoomId,
+        //         'textmessage': 'sssss'
+        //     }));
+        // }
     }
     handleUserKeyPress(e) {
         if (e.key === "Enter" && !e.shiftKey) {
@@ -130,7 +174,7 @@ class ChatRoom extends Component {
         if (this.state.message === '') { return }
 
         this.chatSocket.send(JSON.stringify({
-            'type': 'text',
+            'msgtype': 'TXT',
             'author': this.props.user.id,
             'chatroom': this.props.currentRoomId,
             'textmessage': this.state.message
@@ -138,17 +182,23 @@ class ChatRoom extends Component {
 
         this.setState({ message: '' })
     }
+    // View
     scrollToBottom(e) {
         if (this.messagesEnd) {
             this.messagesEnd.scrollIntoView();
         }
     }
-    resetShow(e){
+    resetShow(e) {
         e.preventDefault();
-        let clickToHide = ['footer', 'chat_box', 'timestamp', 'author_name', 'textarea', 'room_aside']
-        if(clickToHide.includes(e.target.className)){
-            this.setState({showEmoji: false})
+        let clickToHide = ['footer', 'chat_box', 'timestamp', 'author_name', 'message', 'room_aside']
+        if (clickToHide.includes(e.target.className)) {
+            this.setState({ showEmoji: false })
         }
+    }
+    toggleEmogiTable(e) {
+        e.preventDefault();
+        if (e.target.tagName !== 'I') { return }
+        this.setState((currentState) => ({ showEmoji: !currentState.showEmoji }));
     }
 }
 
@@ -161,4 +211,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { getRoomMessages, sendNewMessage, leaveChatRoom, getRoomMember })(ChatRoom);
+export default connect(mapStateToProps, { getRoomMessages, sendImgMessage, leaveChatRoom, getRoomMember })(ChatRoom);

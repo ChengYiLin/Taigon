@@ -53,10 +53,10 @@ function auth(state = initialState, action) {
                 ...state,
             })
 
-        case LOGIN_ERROR:
         case AUTH_ERROR:
-        case REGISTE_ERROR:
         case LOGOUT_SUCCESS:
+        case LOGIN_ERROR:
+        case REGISTE_ERROR:
             localStorage.removeItem('token');
             return ({
                 ...state,

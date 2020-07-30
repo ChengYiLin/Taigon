@@ -1,3 +1,4 @@
+from channels import consumer
 from rest_framework import generics
 from rest_framework import mixins
 from rest_framework import generics
@@ -18,12 +19,12 @@ class ChatroomAPI(mixins.ListModelMixin,
     serializer_class = ChatRooomSerializer
 
     def get(self, request):
-        search_id = int(dict(request.query_params)['room'][0]) if ('room' in dict(request.query_params)) else False
+        search_id = int(dict(request.query_params)['room'][0]) if (
+            'room' in dict(request.query_params)) else False
 
         rooms = ChatRooom.objects.get(
             id=search_id) if search_id else ChatRooom.objects.all()
         # Response
-        print(rooms)
         if(search_id):
             res_data = {'id': rooms.id,
                         'owner': rooms.owner.username,
@@ -32,10 +33,10 @@ class ChatroomAPI(mixins.ListModelMixin,
                         'category': rooms.category.category}
         else:
             res_data = [{'id': room.id,
-                        'owner': room.owner.username,
-                        'roomname': room.roomname,
-                        'bgimage': str(room.bgimage),
-                        'category': room.category.category}
+                         'owner': room.owner.username,
+                         'roomname': room.roomname,
+                         'bgimage': str(room.bgimage),
+                         'category': room.category.category}
                         for room in rooms]
 
         return Response(res_data)
@@ -98,10 +99,11 @@ class MessageAPI(mixins.ListModelMixin,
                      'author_Image': str(UserProfile.objects.get(user=message.author.id).profileimg),
                      'chatroom': message.chatroom.roomname,
                      'time': {
-                        'day': message.timestamp.strftime('%Y:%m:%d'),
-                        'time': message.timestamp.strftime('%H:%M:%S')
+                         'day': message.timestamp.strftime('%Y:%m:%d'),
+                         'time': message.timestamp.strftime('%H:%M:%S')
                      },
-                     'text': message.textmessage}
+                     'type': message.msgtype,
+                     'text': self.resMsgType(message, message.msgtype)}
                     for message in messages]
 
         return Response({
@@ -109,22 +111,26 @@ class MessageAPI(mixins.ListModelMixin,
         })
 
     def post(self, request):
-        roomId = request.query_params['room']
-
+        print(request.data)
         message = self.get_serializer(data=request.data)
         message.is_valid(raise_exception=True)
         message.save()
 
-        messages = Message.objects.filter(chatroom=roomId)
+        messages = Message.objects.filter(chatroom=dict(request.data)['chatroom'][0])
         res_data = [{'id': message.id,
                      'author': message.author.username,
+                     'author_Image': str(UserProfile.objects.get(user=message.author.id).profileimg),
                      'chatroom': message.chatroom.roomname,
-                     'time': message.timestamp.strftime('%Y-%m-%d-%H-%M-%S'),
-                     'text': message.textmessage}
+                     'time': {
+                         'day': message.timestamp.strftime('%Y:%m:%d'),
+                         'time': message.timestamp.strftime('%H:%M:%S')
+                     },
+                     'type': message.msgtype,
+                     'text': self.resMsgType(message, message.msgtype)}
                     for message in messages]
 
         return Response({
-            'data': res_data
+            'data': res_data[::-1]
         })
 
     def delete(self, request, *args, **kwargs):
@@ -137,6 +143,12 @@ class MessageAPI(mixins.ListModelMixin,
             'data': 'success'
         })
 
+    def resMsgType(self, Query, Type):
+        res_dict = {
+            'TXT': Query.textmessage,
+            'IMG': str(Query.imgmessage)
+        }
+        return res_dict[Type]
 
 # RoomMember API
 

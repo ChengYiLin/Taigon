@@ -24,15 +24,24 @@ class ChatConsumer(WebsocketConsumer):
     def receive(self, text_data):
         # Save request data in DB
         req = json.loads(text_data)
+        print(req)
+        res = ''
         author = User.objects.get(id=req['author'])
         chatroom = ChatRooom.objects.get(id=req['chatroom'])
-        msgs = Message.objects.create(
-            author=author, chatroom=chatroom, textmessage=req['textmessage'])
 
-        # Prepare the response data
-        res = json.dumps({'author_name': msgs.author.username,
-                          'timestamp': 'msgs.timestamp',
-                          'textcontent': msgs.textmessage})
+        # Prepare the response data Based on msg type
+        if(req['msgtype'] == "TXT"):
+            # Save to DB
+            msgs = Message.objects.create(
+                author=author, chatroom=chatroom, textmessage=req['textmessage'])
+
+            res = json.dumps({'type': 'TXT',
+                              'author_name': msgs.author.username,
+                              'timestamp': 'msgs.timestamp',
+                              'textcontent': msgs.textmessage})
+
+        elif(req['msgtype'] == "IMG"):
+            res = json.dumps({'type': 'IMG'})
 
         # Web socket send message to all
         async_to_sync(self.channel_layer.group_send)(

@@ -93,7 +93,6 @@ class CreateRoom extends Component {
 
         reader.onloadend = (e) => {
             this.setState({ previewImg: reader.result, disableBtn: false })
-
         }
     }
     createRoomCategory(e) {
