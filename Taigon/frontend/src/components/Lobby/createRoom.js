@@ -6,7 +6,7 @@ class CreateRoom extends Component {
     constructor(props) {
         super(props);
         this.openState = this.props.openState;
-        this.setFalseState = this.props.setFalseState;
+        this.setCreateRoomFalse = this.props.setCreateRoomFalse;
 
         this.state = {
             roomname: "",
@@ -29,6 +29,8 @@ class CreateRoom extends Component {
                 )
             })
 
+            const showPreviewImg = (this.state.previewImg) ? 'image_dropbox show' : 'image_dropbox'
+
             const enableBtn = (this.state.roomname.trim() !== "" && this.state.category !== "" && this.state.previewImg !== "") ? false : true
 
             return (
@@ -38,7 +40,7 @@ class CreateRoom extends Component {
                         <p className='title'>新增聊天室</p>
                         {/* Close windox */}
                         <div className='cross'>
-                            <i className="cross fas fa-times" onClick={this.setFalseState}></i>
+                            <i className="cross fas fa-times" onClick={this.setCreateRoomFalse}></i>
                         </div>
                         {/* Form */}
                         <form className='create_form' onSubmit={this.handleSubmit.bind(this)}>
@@ -54,13 +56,13 @@ class CreateRoom extends Component {
                             </div>
                             <div className="form_group">
                                 <label htmlFor='roomname'>聊天主題 : </label>
-                                <input type="text" id="roomname" name="roomname" placeholder="請輸入聊天室的房間名稱" required
+                                <input type="text" id="roomname" name="roomname" placeholder="請輸入你想開的話題" required
                                     value={this.state.roomname} onChange={this.handleChange.bind(this)}
                                 ></input>
                             </div>
-                            <div className="form_group flex_column">
+                            <div className="form_group image_group">
                                 <label htmlFor='category'>背景圖片 : </label>
-                                <div className='image_dropbox'>
+                                <div className={showPreviewImg}>
                                     <label htmlFor='room_bgimage' className='upload_image'>
                                         <i className="fas fa-upload"></i>
                                         <p>上傳背景圖片(.jpg / .png)</p>
@@ -115,7 +117,7 @@ class CreateRoom extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.createChatRoom(this.state.roomname.trim(), this.fileInput.current.files[0], this.state.category, this.props.user.id);
-        this.props.setFalseState();
+        this.props.setCreateRoomFalse();
         this.setState({ roomname: "", category: "",previewImg: "" })
     }
 }

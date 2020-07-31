@@ -8,14 +8,13 @@ import { getChatRoom } from '../../../actions/lobby';
 class Aside extends Component {
     constructor(props) {
         super(props);
-        this.openState = this.props.openState;
-        this.setTrueState = this.props.setTrueState;
+        this.setCreateRoomTrue = this.props.setCreateRoomTrue;
     }
     render() {
         return (
             <aside>
                 {/*--- Create Room BTN */}
-                <a className='createRoom' onClick={this.setTrueState}>
+                <a className='createRoom' onClick={this.setCreateRoomTrue}>
                     <i className="add_icon fas fa-plus"></i>
                     <span>新增聊天室</span>
                 </a>
