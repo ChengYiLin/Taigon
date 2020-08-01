@@ -110,6 +110,7 @@ class MessageAPI(mixins.ListModelMixin,
         roomId = request.query_params['room'] if request.query_params else False
         messages = Message.objects.filter(
             chatroom=roomId) if roomId else Message.objects.all()
+        messages = messages.order_by('timestamp')
 
         res_data = [{'id': message.id,
                      'author': message.author.username,

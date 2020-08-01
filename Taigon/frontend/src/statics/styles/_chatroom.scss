@@ -1,8 +1,7 @@
 @mixin msg_button_reset {
     border: none;
     outline: none;
-    font-size: 2rem;
-    padding: 0.5rem;
+    font-size: 2.5rem;
     background: transparent;
     color: #adadad;
     cursor: pointer;
@@ -101,9 +100,9 @@
         flex-direction: column;
         // header
         .header {
-            flex: 0 0 6rem;
+            flex: 0 0 5rem;
             font-size: 2rem;
-            padding: 2rem;
+            padding: 1rem;
             box-sizing: border-box;
             box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 #dadce0;
             display: flex;
@@ -116,6 +115,9 @@
                 background-size: cover;
                 background-position: center center;
             }
+            .mb_menu {
+                display: none;
+            }
         }
         // chatroom - main
         .main {
@@ -125,16 +127,18 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            position: relative;
             .overflow_container {
-                height: calc(100vh - 11rem - 6rem);
+                z-index: 1;
+                height: calc(100vh - 8rem - 5rem);
                 overflow: auto;
                 .chat_box {
                     padding: 1.8rem 5rem;
                     display: flex;
                     overflow-anchor: none;
                     .author_img {
-                        flex: 0 0 5rem;
-                        height: 5rem;
+                        flex: 0 0 3rem;
+                        height: 3rem;
                         background-size: cover;
                         background-position: center center;
                         border-radius: 50%;
@@ -142,13 +146,14 @@
                     }
                     .main_content {
                         flex: 1 1 auto;
-                        padding-left: 2rem;
+                        padding-left: 1rem;
                         display: flex;
                         flex-direction: column;
                         justify-content: flex-end;
                         .author_name {
-                            flex: 0 0 2rem;
-                            font-size: 1.5rem;
+                            flex: 0 0 1rem;
+                            font-size: 1.25rem;
+                            color: whitesmoke;
                         }
                         .message_box {
                             display: flex;
@@ -163,8 +168,11 @@
                                     word-break: break-all;
                                     text-align: left;
                                 }
+                            }
+                            .messageImg{
+                                flex: 0 1 auto;
                                 .img {
-                                    width: 250px;
+                                    width: 20rem;
                                     img {
                                         width: 100%;
                                         height: auto;
@@ -187,7 +195,7 @@
                         order: -1;
                         text-align: right;
                         padding-left: 0rem;
-                        padding-right: 2rem;
+                        padding-right: 1rem;
                         .message_box {
                             justify-content: flex-end;
                             .messageTxt {
@@ -203,11 +211,22 @@
                     overflow-anchor: auto;
                 }
             }
+            .background{
+                z-index: -1;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-size: cover;
+                background-position: center center;
+                filter: brightness(.3);
+            }
         }
         // chatroom - footer
         .footer {
-            border-top: 1px solid grey;
-            flex: 0 0 11rem;
+            border-top: 1px solid #cccccc;
+            flex: 0 0 8rem;
             box-sizing: border-box;
             @include flex-center();
             .message_form {
@@ -215,14 +234,18 @@
                 justify-content: space-between;
                 align-items: flex-end;
                 width: 80%;
-                .message {
+                .message_box {
                     width: 80%;
-                    font-size: 1.5rem;
-                    padding: 0.5rem 1rem;
+                    max-height: 90px;
+                    overflow: auto;
                     border: 1px solid rgb(192, 192, 192);
                     border-radius: 0.5rem;
-                    outline: none;
-                    resize: none;
+                    .message {
+                        font-size: 1.5rem;
+                        padding: 0.5rem 1rem;
+                        outline: none;
+                        resize: none;
+                    }
                 }
                 .emojiBtn {
                     position: relative;
@@ -239,7 +262,7 @@
                 }
                 .imageBtn {
                     @include msg_button_reset();
-                    i{
+                    i {
                         cursor: pointer;
                     }
                     input[type="file"] {
@@ -299,20 +322,34 @@
 
 @media (max-width: 1100px) {
     .Chatroom_wrapper {
-        flex-direction: column;
+        display: block;
+        // room aside
         .room_aside {
-            flex: 0 0 80px;
-            background: rgb(25, 85, 60);
+            display: none;
+            // ==============Not doing yet=================
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 50%;
             // room_aside : topbar
             .topbar {
-                padding: 1rem;
+                display: flex;
+                justify-content: space-between;
+                padding: 2rem;
+                border-bottom: 1px solid #216b4c;
                 .logo {
+                    display: flex;
+                    align-items: center;
                     img {
-                        width: 2rem;
+                        width: 3rem;
+                        height: auto;
                     }
                     h1 {
-                        font-size: 1.15rem;
-                        padding-left: 0.6rem;
+                        color: white;
+                        font-size: 1.25rem;
+                        font-weight: bolder;
+                        padding-left: 1rem;
                     }
                 }
                 .profile {
@@ -329,85 +366,120 @@
             }
             // room_aside : navbar
             .chat_nav {
-                display: none;
-                // ---------
                 padding: 2rem 0;
+                padding-top: 0;
                 border-bottom: 1px solid #216b4c;
                 li {
-                    display: flex;
-                    color: white;
-                    font-size: 1.5rem;
-                    padding: 1.5rem 2rem;
-                    cursor: pointer;
                     &:hover {
                         background: rgb(17, 65, 45);
                     }
-                    .nav_icon {
-                        flex: 0 0 4.5rem;
-                    }
-                    .nav_text {
-                        flex: 1 1 auto;
+                    a {
+                        padding: 1.5rem 2rem;
+                        display: flex;
+                        color: white;
+                        font-size: 1.5rem;
+                        .nav_icon {
+                            flex: 0 0 4.5rem;
+                        }
+                        .nav_text {
+                            flex: 1 1 auto;
+                        }
+                        &.roomLink {
+                            flex-direction: column;
+                            // ----Temp Image
+                            .roomName {
+                                text-align: center;
+                                padding: 1rem 0;
+                            }
+                            .roomImage {
+                                margin: 0 auto;
+                                width: 100%;
+                                height: 300px;
+                                background: transparent;
+                                background-size: cover;
+                                background-position: center center;
+                                border-radius: 0.5rem;
+                            }
+                        }
                     }
                 }
             }
         }
-        .chat_content {
-            flex: 1 1 auto;
+
+        // chat conte.nt
+        .chat_content,
+        .room_member {
             display: flex;
             flex-direction: column;
             // header
             .header {
-                flex: 0 0 6rem;
-                font-size: 2rem;
-                padding: 2rem;
-                box-sizing: border-box;
-                box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 0 0 #dadce0;
+                flex: 0 0 3rem;
+                font-size: 1.25rem;
+                padding: 0.8rem 0.5rem;
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-start;
+                align-items: center;
+                .room_name {
+                    padding-left: 0.5rem;
+                }
                 .leave_room {
+                    order: -1;
+                    width: 0.8rem;
+                    height: 0.8rem;
+                    background-image: url("/static/frontend/img/leave_mb.png");
+                }
+                .mb_menu {
                     display: block;
-                    width: 2rem;
-                    height: 2rem;
-                    background-image: url("/static/frontend/img/leave.svg");
+                    margin-left: auto;
+                    margin-right: 0.5rem;
+                    width: 1rem;
+                    height: 1rem;
+                    background-image: url("/static/frontend/img/mb_menu.png");
                     background-size: cover;
-                    background-position: center center;
                 }
             }
-            // main
+            // chatroom - main
             .main {
-                flex: 1 1 auto;
-                box-sizing: border-box;
-                font-size: 1.25rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
+                font-size: 1rem;
                 .overflow_container {
-                    height: calc(100vh - 11rem - 6rem);
-                    overflow: auto;
+                    height: calc(100vh - 3rem - 3rem);
+                    // overflow: auto;
                     .chat_box {
-                        padding: 1.8rem 5rem;
-                        display: flex;
+                        padding: 1.8rem .5rem;
                         .author_img {
-                            flex: 0 0 5rem;
-                            height: 5rem;
-                            background-size: cover;
-                            background-position: center center;
-                            border-radius: 50%;
+                            flex: 0 0 2rem;
+                            height: 2rem;
                         }
                         .main_content {
-                            flex: 1 1 auto;
-                            padding-left: 2rem;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: space-between;
+                            padding-left: .5rem;
                             .author_name {
-                                flex: 0 0 2rem;
-                                font-size: 1.5rem;
-                            }
-                            .timestamp {
-                                flex: 0 0 1.75rem;
+                                flex: 0 0 1rem;
                                 font-size: 1rem;
-                                color: gray;
+                            }
+                            .message_box {
+                                .messageTxt {
+                                    flex: 0 1 auto;
+                                    background: #d8d8d8;
+                                    border-radius: 0.5rem;
+                                    padding: 0.5rem;
+                                    .txt {
+                                        word-break: break-all;
+                                        text-align: left;
+                                    }
+                                }
+                                .messageImg{
+                                    flex: 0 1 auto;
+                                    .img {
+                                        width: 100%;
+                                        img {
+                                            width: 100%;
+                                            height: auto;
+                                        }
+                                    }
+                                }
+                                .timestamp {
+                                    flex: 0 0 2rem;
+                                }
                             }
                         }
                     }
@@ -416,56 +488,85 @@
                             order: -1;
                             text-align: right;
                             padding-left: 0rem;
-                            padding-right: 2rem;
+                            padding-right: .5rem;
+                            .message_box {
+                                justify-content: flex-end;
+                                .messageTxt {
+                                    background: rgb(194, 243, 179);
+                                }
+                                .timestamp {
+                                    order: -1;
+                                    padding-left: 0;
+                                    padding-right: .5rem;
+                                }
+                            }
                         }
                     }
                 }
             }
-            // footer
+            // chatroom - footer
             .footer {
-                border-top: 1px solid grey;
-                flex: 0 0 11rem;
+                flex: 0 0 3rem;
                 box-sizing: border-box;
                 @include flex-center();
                 .message_form {
                     display: flex;
                     justify-content: space-between;
-                    align-items: flex-end;
-                    width: 80%;
-                    textarea {
+                    align-items: center;
+                    width: 90%;
+                    .message_box {
                         width: 80%;
-                        font-size: 1.5rem;
-                        padding: 0.5rem 1rem;
-                        border: 1px solid rgb(192, 192, 192);
-                        border-radius: 0.5rem;
-                        outline: none;
-                        resize: none;
-                    }
-                    .emojiBtn {
-                        position: relative;
-                        @include msg_button_reset();
-                        .emogi {
-                            position: absolute;
-                            bottom: 3rem;
-                            right: 0;
-                            display: none;
-                            &.show {
-                                display: block;
+                        .message {
+                            font-size: 1.25rem;
+                            padding: 0.125rem 1rem;
+                            &::placeholder {
+                                color: transparent;
                             }
                         }
                     }
+                    .emojiBtn {
+                        font-size: 1.5rem;
+                    }
                     .imageBtn {
-                        @include msg_button_reset();
+                        font-size: 1.5rem;
                     }
                     .submitBtn {
-                        border: none;
-                        outline: none;
-                        color: white;
-                        background: rgb(25, 85, 60);
-                        font-size: 1.5rem;
-                        padding: 0.75rem;
-                        border-radius: 50%;
-                        cursor: pointer;
+                        display: none;
+                    }
+                }
+            }
+            // chatroom - member
+            .member {
+                flex: 1 1 auto;
+                .member_overflow_container {
+                    padding: 2rem;
+                    height: calc(100vh - 6rem);
+                    box-sizing: border-box;
+                    overflow: auto;
+                    display: flex;
+                    .member_card {
+                        width: 15rem;
+                        height: 18rem;
+                        margin-right: 2rem;
+                        border-radius: 0.5rem;
+                        border: 1px solid #ffffff;
+                        background: #dedede;
+                        display: flex;
+                        flex-direction: column;
+                        .profileImg {
+                            flex: 0 0 15rem;
+                            width: 100%;
+                            border-radius: 0.5rem 0.5rem 0 0;
+                            background-position: center center;
+                            background-size: cover;
+                            background-image: url("https://freefrontend.com/assets/img/css-business-cards/Geometric-business-card-with-CSS-Grid.png");
+                        }
+                        .name {
+                            flex: 1 1 auto;
+                            font-size: 1.25rem;
+                            text-align: center;
+                            @include flex-center();
+                        }
                     }
                 }
             }

@@ -6,7 +6,7 @@ import Chatbox from './chatbox';
 import Member from './member';
 // action
 import { leaveChatRoom } from '../../actions/lobby';
-import { getRoomMessages, sendImgMessage, getRoomMember } from '../../actions/chatroom';
+import { getRoomMessages, sendImgMessage, getRoomMember, getRoomImage } from '../../actions/chatroom';
 // Router 
 import { Link, Route } from "react-router-dom";
 // Wensocket 
@@ -14,12 +14,16 @@ import ReconnectingWebSocket from 'reconnecting-websocket';
 // Emogi
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
+// ContentEditable
+import ContentEditable from 'react-contenteditable';
+
 
 const HOST = window.location.origin;
 
 class ChatRoom extends Component {
     constructor(props) {
         super(props);
+        this.contentEditable = React.createRef();
         this.state = {
             message: "",
             showEmoji: false,
@@ -30,7 +34,9 @@ class ChatRoom extends Component {
     componentDidMount() {
         const roomID = this.props.currentRoomId
         this.props.getRoomMessages(roomID);
+        this.props.getRoomImage(roomID);
         this.scrollToBottom();
+
         // WebSocket
         const path = `ws://${window.location.host}/ws/chat/${roomID}/`;
         this.chatSocket = new ReconnectingWebSocket(path);
@@ -58,6 +64,7 @@ class ChatRoom extends Component {
     }
     render() {
         const currentRoom = (this.props.currentRoom) ? (this.props.currentRoom) : '';
+        const room_img = (this.props.roomInform) ? HOST + '/media/' + (this.props.roomInform.bgimage) : '';
         const showEmoji = (this.state.showEmoji) ? 'emogi show' : 'emogi';
 
         // Message
@@ -78,18 +85,21 @@ class ChatRoom extends Component {
                         <div className='header'>
                             <p className='room_name'>{currentRoom}</p>
                             <Link className='leave_room' to='/' onClick={this.props.leaveChatRoom}></Link>
+                            <div className='mb_menu'></div>
                         </div>
                         <div className='main'>
                             <div className='overflow_container'>
                                 {Messages}
                                 <div className='overflow_anchor' ref={(el) => { this.messagesEnd = el; }}></div>
                             </div>
+                            <div className='background' style={{backgroundImage:`url('${room_img}')`}}></div>
                         </div>
                         <div className='footer'>
-                            <form className='message_form' onSubmit={this.websocketSubmitMessage.bind(this)}>
-                                <textarea id="message" name="message" className='message' placeholder={`Messagge to ${currentRoom}`} rows='2'
-                                    value={this.state.message} onChange={this.handleTextChange.bind(this)} onKeyPress={this.handleUserKeyPress.bind(this)}
-                                ></textarea>
+                            <div className='message_form'>
+                                <div className='message_box'>
+                                    <ContentEditable className='message' contentEditable innerRef={this.contentEditable}
+                                        html={this.state.message} onChange={this.handleTextChange.bind(this)} onKeyPress={this.handleUserKeyPress.bind(this)}/>
+                                </div>
                                 <div className="emojiBtn" onClick={this.toggleEmogiTable.bind(this)}>
                                     <i className="far fa-smile"></i>
                                     <div className={showEmoji}>
@@ -105,7 +115,7 @@ class ChatRoom extends Component {
                                 <button type="submit" className="submitBtn" onClick={this.websocketSubmitMessage.bind(this)}>
                                     <i className="fas fa-paper-plane"></i>
                                 </button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 )} />
@@ -120,7 +130,7 @@ class ChatRoom extends Component {
         this.setState((currentState) => ({ message: currentState.message + e.native }));
     }
     handleTextChange(e) {
-        this.setState({ [e.target.className]: e.target.value });
+        this.setState({ 'message': e.target.value });
     }
     handleImgChange(e) {
         let formData = new FormData();
@@ -178,13 +188,6 @@ class ChatRoom extends Component {
             this.messagesEnd.scrollIntoView();
         }
     }
-    resetShow(e) {
-        e.preventDefault();
-        let clickToHide = ['footer', 'chat_box', 'timestamp', 'author_name', 'message', 'room_aside']
-        if (clickToHide.includes(e.target.className)) {
-            this.setState({ showEmoji: false })
-        }
-    }
     toggleEmogiTable(e) {
         e.preventDefault();
         if (e.target.tagName !== 'I') { return }
@@ -197,8 +200,9 @@ const mapStateToProps = state => {
         user: state.auth.user,
         past_message: state.chatroom.message,
         currentRoom: state.lobby.currentRoom,
-        currentRoomId: state.lobby.currentRoomId
+        currentRoomId: state.lobby.currentRoomId,
+        roomInform: state.chatroom.roomInform
     }
 }
 
-export default connect(mapStateToProps, { getRoomMessages, sendImgMessage, leaveChatRoom, getRoomMember })(ChatRoom);
+export default connect(mapStateToProps, { getRoomMessages, sendImgMessage, leaveChatRoom, getRoomMember, getRoomImage })(ChatRoom);

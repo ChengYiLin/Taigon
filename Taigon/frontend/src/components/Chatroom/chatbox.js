@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import parse from 'html-react-parser';
 
 const HOST = window.location.origin;
 
@@ -19,26 +20,32 @@ class Chatbox extends Component {
         let message;
         switch (this.msgtype) {
             case 'TXT':
-                message = <p className='txt'>{this.textcontent}</p>
+                message = (
+                    <div className='messageTxt'>
+                        <p className='txt'>{parse(this.textcontent)}</p>
+                    </div>
+                )
                 break;
             case 'IMG':
-                message = <div className='img'><img src={`${HOST + '/media/' + this.textcontent}`}></img></div>
+                message = (
+                    <div className='messageImg'>
+                        <div className='img'><img src={`${HOST + '/media/' + this.textcontent}`}></img></div>
+                    </div>
+                )
                 break;
             default:
-                message = <p className='txt'>{this.textcontent}</p>
+                message = <></>
         }
         // Edit timestamp
         let timestamp = this.timestamp.time.slice(0, 5);
+
         return (
             <div className={checkMineMessage}>
                 <div className='author_img' style={{ backgroundImage: `url('${HOST + '/media/' + this.authorImage}')` }}></div>
                 <div className='main_content'>
                     <p className='author_name'>{this.author_name}</p>
                     <div className='message_box'>
-                        <div className='messageTxt'>
-                            {message}
-                            {/* <p className='txt'>{this.textcontent}</p> */}
-                        </div>
+                        {message}
                         <small className='timestamp'>{timestamp}</small>
                     </div>
                 </div>

@@ -30,8 +30,7 @@ class Aside extends Component {
                 <ul className='chat_nav'>
                     <li>
                         <Link to={`/chatroom/${currentRoom}`} className='roomLink'>
-                            <p className='roomName'>{currentRoom}</p>
-                            <div className='roomImage' style={{ backgroundImage: `url(${room_img})` }}></div>
+                            <p className='nav_text'>{currentRoom}</p>
                         </Link>
                     </li>
                     <li>
