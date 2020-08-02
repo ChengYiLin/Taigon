@@ -29,7 +29,7 @@ class Topbar extends Component {
                     <div className='User'>
                         <a className='profile_image' onClick={this.showInform.bind(this)} style={{ backgroundImage: `url(${profile_img})` }}></a>
                         <div className={`${showInform_class}`}>
-                            <Link to='/profile' className='profile_image' style={{ backgroundImage: `url(${profile_img})` }}></Link>
+                            <Link to='/lobby/profile' className='profile_image' style={{ backgroundImage: `url(${profile_img})` }}></Link>
                             <p className='profile_name'>{userName}</p>
                             <p className='profile_email'>{userEmail}</p>
                             <div className='signout_box'>

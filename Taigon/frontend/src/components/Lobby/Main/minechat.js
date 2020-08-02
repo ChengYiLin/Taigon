@@ -4,6 +4,8 @@ import { getUserOwnChatroom, getNowRoom, deleteChatRoom } from '../../../actions
 // Router 
 import { Link } from "react-router-dom";
 
+const HOST = window.location.origin;
+
 class MineChat extends Component {
     componentDidMount() {
         const userId = this.props.user.id
@@ -14,9 +16,8 @@ class MineChat extends Component {
             let room_id = element.id
             let room_Name = element.roomname;
             let room_Category = element.category;
-            let room_BackgroundImage = 'media/' + element.bgimage;
+            let room_BackgroundImage = HOST +'/media/' + element.bgimage;
 
-            // onClick={() => { this.props.getNowRoom(room_Name, room_id) }}
             return (
                 <Link key={room_id} className='room' to={`/chatroom/${room_Name}`} onClick={this.handleRoomClick.bind(this)} data-roomid={room_id} data-roomname={room_Category} >
                     <div className='image_box' >

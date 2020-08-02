@@ -31,9 +31,9 @@ class Lobby extends Component {
                     <div className='container'>
                         <Aside openState={this.state.createRoomState} setCreateRoomTrue={this.openCreateRoom.bind(this)} />
                         <Switch>
-                            <Route exact path='/' component={Hotcategory} />
-                            <Route exact path='/profile' component={Profile} />
-                            <Route exact path='/minechat' component={MineChat} />
+                            <Route exact path='/lobby' component={Hotcategory} />
+                            <Route exact path='/lobby/profile' component={Profile} />
+                            <Route exact path='/lobby/minechat' component={MineChat} />
                         </Switch>
                     </div>
                 </section>

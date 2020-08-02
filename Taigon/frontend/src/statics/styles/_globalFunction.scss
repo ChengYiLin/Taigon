@@ -1,0 +1,37 @@
+@mixin flex_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex_align_center {
+    display: flex;
+    align-items: center;
+}
+
+@mixin button_ripple_effect($animation_time) {
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+    position: relative;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        padding: 50%;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        opacity: 0;
+        transition: transform $animation_time, opacity $animation_time;
+    }
+    &:hover {
+        background: #7eaa8c;
+    }
+    &:active::after {
+        transition: 0s;
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0);
+    }
+}

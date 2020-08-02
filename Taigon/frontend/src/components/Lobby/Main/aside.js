@@ -21,19 +21,19 @@ class Aside extends Component {
                 {/*--- Aside Navbar */}
                 <ul className='main_nav'>
                     <li>
-                        <Link className='navlink' to='/' onClick={()=>{this.props.getChatRoom()}}>
+                        <Link className='navlink' to='/lobby' onClick={()=>{this.props.getChatRoom()}}>
                             <i className="nav_icon fas fa-fire"></i>
                             <span>熱門話題</span>
                         </Link>
                     </li>
                     <li>
-                        <Link className='navlink' to='/minechat'>
+                        <Link className='navlink' to='/lobby/minechat'>
                             <i className="nav_icon fab fa-facebook-messenger"></i>
                             <span>我的聊天</span>
                         </Link>
                     </li>
                     <li>
-                        <Link className='navlink' to='/profile'>
+                        <Link className='navlink' to='/lobby/profile'>
                             <i className="nav_icon fas fa-user-alt"></i>
                             <span>個人資訊</span>
                         </Link>

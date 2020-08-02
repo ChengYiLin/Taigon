@@ -16,7 +16,7 @@ class Registe_content extends Component {
     render() {
         if(this.props.isAuthenticated){
             return (
-                <Redirect push to="/" />
+                <Redirect push to="/lobby" />
             )
         }
         return (

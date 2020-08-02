@@ -84,7 +84,7 @@ class ChatRoom extends Component {
                     <div className='chat_content'>
                         <div className='header'>
                             <p className='room_name'>{currentRoom}</p>
-                            <Link className='leave_room' to='/' onClick={this.props.leaveChatRoom}></Link>
+                            <Link className='leave_room' to='/lobby' onClick={this.props.leaveChatRoom}></Link>
                             <div className='mb_menu'></div>
                         </div>
                         <div className='main'>

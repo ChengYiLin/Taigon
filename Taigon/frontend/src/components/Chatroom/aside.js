@@ -40,7 +40,7 @@ class Aside extends Component {
                         </Link>
                     </li>
                     <li>
-                        <Link to={`/`}>
+                        <Link to={`/lobby`}>
                             <i className="nav_icon fas fa-door-open"></i>
                             <p className='nav_text'>返回大廳</p>
                         </Link>
