@@ -1,0 +1,294 @@
+.homepage {
+    background: $main_bg_color;
+    .section {
+        width: 100%;
+        height: 100vh;
+        max-height: 1200px;
+        background: $main_bg_color;
+        overflow: hidden;
+    }
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        .topbar {
+            padding: 1rem 0;
+            flex: 0 0 4rem;
+            .container {
+                width: 70%;
+                max-width: 1024px;
+                margin: 0 auto;
+                justify-content: space-between;
+                @include flex_align_center();
+                .Logo {
+                    @include flex_align_center();
+                    img {
+                        width: 2rem;
+                        height: auto;
+                    }
+                    p {
+                        color: #464646;
+                        font-size: 1.5rem;
+                        font-weight: 800;
+                        padding-left: 0.5rem;
+                    }
+                }
+                .entrance {
+                    width: 10rem;
+                    justify-content: space-between;
+                    @include flex_align_center();
+                    .entrance_button {
+                        font-size: 1.2rem;
+                        padding: 0.25rem 1rem;
+                        border-radius: 0.25rem;
+                        cursor: pointer;
+                        position: relative;
+                        overflow: hidden;
+                        z-index: 1;
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            left: 0;
+                            bottom: 0;
+                            height: 0;
+                            border-radius: 50% 50% 0 0;
+                            width: 100%;
+                            transition: 0.3s;
+                            z-index: -1;
+                        }
+                        &:hover::before {
+                            height: 180%;
+                        }
+                    }
+                    .signin {
+                        color: #20adce;
+                        border: 1px solid #20adce;
+                        &::before {
+                            background: #20adce;
+                        }
+                        &:hover {
+                            color: $main_bg_color;
+                        }
+                    }
+                    .signup {
+                        color: #4fb96c;
+                        border: 1px solid #4fb96c;
+                        &::before {
+                            background: #4fb96c;
+                        }
+                        &:hover {
+                            color: $main_bg_color;
+                        }
+                    }
+                }
+            }
+        }
+        .header_content {
+            flex: 1 1 auto;
+            .container {
+                width: 70%;
+                max-width: 1024px;
+                height: 100%;
+                margin: 0 auto;
+                position: relative;
+                .slogen {
+                    margin-top: 15%;
+                    .title {
+                        font-size: 2.5rem;
+                        line-height: 3rem;
+                        margin: 1.25rem 0;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        .logo_text {
+                            font-weight: bold;
+                            font-style: italic;
+                            color: rgb(63, 156, 94);
+                        }
+                        &.typing1 {
+                            width: 17.5rem;
+                            border-right: 2px solid transparent;
+                            animation: typewriter 1.2s steps(18) 1.5s 1 normal both, textCursor 500ms steps(8) 7 normal;
+                        }
+                        &.typing2 {
+                            width: 19rem;
+                            border-right: 2px solid transparent;
+                            animation: typewriter2 1.2s steps(18) 4s 1 normal both, textCursor 500ms steps(2) 3.5s 7 normal;
+                        }
+                    }
+                    .subtitle {
+                        font-size: 1.5rem;
+                        line-height: 3rem;
+                        color: grey;
+                    }
+                    .startChat {
+                        display: inline-block;
+                        font-size: 1.5rem;
+                        padding: 0.8rem 2.5rem;
+                        margin-top: 1rem;
+                        color: white;
+                        background: #689476;
+                        border-radius: 0.5rem;
+                        @include button_ripple_effect(1s);
+                    }
+                }
+                .main_img {
+                    position: absolute;
+                    top: 40%;
+                    right: -150%;
+                    transform: translate(-50%, -50%);
+                    animation: moveLeft 1s ease .2s 1 normal;
+                    animation-fill-mode: forwards;
+                    img {
+                        width: 55vw;
+                        
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1600px){
+    .homepage {
+        .header {
+            .header_content {
+                .container {
+                    .main_img {
+                        animation: pc_moveLeft 1s ease .2s 1 normal;
+                        animation-fill-mode: forwards;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .homepage {    
+        .header {
+            .topbar {
+                .container {
+                    width: 90%;
+                    .entrance {
+                        width: 8rem;
+                        .entrance_button {
+                            font-size: 1rem;
+                            padding: 0.25rem .75rem;
+                        }
+                    }
+                }
+            }
+            // -----------------------------
+            .header_content {
+                .container {
+                    width: 85%;
+                    .slogen {
+                        margin-top: 15%;
+                        .title {
+                            font-size: 2rem;
+                            line-height: 2.5rem;
+                            margin: .25rem 0;
+                            &.typing1 {
+                                width: 14rem;
+                                animation: mb_typewriter 1.2s steps(18) 1.5s 1 normal both, textCursor 500ms steps(8) 7 normal;
+                            }
+                            &.typing2 {
+                                width: 16rem;
+                                animation: mb_typewriter2 1.2s steps(18) 4s 1 normal both, textCursor 500ms steps(2) 3.5s 7 normal;
+                            }
+                        }
+                        .subtitle {
+                            font-size: 1.25rem;
+                            line-height: 2.5rem;   
+                            margin: 1.25rem 0;
+                        }
+                        .startChat {
+                            font-size: 1.25rem;
+                        }
+                    }
+                    .main_img {
+                        top: 70%;
+                        animation: mb_moveLeft 1s ease .2s 1 normal;
+                        animation-fill-mode: forwards;
+                        img {
+                            width: 80vw;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// === animation ===
+@keyframes moveLeft {
+    from {
+        right: -150%;
+    }
+    to {
+        right: -60%;
+    }
+}
+
+@keyframes pc_moveLeft {
+    from {
+        right: -150%;
+    }
+    to {
+        right: -90%;
+    }
+}
+
+@keyframes mb_moveLeft {
+    from {
+        right: -150%;
+    }
+    to {
+        right: -65%;
+    }
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 17.5rem;
+    }
+}
+
+@keyframes mb_typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 14rem;
+    }
+}
+
+@keyframes typewriter2 {
+    from {
+        width: 0;
+    }
+    to {
+        width: 20rem;
+    }
+}
+
+@keyframes mb_typewriter2 {
+    from {
+        width: 0;
+    }
+    to {
+        width: 16rem;
+    }
+}
+
+@keyframes textCursor {
+    from {
+        border-right-color: rgba(0, 0, 0, 0.75);
+    }
+    to {
+        border-right-color: transparent;
+    }
+}
