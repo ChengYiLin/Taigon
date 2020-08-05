@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // actions
-import { register } from '../../actions/account';
+import { register } from '../../../actions/account';
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -15,7 +15,7 @@ class SignUp extends React.Component {
             password: '',
         }
         this.handleChange = this.handleChange.bind(this);
-        this.handleGosignup = this.handleGosignup.bind(this);
+        this.handleGosignin = this.handleGosignin.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -48,7 +48,7 @@ class SignUp extends React.Component {
                         </div>
                         <div className='footer'>
                             <input type="submit" className='entrance_submit signup' value="Sign Up" onClick={this.handleSubmit} />
-                            <p className="small_text">already have an account？<a id='goSignUp'>Sign In</a></p>
+                            <p className="small_text">already have an account？<a id='goSignUp' onClick={this.handleGosignin}>Sign In</a></p>
                         </div>
                     </form>
                 </div>
@@ -58,7 +58,8 @@ class SignUp extends React.Component {
     handleChange(e) {
         this.setState({ [e.target.id]: e.target.value })
     }
-    handleGosignup(e) {
+    handleGosignin(e) {
+        console.log(e.target);
         e.preventDefault();
         this.toggleSignIn();
         this.toggleSignUp();

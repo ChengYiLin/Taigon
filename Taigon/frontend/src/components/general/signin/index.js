@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // actions
-import { login } from '../../actions/account';
+import { login } from '../../../actions/account';
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -29,13 +29,13 @@ class SignIn extends React.Component {
                             <div className='form_group'>
                                 <div className='entrance_input'>
                                     <div className='input_icon' style={{ backgroundImage: 'url("/static/img/user.png")' }}></div>
-                                    <input id='username' className='input_text' type='text' placeholder='username' onChange={this.handleChange}></input>
+                                    <input id='username' className='input_text' type='text' placeholder='username' value={this.state.username} onChange={this.handleChange}></input>
                                 </div>
                             </div>
                             <div className='form_group'>
                                 <div className='entrance_input'>
                                     <div className='input_icon' style={{ backgroundImage: 'url("/static/img/lock.png")' }}></div>
-                                    <input id='password' className='input_text' type='password' placeholder='password' onChange={this.handleChange}></input>
+                                    <input id='password' className='input_text' type='password' placeholder='password' value={this.state.password} onChange={this.handleChange}></input>
                                 </div>
                             </div>
                         </div>

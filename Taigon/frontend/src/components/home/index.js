@@ -5,8 +5,8 @@ import { Redirect } from "react-router-dom";
 // Components
 import Topbar from './topbar';
 import HeaderContent from './headerContent';
-import SignIn from '../signin';
-import SignUp from '../signup';
+import SignIn from '../general/signin';
+import SignUp from '../general/signup';
 // actions
 import { checkLogin } from '../../actions/account';
 
@@ -21,13 +21,13 @@ class Home extends React.Component {
         this.toggleSignUp = this.toggleSignUp.bind(this)
         this.closeAll = this.closeAll.bind(this)
     }
-    componentWillMount() {
+    componentDidMount() {
         // if localStorage have token, then go to Lobby Page Directly
         this.props.checkLogin();
     }
     render() {
         // if user login
-        if (this.props.login) { return (<Redirect to='/lobby' />) }
+        if (this.props.login) { return (<Redirect to='/mine' />) }
 
         let entranceBox = <></>
         if (this.state.showSignIn) { entranceBox = <SignIn toggleSignIn={this.toggleSignIn} toggleSignUp={this.toggleSignUp} closeAll={this.closeAll} /> }
