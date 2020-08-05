@@ -1,5 +1,9 @@
-@import 'reset';
-@import 'globalFunction';
-@import 'homepage';
-@import './entrance';
-@import './mainpage';
+@import './general/reset';
+@import './general/globalfunction';
+// home page
+@import './home/homepage';
+@import './home/entrance';
+// main page
+@import './mainpage/mainpage';
+@import './mainpage/lobby/lobbynavbar';
+@import './mainpage/lobby/lobby_content';
