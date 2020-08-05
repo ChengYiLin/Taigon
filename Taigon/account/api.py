@@ -1,11 +1,34 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
-from .serializers import LoginSerializer, RegisterSerializer
+from .serializers import UserSerialzer, LoginSerializer, RegisterSerializer
 from django.contrib.auth import get_user_model
 from .models import Profile
 
 User = get_user_model()
+
+
+class getUserData(generics.GenericAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = UserSerialzer
+
+    def get(self, request):
+        userId = self.request.user.id
+        userProfile = Profile.objects.get(user=userId)
+
+        return Response({
+            "user": {
+                "id": userId,
+                "username": self.request.user.username,
+                "email": self.request.user.email,
+                "nickname": userProfile.nickname,
+                "male": userProfile.male,
+                "introduction": userProfile.introduction,
+                "image": userProfile.profileimg.name,
+            }
+        })
 
 
 class LoginAPI(generics.GenericAPIView):

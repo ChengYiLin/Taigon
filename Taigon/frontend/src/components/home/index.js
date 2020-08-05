@@ -1,9 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+// Router
+import { Redirect } from "react-router-dom";
 // Components
 import Topbar from './topbar';
 import HeaderContent from './headerContent';
 import SignIn from '../signin';
 import SignUp from '../signup';
+// actions
+import { checkLogin } from '../../actions/account';
 
 class Home extends React.Component {
     constructor(props) {
@@ -16,7 +21,14 @@ class Home extends React.Component {
         this.toggleSignUp = this.toggleSignUp.bind(this)
         this.closeAll = this.closeAll.bind(this)
     }
+    componentWillMount() {
+        // if localStorage have token, then go to Lobby Page Directly
+        this.props.checkLogin();
+    }
     render() {
+        // if user login
+        if (this.props.login) { return (<Redirect to='/lobby' />) }
+
         let entranceBox = <></>
         if (this.state.showSignIn) { entranceBox = <SignIn toggleSignIn={this.toggleSignIn} toggleSignUp={this.toggleSignUp} closeAll={this.closeAll} /> }
         if (this.state.showSignUp) { entranceBox = <SignUp toggleSignIn={this.toggleSignIn} toggleSignUp={this.toggleSignUp} closeAll={this.closeAll} /> }
@@ -42,4 +54,10 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+const mapStateToProps = state => {
+    return {
+        login: state.account.login
+    }
+}
+
+export default connect(mapStateToProps, { checkLogin })(Home);

@@ -71,7 +71,7 @@ class SignUp extends React.Component {
         e.preventDefault();
         if (this.state.username === '') { alert('username not input') }
         else if (this.state.password === '') { alert('password not input') }
-        console.log('hello')
+
         this.props.register(this.state.username, this.state.email, this.state.password)
     }
 }

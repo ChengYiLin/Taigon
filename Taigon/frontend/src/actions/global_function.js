@@ -1,12 +1,16 @@
 const HOST = window.location.origin;
 
 // Fetch API
-export function GetFetch(dispatch, URL, dispatchType) {
+export function GetFetch(dispatch, URL, dispatchType, token=null) {
     const config = {
         method: "GET",
         headers: {
             'content-type': 'application/json',
         },
+    }
+
+    if(token!==null){
+        config.headers['Authorization'] = `Token ${token}`;
     }
 
     fetch(HOST + URL, config)
@@ -30,13 +34,17 @@ export function GetFetch(dispatch, URL, dispatchType) {
         })
 }
 
-export function PostFetch(dispatch, URL, data, dispatchType) {
+export function PostFetch(dispatch, URL, data, dispatchType, token=null) {
     const config = {
         method: "POST",
         headers: {
             'content-type': 'application/json',
         },
         body: JSON.stringify(data),
+    }
+
+    if(token!==null){
+        config.headers['Authorization'] = `Token ${token}`;
     }
 
     fetch(HOST + URL, config)
