@@ -16,3 +16,7 @@ db.sqlite3
 __pycache__
 
 secrets
+
+migrations/
+
+media/

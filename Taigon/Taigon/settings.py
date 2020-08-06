@@ -15,6 +15,7 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -25,6 +26,7 @@ INSTALLED_APPS = [
     'knox',
     'account',
     'frontend',
+    'chatroom',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +58,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Taigon.wsgi.application'
+ASGI_APPLICATION = "Taigon.routing.application"
 
+# Channels
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 DATABASES = {
