@@ -138,9 +138,17 @@ input {
     border: none;
 }
 
+button{
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
 div,
 form,
 nav,
-main{
+main,
+label,
+textarea{
     box-sizing: border-box;
 }

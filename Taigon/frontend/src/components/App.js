@@ -5,8 +5,6 @@ import Home from './home';
 import Mine from './mine';
 import Lobby from './lobby';
 import Profile from './profile';
-// ----test
-import Channel from './channel';
 // Router
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // Redux
@@ -22,7 +20,6 @@ class App extends React.Component {
             <Provider store={store}>
                 <Router>
                     <Switch>
-                        {/* <Route exact path='/' component={Channel} /> */}
                         <Route exact path='/mine' component={Mine} />
                         <Route exact path='/lobby' component={Lobby} />
                         <Route exact path='/profile' component={Profile} />

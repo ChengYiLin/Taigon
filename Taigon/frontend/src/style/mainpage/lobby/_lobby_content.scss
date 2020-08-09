@@ -31,7 +31,7 @@
             .room_list {
                 display: grid;
                 grid-gap: 1rem;
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
                 .room {
                     .room_background {
                         width: 100%;
@@ -55,12 +55,12 @@
                     .room_inform {
                         display: flex;
                         flex-direction: column;
-                        height: 9rem;
+                        height: 8rem;
                         padding: 2rem 1rem 1rem 1rem;
                         background: #ffff9b;
                         border-radius: 0 0 1rem 1rem;
                         .room_name {
-                            flex: 0 0 2.5rem;
+                            flex: 0 0 1.75rem;
                             font-size: 1.25rem;
                         }
                         .room_introduction {

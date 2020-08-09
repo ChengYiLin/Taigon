@@ -1,6 +1,6 @@
 const HOST = window.location.origin;
 
-// Fetch API
+// Fetch : Get API
 export function GetFetch(dispatch, URL, dispatchType, token=null) {
     const config = {
         method: "GET",
@@ -34,6 +34,7 @@ export function GetFetch(dispatch, URL, dispatchType, token=null) {
         })
 }
 
+// Fetch : Post API
 export function PostFetch(dispatch, URL, data, dispatchType, token=null) {
     const config = {
         method: "POST",

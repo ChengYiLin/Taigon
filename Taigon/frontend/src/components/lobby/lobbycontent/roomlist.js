@@ -18,7 +18,7 @@ class RoomList extends React.Component {
         let rooms = [];
         if (this.props.room_list.length) {
             rooms = this.props.room_list.map(element => (
-                <div className='room'>
+                <div key={element.id} className='room'>
                     <div className='room_background' style={{ backgroundImage: `url(${HOST + '/media/' + element.background})` }}>
                         <div className='room_icon' style={{ backgroundImage: `url(${HOST + '/media/' + element.icon})` }}></div>
                     </div>

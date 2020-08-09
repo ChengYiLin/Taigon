@@ -8,6 +8,7 @@ class LobbyNavbar extends React.Component {
     constructor(props) {
         super(props);
         this.changeNowCategory = this.props.changeNowCategory;
+        this.handleClickCategory = this.handleClickCategory.bind(this)
     }
     componentDidMount() {
         this.props.getCategories();
@@ -17,7 +18,7 @@ class LobbyNavbar extends React.Component {
             const categoryClass = (parseInt(element.id) === parseInt(this.props.now_category)) ? 'category show' : 'category';
             return (
                 <li key={element.id}>
-                    <a id={element.id} className={categoryClass} onClick={this.handleClickCategory.bind(this)}>{element.value}</a>
+                    <a id={element.id} className={categoryClass} onClick={this.handleClickCategory}>{element.value}</a>
                 </li>
             )
         })

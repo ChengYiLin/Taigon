@@ -2,10 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 // Router
 import { Link } from "react-router-dom";
+// actions
+import { toggleCreateRoom } from '../../../actions/createroom';
 
 class MainNavbar extends React.Component {
     constructor(props) {
         super(props);
+        this.toggleCreateRoom = this.props.toggleCreateRoom;
+        this.clickCreateRoom = this.clickCreateRoom.bind(this);
     }
     render() {
         return (
@@ -25,7 +29,7 @@ class MainNavbar extends React.Component {
                         </Link>
                     </li>
                     <li>
-                        <a className='option'>
+                        <a className='option' onClick={this.clickCreateRoom}>
                             <img className='responsive_img' src='/static/img/add.svg'></img>
                         </a>
                     </li>
@@ -36,9 +40,15 @@ class MainNavbar extends React.Component {
             </nav>
         )
     }
+    clickCreateRoom(e){
+        e.preventDefault();
+        this.toggleCreateRoom();
+    }
 }
 const mapStateToProps = state => {
-    return {}
+    return {
+        showCreateRoom: state.createRoom.showCreateRoom
+    }
 }
 
-export default connect(mapStateToProps)(MainNavbar);
+export default connect(mapStateToProps, { toggleCreateRoom })(MainNavbar);
