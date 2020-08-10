@@ -40,7 +40,7 @@ class MainNavbar extends React.Component {
             </nav>
         )
     }
-    clickCreateRoom(e){
+    clickCreateRoom(e) {
         e.preventDefault();
         this.toggleCreateRoom();
     }
@@ -51,4 +51,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { toggleCreateRoom })(MainNavbar);
+const mapDispatchToProps = dispatch => {
+    return {
+        toggleCreateRoom: () => dispatch(toggleCreateRoom())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainNavbar);

@@ -4,7 +4,6 @@ import {
 
 const initialState = {
     showCreateRoom: false,
-    roomname: ""
 }
 
 function createRoom(state = initialState, action) {
