@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 // Components
 import MainNavbar from '../general/main_navbar';
+import MineNavbar from './mine_navbar';
 import Createroom from '../general/createroom';
+
 
 
 class Mine extends React.Component {
@@ -16,8 +18,7 @@ class Mine extends React.Component {
             <div className='mine mainpage'>
                 <MainNavbar />
                 <main className='main_content'>
-                    <nav className='sub_navbar'>
-                    </nav>
+                    <MineNavbar />
                     <div className='content'>
                     </div>
                 </main>

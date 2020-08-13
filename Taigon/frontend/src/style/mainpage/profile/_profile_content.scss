@@ -1,11 +1,11 @@
-.profile{
-    .profile_content{
+.profile {
+    .profile_content {
         padding: 2rem;
         .banner {
             display: block;
             width: 100%;
             height: 10vh;
-            margin-bottom: 3rem;
+            margin-bottom: 5rem;
             border-radius: 0.5rem;
             background-image: $profile_banner_bg;
             @include flex_center();
@@ -16,33 +16,64 @@
                 line-height: 3rem;
             }
         }
-        .profileInform{
+        .profileInform {
             display: flex;
             justify-content: space-around;
-            .imgPart{
+            .imgPart {
                 flex: 0 0 40%;
-
-                height: 60vh;
+                height: 50vh;
                 @include flex_center();
-                .profile_img{
+                .profile_img {
                     width: 70%;
                     height: auto;
                     border-radius: 50%;
                     border: 3px solid #eeeeee;
                 }
             }
-            .mainPart{
+            .mainPart {
                 flex: 0 0 45%;
-                background: red;
-                .inform_group{
+                display: flex;
+                flex-direction: column;
+                .inform_group {
+                    flex: 0 0 4rem;
                     display: flex;
-                    .label{
-                        font-size: 1rem;
+                    align-items: baseline;
+                    padding: 1.25rem 0;
+                    &.columnType {
+                        flex-direction: column;
+                        flex: 1 1 auto;
+                        .label {
+                            flex: 0 0 2.5rem;
+                        }
+                    }
+                    .label {
+                        flex: 0 0 7rem;
+                        font-size: 1.25rem;
                         color: grey;
                     }
-                    .profile_data{
-                        font-size: 1.25rem;
-                        
+                    .profile_data {
+                        font-size: 1.5rem;
+                    }
+                    .edit_box{
+                        border-radius: 0.5rem;
+                        border: 1px solid grey;
+                        overflow-y: auto;
+                        width: 60%;
+                        &.edit_nickname{
+                            max-width: 15rem;
+                            height: 2.25rem;
+                            padding: 0 .5rem;
+                        }
+                        &.edit_introduct {
+                            max-width: 25rem;
+                            height: 15rem;
+                            padding: 0.5rem;
+                        }
+                    }
+                    .profile_nickname,
+                    .profile_introduction {
+                        outline: none;
+                        line-height: 2rem;
                     }
                 }
             }
