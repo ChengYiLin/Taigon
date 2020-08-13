@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import account from './account';
+import auth from './auth';
 import lobby from './lobby';
-import createRoom from './createroom';
+import chatroom from './chatroom';
 
 export default combineReducers({
-    account,
+    auth,
     lobby,
-    createRoom
+    chatroom
 })
