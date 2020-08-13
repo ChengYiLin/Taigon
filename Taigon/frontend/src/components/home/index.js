@@ -1,7 +1,7 @@
 import React from 'react';
 // Components
 import Topbar from './topbar';
-import HeaderContent from './headerContent';
+import HomeContent from './homeContent';
 
 class Home extends React.Component {
     render() {
@@ -9,7 +9,7 @@ class Home extends React.Component {
             <div className='homepage'>
                 <div className='section header'>
                     <Topbar />
-                    <HeaderContent />
+                    <HomeContent />
                 </div>
             </div>
         )

@@ -2,7 +2,7 @@ import React from 'react';
 // Router 
 import { Link } from "react-router-dom";
 
-class HeaderContent extends React.Component {
+class HomeContent extends React.Component {
     render() {
         return (
             <div className='header_content'>
@@ -25,4 +25,4 @@ class HeaderContent extends React.Component {
     }
 }
 
-export default HeaderContent;
+export default HomeContent;
