@@ -9,7 +9,7 @@ class To_signin extends Component {
                 <div className="main_content">
                     <h2>One of us ?</h2>
                     <p>Just sign in<br></br>We've missed you!</p>
-                    <Link to="/" className="goSignin">
+                    <Link to="/signin" className="goSignin">
                         Go SignIn
                     </Link>
                 </div>

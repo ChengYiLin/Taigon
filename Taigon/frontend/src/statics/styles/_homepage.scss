@@ -135,14 +135,13 @@
                 }
                 .main_img {
                     position: absolute;
-                    top: 40%;
+                    top: 35%;
                     right: -150%;
                     transform: translate(-50%, -50%);
                     animation: moveLeft 1s ease .2s 1 normal;
                     animation-fill-mode: forwards;
                     img {
-                        width: 55vw;
-                        
+                        width: 50vw;
                     }
                 }
             }

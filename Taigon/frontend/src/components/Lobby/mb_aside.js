@@ -20,19 +20,19 @@ class Mb_Aside extends Component {
                 <div className='nav'>
                     <ul>
                         <li>
-                            <Link className='navlink' to='/' onClick={() => { this.setMobileAsideFalse() }}>
+                            <Link className='navlink' to='/lobby' onClick={() => { this.setMobileAsideFalse() }}>
                                 <i className="nav_icon fas fa-fire"></i>
                                 <span>熱門話題</span>
                             </Link>
                         </li>
                         <li>
-                            <Link className='navlink' to='/minechat' onClick={() => { this.setMobileAsideFalse() }}>
+                            <Link className='navlink' to='/lobby/minechat' onClick={() => { this.setMobileAsideFalse() }}>
                                 <i className="nav_icon fab fa-facebook-messenger"></i>
                                 <span>我的聊天</span>
                             </Link>
                         </li>
                         <li>
-                            <Link className='navlink' to='/profile' onClick={() => { this.setMobileAsideFalse() }}>
+                            <Link className='navlink' to='/lobby/profile' onClick={() => { this.setMobileAsideFalse() }}>
                                 <i className="nav_icon fas fa-user-alt"></i>
                                 <span>個人資訊</span>
                             </Link>

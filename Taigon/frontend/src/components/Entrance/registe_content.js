@@ -23,7 +23,7 @@ class Registe_content extends Component {
             <div className="registe_content">
                 <div className="main_content">
                     <h2>Create Free Account</h2>
-                    <p>Sign Up using social networks</p>
+                    {/* <p>Sign Up using social networks</p>
                     <div className="social_networks">
                         <a className="social_login_btn fb">FaceBook</a>
                         <a className="social_login_btn google">Google</a>
@@ -32,7 +32,7 @@ class Registe_content extends Component {
                         <div className="line"><hr></hr></div>
                         <p className="text">or</p>
                         <div className="line"><hr></hr></div>
-                    </div>
+                    </div> */}
                     <form className="registe_form" onSubmit={this.handleSubmit.bind(this)}>
                         <div className="form_group">
                             <input type="text" id="userName" name="username" placeholder="Enter user name" required
