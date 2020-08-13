@@ -1,36 +1,38 @@
 import React from 'react';
-import '../style/all.scss';
+import '../statics/styles/all.scss';
 // Components
+import { Signin_Page, Registe_Page } from './Entrance';
+import Chatroom from './Chatroom';
+import Lobby from './Lobby';
 import Home from './home';
-import Mine from './mine';
-import Lobby from './lobby';
-import Profile from './profile';
-// Router
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // Redux
 import { Provider } from 'react-redux';
-import store from '../store'
+import store from '../store';
+// Router 
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// actions
+import { loadUserData } from '../actions/auth';
+
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
+    componentDidMount() {
+        store.dispatch(loadUserData());
     }
     render() {
         return (
             <Provider store={store}>
                 <Router>
                     <Switch>
-                        <Route exact path='/mine' component={Mine} />
-                        <Route exact path='/lobby' component={Lobby} />
-                        <Route exact path='/profile' component={Profile} />
-                        <Route path='/' component={Home} />
+                        <Route exact path="/" component={Home} />
+                        <Route path="/chatroom/:roomname" component={Chatroom} />
+                        <Route exact path="/signin" component={Signin_Page} />
+                        <Route exact path="/registe" component={Registe_Page} />
+                        <Route path="/lobby" component={Lobby} />
                     </Switch>
                 </Router>
             </Provider>
         )
     }
 }
-
-
 
 export default App;

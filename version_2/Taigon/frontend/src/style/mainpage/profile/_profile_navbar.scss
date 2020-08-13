@@ -1,0 +1,30 @@
+.profile {
+    .profile_navbar {
+        padding: 1rem 0;
+        .title {
+            color: white;
+            font-size: 1.5rem;
+            padding: 0 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .settings {
+            li {
+                padding: 0.3rem 0;
+                .item {
+                    display: block;
+                    padding: 1rem;
+                    margin-left: 1rem;
+                    color: #8a8a8a;
+                    font-size: 1.25rem;
+                    cursor: pointer;
+                    &.show,
+                    &:hover{
+                        color: #0f8840;
+                        background: $main_bg_color;
+                        border-radius: .5rem 0 0 .5rem;
+                    }
+                }
+            }
+        }
+    }
+}
