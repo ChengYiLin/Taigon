@@ -32,13 +32,10 @@ class ChatConsumer(WebsocketConsumer):
         # Prepare the response data Based on msg type
         if(req['msgtype'] == "TXT"):
             # Save to DB
-            msgs = Message.objects.create(
+            Message.objects.create(
                 author=author, chatroom=chatroom, textmessage=req['textmessage'])
 
-            res = json.dumps({'type': 'TXT',
-                              'author_name': msgs.author.username,
-                              'timestamp': 'msgs.timestamp',
-                              'textcontent': msgs.textmessage})
+            res = json.dumps({'type': 'TXT'})
 
         elif(req['msgtype'] == "IMG"):
             res = json.dumps({'type': 'IMG'})

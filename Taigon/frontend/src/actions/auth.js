@@ -1,3 +1,5 @@
+import { GetFetch, PostFetch, PostFileFetch } from './globalfunction';
+
 export const USER_LOADING = 'USER_LOADING';
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
@@ -20,125 +22,77 @@ export const loadUserData = () => (dispatch, getState) => {
     // Get Token from state
     const token = getState().auth.token;
 
-    // Define Ajax config for UserAPI
-    const config = {
-        method: "GET",
-        headers: {
-            'content-type': 'application/json',
-        },
-    }
-    // --- if there is a token, ser it in headers
-    if (token) {
-        config.headers['Authorization'] = `Token ${token}`;
+    const dispatchType = {
+        'success': USER_LOADED,
+        'error': AUTH_ERROR
     }
 
-    Standard_Fetch(dispatch, HOST + '/api/auth/user', config, USER_LOADED, AUTH_ERROR);
+    GetFetch(dispatch, '/api/auth/user', dispatchType, token)
 };
 
 // User Login
 export const login = (username, password) => (dispatch) => {
-    let config = {
-        method: "POST",
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({ username, password })
+    const dispatchType = {
+        'success': LOGIN_SUCCESS,
+        'error': LOGIN_ERROR
     }
 
-    // FETCH API
-    Standard_Fetch(dispatch, HOST + '/api/auth/login', config, LOGIN_SUCCESS, LOGIN_ERROR);
+    const data = {
+        'username': username,
+        'password': password
+    }
+
+    PostFetch(dispatch, '/api/auth/login', data, dispatchType)
 }
 
 // User Registe
 export const registe = (username, email, password) => (dispatch) => {
-    let config = {
-        method: "POST",
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({ username, email, password })
+    const dispatchType = {
+        'success': REGISTE_SUCCESS,
+        'error': REGISTE_ERROR
     }
 
-    // FETCH API
-    Standard_Fetch(dispatch, HOST + '/api/auth/registe', config, REGISTE_SUCCESS, REGISTE_ERROR);
+    const data = {
+        'username': username,
+        'email': email,
+        'password': password
+    }
+
+    PostFetch(dispatch, '/api/auth/registe', data, dispatchType)
 }
 
 // User Logout
 export const logout = () => (dispatch, getState) => {
-    // Get Token from state
     const token = getState().auth.token;
 
-    // Define Ajax config for UserAPI
     const config = {
         method: "POST",
         headers: {
             'content-type': 'application/json',
+            'Authorization': `Token ${token}`
         },
     }
-    // --- if there is a token, ser it in headers
-    if (token) {
-        config.headers['Authorization'] = `Token ${token}`;
-    }
 
-    // FETCH API
     fetch(HOST + '/api/auth/logout', config)
         .then(res => {
-            if (res.ok) {
-                return res
-            }
-            else {
-                throw ({ status: res.status, msg: res.statusText });
-            }
+            if (res.ok) { return res }
+            else { throw ({ status: res.status, msg: res.statusText }) }
         })
-        .then(res => {
-            dispatch({
-                type: LOGOUT_SUCCESS,
-                payload: res
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: LOGOUT_ERROR,
-                payload: err.status
-            });
-        })
+        .then(res => { dispatch({ type: LOGOUT_SUCCESS, payload: res }) })
+        .catch(err => { dispatch({ type: LOGOUT_ERROR, payload: err.status }) })
 }
 
 
 // Update user Profile
-export const updateProfileImage = (user, profileImg) => (dispatch) =>{
+export const updateProfileImage = (user, profileImg) => (dispatch) => {
+    const dispatchType = {
+        'success': UPDATE_PROFILE_IMAGE,
+        'error': UPDATE_PROFILE_IMAGE_ERROR
+    }
+    
     let formData = new FormData();
     formData.append('user', user);
     formData.append('profileimg', profileImg);
 
-    const config = {
-        method: "POST",
-        body: formData,
-    }
-
-    // FETCH API
-    Standard_Fetch(dispatch, HOST + '/api/auth/profile', config, UPDATE_PROFILE_IMAGE, UPDATE_PROFILE_IMAGE_ERROR);
-}
-
-// Fetch API
-function Standard_Fetch(dispatch, URL, config, Success_type, Error_type) {
-    fetch(URL, config)
-        .then(res => {
-            if (res.ok) { return res.json() }
-            else {
-                throw ({ status: res.status, msg: res.statusText });
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: Success_type,
-                payload: res
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: Error_type,
-                payload: err.status
-            });
-        })
+    PostFileFetch(dispatch, '/api/auth/profile', formData, dispatchType)
 }

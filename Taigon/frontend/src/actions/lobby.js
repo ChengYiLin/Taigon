@@ -1,3 +1,5 @@
+import { GetFetch, PostFetch, PostFileFetch, DeleteFetch } from './globalfunction';
+
 export const GET_CHATROOM = 'GET_CHATROOM';
 export const GET_CHATROOM_ERROR = 'GET_CHATROOM';
 export const GET_NOW_ROOM = 'GET_NOW_ROOM';
@@ -19,32 +21,12 @@ const HOST = window.location.origin;
 
 // Get the chatroom
 export const getChatRoom = () => (dispatch) => {
-    const config = {
-        method: "GET",
-        headers: {
-            'content-type': 'application/json',
-        },
+    const dispatchType = {
+        'success': GET_CHATROOM,
+        'error': GET_CHATROOM_ERROR
     }
 
-    fetch(HOST + '/api/chatroom', config)
-        .then(res => {
-            if (res.ok) { return res.json() }
-            else {
-                throw ({ status: res.status, msg: res.statusText });
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: GET_CHATROOM,
-                payload: res
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: GET_CHATROOM_ERROR,
-                payload: err.status
-            });
-        })
+    GetFetch(dispatch, '/api/chatroom', dispatchType)
 }
 
 // Get the Room Name Now
@@ -65,159 +47,71 @@ export const leaveChatRoom = () => (dispatch) => {
 
 // Create Chat Room
 export const createChatRoom = (roomName, roomBgImg, category, owner) => (dispatch) => {
+    const dispatchType = {
+        'success': CREATE_CHATROOM,
+        'error': CREATE_CHATROOM_ERROR
+    }
+
     let formData = new FormData();
     formData.append('roomname', roomName);
     formData.append('bgimage', roomBgImg);
     formData.append('category', category);
     formData.append('owner', owner);
 
-    const config = {
-        method: "POST",
-        body: formData,
-    }
-
-    fetch(HOST + '/api/chatroom', config)
-        .then(res => {
-            if (res.ok) { return res.json() }
-            else {
-                throw ({ status: res.status, msg: res.statusText });
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: CREATE_CHATROOM,
-                payload: res
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: CREATE_CHATROOM_ERROR,
-                payload: err.status
-            });
-        })
+    PostFileFetch(dispatch, '/api/chatroom', formData, dispatchType)
 }
 
 // Get the chatroom categories
 export const getChatroomCategories = () => (dispatch) => {
-    const config = {
-        method: "GET",
-        headers: {
-            'content-type': 'application/json',
-        },
+    const dispatchType = {
+        'success': GET_ROOM_CATEGORIES,
+        'error': GET_ROOM_CATEGORIES_ERROR
     }
 
-    fetch(HOST + '/api/roomcategory', config)
-        .then(res => {
-            if (res.ok) { return res.json() }
-            else {
-                throw ({ status: res.status, msg: res.statusText });
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: GET_ROOM_CATEGORIES,
-                payload: res
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: GET_ROOM_CATEGORIES_ERROR,
-                payload: err.status
-            });
-        })
+    GetFetch(dispatch, '/api/roomcategory', dispatchType)
 }
 
 // Get the User own chatroom
 export const getUserOwnChatroom = (user) => (dispatch) => {
-    const config = {
-        method: "GET",
-        headers: {
-            'content-type': 'application/json',
-        }
+    const dispatchType = {
+        'success': GET_USER_CHATROOM,
+        'error': GET_USER_CHATROOM_ERROR
     }
 
-    fetch(HOST + `/api/roommember?user=${user}`, config)
-        .then(res => {
-            if (res.ok) { return res.json() }
-            else {
-                throw ({ status: res.status, msg: res.statusText });
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: GET_USER_CHATROOM,
-                payload: res
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: GET_USER_CHATROOM_ERROR,
-                payload: err.status
-            });
-        })
+    GetFetch(dispatch, `/api/roommember?user=${user}`, dispatchType)
 }
 
 // Check Room Member or not
 export const checkRoomMember = (user, roomID) => (dispatch) => {
+    const dispatchType = {
+        'success': CHECK_ROOM_MEMBER,
+        'error': CHECK_ROOM_MEMBER_ERROR
+    }
+
     const data = {
         "user": user,
         "roomname": roomID
     }
 
-    const config = {
-        method: "POST",
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    }
-
-    Standard_Fetch(dispatch, HOST + `/api/roommember`, config, CHECK_ROOM_MEMBER, CHECK_ROOM_MEMBER_ERROR);
+    PostFetch(dispatch, `/api/roommember`, data, dispatchType)
 }
 
 // Get the chatroom by category
 export const getChatRoomByCategory = (category_ID) => (dispatch) => {
-    const config = {
-        method: "GET",
-        headers: {
-            'content-type': 'application/json',
-        },
+    const dispatchType = {
+        'success': GET_CHATROOM_BY_CATEGORY,
+        'error': GET_CHATROOM_BY_CATEGORY_ERROR
     }
 
-    Standard_Fetch(dispatch, HOST + `/api/chatroom?category=${category_ID}`, config, GET_CHATROOM_BY_CATEGORY, GET_CHATROOM_BY_CATEGORY_ERROR);
+    GetFetch(dispatch, `/api/chatroom?category=${category_ID}`, dispatchType)
 }
 
 // Delete the chatroom from mine room
 export const deleteChatRoom = (user, roomID) => (dispatch) => {
-    const config = {
-        method: "DELETE",
-        headers: {
-            'content-type': 'application/json',
-        }
+    const dispatchType = {
+        'success': DELETE_CHATROOM,
+        'error': DELETE_CHATROOM_ERROR
     }
 
-    Standard_Fetch(dispatch, HOST + `/api/roommember?user=${user}&room=${roomID}`, config, DELETE_CHATROOM, DELETE_CHATROOM_ERROR);
-}
-
-// Fetch API
-function Standard_Fetch(dispatch, URL, config, Success_type, Error_type) {
-    fetch(URL, config)
-        .then(res => {
-            if (res.ok) { return res.json() }
-            else {
-                throw ({ status: res.status, msg: res.statusText });
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: Success_type,
-                payload: res
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: Error_type,
-                payload: err.status
-            });
-        })
+    DeleteFetch(dispatch, `/api/roommember?user=${user}&room=${roomID}`, dispatchType)
 }

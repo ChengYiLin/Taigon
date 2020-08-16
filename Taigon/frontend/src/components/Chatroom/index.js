@@ -139,29 +139,7 @@ class ChatRoom extends Component {
         formData.append('chatroom', this.props.currentRoomId);
         formData.append('imgmessage', this.fileInput.current.files[0]);
 
-        const config = {
-            method: "POST",
-            body: formData,
-        }
-
-        fetch(HOST + '/api/message', config)
-            .then(res => {
-                if (res.ok) { return res.json() }
-                else {
-                    throw ({ status: res.status, msg: res.statusText });
-                }
-            })
-            .then(res => {
-                console.log(res)
-                this.chatSocket.send(JSON.stringify({
-                    'msgtype': 'IMG',
-                    'author': this.props.user.id,
-                    'chatroom': this.props.currentRoomId
-                }));
-            })
-            .catch(err => {
-                console.log(`Somthig Wrong : ${err}`)
-            })
+        this.props.sendImgMessage(formData, this.chatSocket)
     }
     handleUserKeyPress(e) {
         if (e.key === "Enter" && !e.shiftKey) {
