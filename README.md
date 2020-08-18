@@ -11,7 +11,11 @@ Taigon is a real-time chat app project written by **React**(Front-End) and **Dja
 * You also can create your own chatroom you want in the lobby
 
 
-![](https://i.imgur.com/Z0yjSyk.png)
+![](https://i.imgur.com/wF98PvZ.gif)
+
+![](https://i.imgur.com/XLXJNDg.gif)
+
+
 
 ## Demo
 Front-End code : [quick_link](https://github.com/ChengYiLin/Taigon/tree/master/Taigon/frontend/src)
