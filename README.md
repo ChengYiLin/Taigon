@@ -5,6 +5,7 @@
 Taigon is a real-time chat app project written by **React**(Front-End) and **Django**(Backend).
 
 ***Link :*** http://taigon.martin-lin.com/
+***Temp Link :***http://ec2-18-183-248-146.ap-northeast-1.compute.amazonaws.com/
 
 * There are multiple chatrooms with eight categories you can join
 * You can real-time send a text message or picture in the chatroom
