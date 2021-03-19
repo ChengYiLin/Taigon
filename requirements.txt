@@ -17,7 +17,7 @@ daphne==2.5.0
 Django==3.0.8
 django-rest-knox==4.1.0
 django-storages==1.9.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 docutils==0.15.2
 gunicorn==20.0.4
 h11==0.9.0
