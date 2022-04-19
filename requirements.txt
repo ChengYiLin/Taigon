@@ -14,7 +14,7 @@ click==7.1.2
 constantly==15.1.0
 cryptography==3.3.2
 daphne==2.5.0
-Django==3.0.8
+Django==3.1.14
 django-rest-knox==4.1.0
 django-storages==1.9.1
 djangorestframework==3.11.0
